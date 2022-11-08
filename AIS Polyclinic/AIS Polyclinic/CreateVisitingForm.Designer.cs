@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.bOK = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.FIOPatientCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataDoctor = new System.Windows.Forms.DataGridView();
             this.FIODoctorCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataPatient = new System.Windows.Forms.DataGridView();
+            this.FIOPatientCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.bCancel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataDoctor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataPatient)).BeginInit();
             this.SuspendLayout();
             // 
             // bOK
@@ -46,40 +46,21 @@
             this.bOK.Name = "bOK";
             this.bOK.Size = new System.Drawing.Size(95, 40);
             this.bOK.TabIndex = 0;
-            this.bOK.Text = "ОК";
+            this.bOK.Text = "OK";
             this.bOK.UseVisualStyleBackColor = true;
             this.bOK.Click += new System.EventHandler(this.bOK_Click);
             // 
-            // dataGridView1
+            // dataDoctor
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataDoctor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataDoctor.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FIODoctorCol});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(380, 186);
-            this.dataGridView1.TabIndex = 1;
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.FIOPatientCol});
-            this.dataGridView2.Location = new System.Drawing.Point(409, 12);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowHeadersWidth = 51;
-            this.dataGridView2.RowTemplate.Height = 24;
-            this.dataGridView2.Size = new System.Drawing.Size(379, 186);
-            this.dataGridView2.TabIndex = 2;
-            // 
-            // FIOPatientCol
-            // 
-            this.FIOPatientCol.HeaderText = "ФИО Пациента";
-            this.FIOPatientCol.MinimumWidth = 6;
-            this.FIOPatientCol.Name = "FIOPatientCol";
-            this.FIOPatientCol.Width = 125;
+            this.dataDoctor.Location = new System.Drawing.Point(12, 12);
+            this.dataDoctor.Name = "dataDoctor";
+            this.dataDoctor.RowHeadersWidth = 51;
+            this.dataDoctor.RowTemplate.Height = 24;
+            this.dataDoctor.Size = new System.Drawing.Size(380, 186);
+            this.dataDoctor.TabIndex = 1;
             // 
             // FIODoctorCol
             // 
@@ -87,6 +68,25 @@
             this.FIODoctorCol.MinimumWidth = 6;
             this.FIODoctorCol.Name = "FIODoctorCol";
             this.FIODoctorCol.Width = 125;
+            // 
+            // dataPatient
+            // 
+            this.dataPatient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataPatient.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.FIOPatientCol});
+            this.dataPatient.Location = new System.Drawing.Point(409, 12);
+            this.dataPatient.Name = "dataPatient";
+            this.dataPatient.RowHeadersWidth = 51;
+            this.dataPatient.RowTemplate.Height = 24;
+            this.dataPatient.Size = new System.Drawing.Size(379, 186);
+            this.dataPatient.TabIndex = 2;
+            // 
+            // FIOPatientCol
+            // 
+            this.FIOPatientCol.HeaderText = "ФИО Пациента";
+            this.FIOPatientCol.MinimumWidth = 6;
+            this.FIOPatientCol.Name = "FIOPatientCol";
+            this.FIOPatientCol.Width = 125;
             // 
             // dateTimePicker1
             // 
@@ -101,8 +101,9 @@
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(95, 40);
             this.bCancel.TabIndex = 4;
-            this.bCancel.Text = "Отмена";
+            this.bCancel.Text = "Cancel";
             this.bCancel.UseVisualStyleBackColor = true;
+            this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
             // 
             // label1
             // 
@@ -121,13 +122,15 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.bCancel);
             this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.dataGridView2);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataPatient);
+            this.Controls.Add(this.dataDoctor);
             this.Controls.Add(this.bOK);
             this.Name = "CreateVisitingForm";
             this.Text = "CreateVisitingForm";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.Activated += new System.EventHandler(this.CreateVisitingForm_Activated);
+            this.Shown += new System.EventHandler(this.CreateVisitingForm_Shown);
+            ((System.ComponentModel.ISupportInitialize)(this.dataDoctor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataPatient)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -136,9 +139,9 @@
         #endregion
 
         private System.Windows.Forms.Button bOK;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataDoctor;
         private System.Windows.Forms.DataGridViewTextBoxColumn FIODoctorCol;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dataPatient;
         private System.Windows.Forms.DataGridViewTextBoxColumn FIOPatientCol;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button bCancel;

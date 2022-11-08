@@ -61,11 +61,30 @@
     <Compile Include="CreateVisitingForm.Designer.cs">
       <DependentUpon>CreateVisitingForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="InfoDoctorForm.cs">
+    <Compile Include="DoctorData.cs" />
+    <Compile Include="FormAddDoctor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InfoDoctorForm.Designer.cs">
-      <DependentUpon>InfoDoctorForm.cs</DependentUpon>
+    <Compile Include="FormAddDoctor.Designer.cs">
+      <DependentUpon>FormAddDoctor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAddPatient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddPatient.Designer.cs">
+      <DependentUpon>FormAddPatient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormListPerson.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormListPerson.Designer.cs">
+      <DependentUpon>FormListPerson.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InfoForm.Designer.cs">
+      <DependentUpon>InfoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -73,13 +92,25 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PatientData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlManager.cs" />
+    <Compile Include="VisitingData.cs" />
     <EmbeddedResource Include="CreateVisitingForm.resx">
       <DependentUpon>CreateVisitingForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InfoDoctorForm.resx">
-      <DependentUpon>InfoDoctorForm.cs</DependentUpon>
+    <EmbeddedResource Include="FormAddDoctor.resx">
+      <DependentUpon>FormAddDoctor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAddPatient.resx">
+      <DependentUpon>FormAddPatient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormListPerson.resx">
+      <DependentUpon>FormListPerson.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoForm.resx">
+      <DependentUpon>InfoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

@@ -31,13 +31,18 @@
             this.bAddDoctor = new System.Windows.Forms.Button();
             this.bAddVisiting = new System.Windows.Forms.Button();
             this.bCreateDoc = new System.Windows.Forms.Button();
+            this.bAddPatient = new System.Windows.Forms.Button();
+            this.bListVisiting = new System.Windows.Forms.Button();
+            this.bListDoctor = new System.Windows.Forms.Button();
+            this.bListPatient = new System.Windows.Forms.Button();
+            this.bDisease = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // bAddDoctor
             // 
-            this.bAddDoctor.Location = new System.Drawing.Point(493, 74);
+            this.bAddDoctor.Location = new System.Drawing.Point(336, 56);
             this.bAddDoctor.Name = "bAddDoctor";
-            this.bAddDoctor.Size = new System.Drawing.Size(129, 58);
+            this.bAddDoctor.Size = new System.Drawing.Size(134, 58);
             this.bAddDoctor.TabIndex = 0;
             this.bAddDoctor.Text = "Добавить врача";
             this.bAddDoctor.UseVisualStyleBackColor = true;
@@ -45,7 +50,7 @@
             // 
             // bAddVisiting
             // 
-            this.bAddVisiting.Location = new System.Drawing.Point(89, 74);
+            this.bAddVisiting.Location = new System.Drawing.Point(27, 12);
             this.bAddVisiting.Name = "bAddVisiting";
             this.bAddVisiting.Size = new System.Drawing.Size(109, 58);
             this.bAddVisiting.TabIndex = 1;
@@ -55,7 +60,7 @@
             // 
             // bCreateDoc
             // 
-            this.bCreateDoc.Location = new System.Drawing.Point(282, 74);
+            this.bCreateDoc.Location = new System.Drawing.Point(174, 94);
             this.bCreateDoc.Name = "bCreateDoc";
             this.bCreateDoc.Size = new System.Drawing.Size(130, 57);
             this.bCreateDoc.TabIndex = 2;
@@ -63,16 +68,75 @@
             this.bCreateDoc.UseVisualStyleBackColor = true;
             this.bCreateDoc.Click += new System.EventHandler(this.bCreateDoc_Click);
             // 
+            // bAddPatient
+            // 
+            this.bAddPatient.Location = new System.Drawing.Point(493, 56);
+            this.bAddPatient.Name = "bAddPatient";
+            this.bAddPatient.Size = new System.Drawing.Size(157, 58);
+            this.bAddPatient.TabIndex = 3;
+            this.bAddPatient.Text = "Добавить пациента";
+            this.bAddPatient.UseVisualStyleBackColor = true;
+            this.bAddPatient.Click += new System.EventHandler(this.bAddPatient_Click);
+            // 
+            // bListVisiting
+            // 
+            this.bListVisiting.Location = new System.Drawing.Point(27, 165);
+            this.bListVisiting.Name = "bListVisiting";
+            this.bListVisiting.Size = new System.Drawing.Size(109, 58);
+            this.bListVisiting.TabIndex = 4;
+            this.bListVisiting.Text = "Список встреч";
+            this.bListVisiting.UseVisualStyleBackColor = true;
+            this.bListVisiting.Click += new System.EventHandler(this.bListVisiting_Click);
+            // 
+            // bListDoctor
+            // 
+            this.bListDoctor.Location = new System.Drawing.Point(336, 135);
+            this.bListDoctor.Name = "bListDoctor";
+            this.bListDoctor.Size = new System.Drawing.Size(134, 58);
+            this.bListDoctor.TabIndex = 5;
+            this.bListDoctor.Text = "Список врачей";
+            this.bListDoctor.UseVisualStyleBackColor = true;
+            this.bListDoctor.Click += new System.EventHandler(this.bListDoctor_Click);
+            // 
+            // bListPatient
+            // 
+            this.bListPatient.Location = new System.Drawing.Point(493, 135);
+            this.bListPatient.Name = "bListPatient";
+            this.bListPatient.Size = new System.Drawing.Size(157, 58);
+            this.bListPatient.TabIndex = 6;
+            this.bListPatient.Text = "Список пациентов";
+            this.bListPatient.UseVisualStyleBackColor = true;
+            this.bListPatient.Click += new System.EventHandler(this.bListPatient_Click);
+            // 
+            // bDisease
+            // 
+            this.bDisease.Location = new System.Drawing.Point(27, 91);
+            this.bDisease.Name = "bDisease";
+            this.bDisease.Size = new System.Drawing.Size(109, 58);
+            this.bDisease.TabIndex = 7;
+            this.bDisease.Text = "Поставить диагноз";
+            this.bDisease.UseVisualStyleBackColor = true;
+            this.bDisease.Click += new System.EventHandler(this.bDisease_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(694, 210);
+            this.ClientSize = new System.Drawing.Size(678, 262);
+            this.Controls.Add(this.bDisease);
+            this.Controls.Add(this.bListPatient);
+            this.Controls.Add(this.bListDoctor);
+            this.Controls.Add(this.bListVisiting);
+            this.Controls.Add(this.bAddPatient);
             this.Controls.Add(this.bCreateDoc);
             this.Controls.Add(this.bAddVisiting);
             this.Controls.Add(this.bAddDoctor);
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "MainForm";
+            this.Activated += new System.EventHandler(this.MainForm_Activated);
+            this.Deactivate += new System.EventHandler(this.MainForm_Deactivate);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.ResumeLayout(false);
 
         }
@@ -82,6 +146,11 @@
         private System.Windows.Forms.Button bAddDoctor;
         private System.Windows.Forms.Button bAddVisiting;
         private System.Windows.Forms.Button bCreateDoc;
+        private System.Windows.Forms.Button bAddPatient;
+        private System.Windows.Forms.Button bListVisiting;
+        private System.Windows.Forms.Button bListDoctor;
+        private System.Windows.Forms.Button bListPatient;
+        private System.Windows.Forms.Button bDisease;
     }
 }
 

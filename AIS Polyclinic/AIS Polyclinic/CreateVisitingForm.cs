@@ -12,12 +12,33 @@ namespace AIS_Polyclinic
 {
     public partial class CreateVisitingForm : Form
     {
-        public CreateVisitingForm()
+        SqlManager myDB;
+        string messegeL = "На данный день у этого врача назначено визитов: ";
+        private CreateVisitingForm()     //сделать приватным
         {
             InitializeComponent();
         }
+        public CreateVisitingForm(SqlManager myDB) : this()
+        {
+            this.myDB = myDB;
+        }
 
         private void bOK_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bCancel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CreateVisitingForm_Activated(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CreateVisitingForm_Shown(object sender, EventArgs e)
         {
 
         }

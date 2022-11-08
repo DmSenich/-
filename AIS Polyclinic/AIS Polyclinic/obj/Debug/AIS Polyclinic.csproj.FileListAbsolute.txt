@@ -1,0 +1,22 @@
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\bin\Debug\AIS Polyclinic.exe.config
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\bin\Debug\AIS Polyclinic.exe
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\bin\Debug\AIS Polyclinic.pdb
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\bin\Debug\FirebirdSql.Data.FirebirdClient.dll
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Debug\AIS Polyclinic.csproj.AssemblyReference.cache
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Debug\AIS Polyclinic.csproj.SuggestedBindingRedirects.cache
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Debug\AIS_Polyclinic.CreateVisitingForm.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Debug\AIS_Polyclinic.InfoForm.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Debug\AIS_Polyclinic.MainForm.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Debug\AIS_Polyclinic.Properties.Resources.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Debug\AIS Polyclinic.csproj.GenerateResource.cache
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Debug\AIS Polyclinic.csproj.CoreCompileInputs.cache
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Debug\AIS Polyclinic.csproj.CopyComplete
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Debug\AIS Polyclinic.exe
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Debug\AIS Polyclinic.pdb
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Debug\AIS_Polyclinic.FormAddDoctor.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Debug\AIS_Polyclinic.FormListPerson.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Debug\AIS_Polyclinic.FormAddPatient.resources
