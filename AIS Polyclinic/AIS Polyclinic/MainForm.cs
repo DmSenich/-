@@ -44,7 +44,19 @@ namespace AIS_Polyclinic
             {
                 if (formAddDoctor.ShowDialog() == DialogResult.OK)
                 {
-
+                    string[] fio = formAddDoctor.FIO;
+                    int workExp = formAddDoctor.WorkExp;
+                    DataTable dtSpec = formAddDoctor.DTSpec;
+                    sSql = $"insert into doctor_table (last_name, first_name, patronymic, work_experience) values('{fio[0]}', '{fio[1]}', '{fio[2]}', {workExp})"; // ДОБАВИТЬ ФОТО
+                    myDB.iExeecuteNonQuery(sSql);
+                    sSql = $"select * from doctor_table where last_name = '{fio[0]}' and first_name = '{fio[1]}' and patronymic = '{fio[2]}' and work_experience = {workExp}";
+                    DataTable newDoc = myDB.iExecuteReader(sSql);
+                    int id = Convert.ToInt32(newDoc.Rows[0][0]);
+                    foreach(DataRow row in dtSpec.Rows)
+                    {
+                        sSql = $"insert into \"DOCTOR-SPECIALTY_TABLE\" (id_doctor, id_specialty) values({id}, {row[0]}) ";
+                        myDB.iExeecuteNonQuery(sSql);
+                    }
                 }
             }
             catch(Exception ex)
