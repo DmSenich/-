@@ -77,7 +77,12 @@ namespace AIS_Polyclinic
             {
                 if (formAddPatient.ShowDialog() == DialogResult.OK)
                 {
-                    
+                    string[] fio = formAddPatient.FIO;
+                    string[] adress = formAddPatient.Adress;
+                    DateTime dateBirth = formAddPatient.DateBirth;
+
+                    string sSql = $"insert into patient_table (last_name, first_name, patronymic, area, city, house, apartment, date_birth) values('{fio[0]}', '{fio[1]}', '{fio[2]}', '{adress[0]}', '{adress[1]}', '{adress[2]}', '{adress[3]}', '{dateBirth.ToShortDateString()}')";
+                    myDB.iExeecuteNonQuery(sSql);
                 }
             }
             catch( Exception ex)

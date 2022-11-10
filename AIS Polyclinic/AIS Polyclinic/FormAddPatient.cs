@@ -12,6 +12,7 @@ namespace AIS_Polyclinic
 {
     public partial class FormAddPatient : Form
     {
+        DataTable dtPatient;
         string[] fio = new string[3];
         string[] adress = new string[4];
         DateTime dateOfBirth;
@@ -33,6 +34,18 @@ namespace AIS_Polyclinic
             tApartment.Text = adress[3];
             /*Дата дня рождения*/
         }
+        public FormAddPatient(DataTable dtPAtient) : this()
+        {
+            this.dtPatient = dtPAtient;
+            fio[0] = dtPatient.Rows[0][1].ToString();
+            fio[1] = dtPatient.Rows[0][2].ToString();
+            fio[2] = dtPatient.Rows[0][3].ToString();
+            adress[0] = dtPatient.Rows[0][4].ToString();
+            adress[1] = dtPatient.Rows[0][5].ToString();
+            adress[2] = dtPatient.Rows[0][6].ToString();
+            adress[3] = dtPatient.Rows[0][7].ToString();
+            dateOfBirth = Convert.ToDateTime(dtPatient.Rows[0][7]);
+        }
 
         private void bCancel_Click(object sender, EventArgs e)
         {
@@ -41,6 +54,15 @@ namespace AIS_Polyclinic
 
         private void bOK_Click(object sender, EventArgs e)
         {
+            fio[0] = tLastName.Text;
+            fio[1] = tFirstName.Text;
+            fio[2] = tPatronymic.Text;
+            adress[0] = tArea.Text;
+            adress[1] = tCity.Text;
+            adress[2] = tHouse.Text;
+            adress[3] = tApartment.Text;
+            dateOfBirth = dateBirth.Value;
+
             DialogResult = DialogResult.OK;
         }
         public string[] FIO { get { return fio; } }
