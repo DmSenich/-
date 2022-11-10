@@ -20,8 +20,16 @@ namespace AIS_Polyclinic
 
         private void bAddVisiting_Click(object sender, EventArgs e)
         {
-            CreateVisitingForm createVisitingForm = new CreateVisitingForm(myDB);
+            //CreateVisitingForm createVisitingForm = new CreateVisitingForm(myDB);
+
             //createVisitingForm.Show();
+            
+            string sSql = $"select * from doctor_table";
+            DataTable dtDocs = myDB.iExecuteReader(sSql);
+            sSql = $"select * from patient_table";
+            DataTable dtPatients = myDB.iExecuteReader(sSql);
+
+            CreateVisitingForm createVisitingForm = new CreateVisitingForm(dtDocs, dtPatients);
             try
             {
                 if (createVisitingForm.ShowDialog() == DialogResult.OK)

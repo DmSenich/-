@@ -30,9 +30,7 @@
         {
             this.bOK = new System.Windows.Forms.Button();
             this.dataDoctor = new System.Windows.Forms.DataGridView();
-            this.FIODoctorCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataPatient = new System.Windows.Forms.DataGridView();
-            this.FIOPatientCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.bCancel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -53,8 +51,6 @@
             // dataDoctor
             // 
             this.dataDoctor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataDoctor.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.FIODoctorCol});
             this.dataDoctor.Location = new System.Drawing.Point(12, 12);
             this.dataDoctor.Name = "dataDoctor";
             this.dataDoctor.RowHeadersWidth = 51;
@@ -62,31 +58,15 @@
             this.dataDoctor.Size = new System.Drawing.Size(380, 186);
             this.dataDoctor.TabIndex = 1;
             // 
-            // FIODoctorCol
-            // 
-            this.FIODoctorCol.HeaderText = "ФИО Врача";
-            this.FIODoctorCol.MinimumWidth = 6;
-            this.FIODoctorCol.Name = "FIODoctorCol";
-            this.FIODoctorCol.Width = 125;
-            // 
             // dataPatient
             // 
             this.dataPatient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataPatient.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.FIOPatientCol});
             this.dataPatient.Location = new System.Drawing.Point(409, 12);
             this.dataPatient.Name = "dataPatient";
             this.dataPatient.RowHeadersWidth = 51;
             this.dataPatient.RowTemplate.Height = 24;
             this.dataPatient.Size = new System.Drawing.Size(379, 186);
             this.dataPatient.TabIndex = 2;
-            // 
-            // FIOPatientCol
-            // 
-            this.FIOPatientCol.HeaderText = "ФИО Пациента";
-            this.FIOPatientCol.MinimumWidth = 6;
-            this.FIOPatientCol.Name = "FIOPatientCol";
-            this.FIOPatientCol.Width = 125;
             // 
             // dateTimePicker1
             // 
@@ -140,9 +120,7 @@
 
         private System.Windows.Forms.Button bOK;
         private System.Windows.Forms.DataGridView dataDoctor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FIODoctorCol;
         private System.Windows.Forms.DataGridView dataPatient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FIOPatientCol;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button bCancel;
         private System.Windows.Forms.Label label1;
