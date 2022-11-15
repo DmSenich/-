@@ -29,9 +29,10 @@ namespace AIS_Polyclinic
             sSql = $"select * from patient_table";
             DataTable dtPatients = myDB.iExecuteReader(sSql);
 
-            CreateVisitingForm createVisitingForm = new CreateVisitingForm(dtDocs, dtPatients);
+            CreateVisitingForm createVisitingForm = new CreateVisitingForm(myDB);
             try
             {
+               
                 if (createVisitingForm.ShowDialog() == DialogResult.OK)
                 {
 
@@ -135,7 +136,7 @@ namespace AIS_Polyclinic
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            myDB.Close();
+            //myDB.Close();
             myDB = null;
         }
 
@@ -143,5 +144,16 @@ namespace AIS_Polyclinic
         {
             myDB = new SqlManager();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //FormListPersonAlter formListPersonAlter = new FormListPersonAlter(0, myDB);
+            //formListPersonAlter.Show();
+        }
+
+        /*Все английские слова перевести
+        Добавить номер медицинского страхования пациентов
+        Выводить врачей со специальностями
+        Запретить создание (изменение) врачей без специальности (должна быть хотя бы одна)*/
     }
 }

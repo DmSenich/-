@@ -25,11 +25,12 @@ namespace AIS_Polyclinic
             cs.Charset = "win1251";
             string ConnString = cs.ToString();
             fbConnection.ConnectionString = ConnString;
-            fbConnection.Open();
+            //fbConnection.Open();
         }
 
         public DataTable iExecuteReader(string sSql)
         {
+            fbConnection.Open();
             FbCommand fbCommand = new FbCommand(sSql, fbConnection);
             fbCommand.CommandType = CommandType.Text;
             //FbTransaction fbt = fbConnection.BeginTransaction(IsolationLevel.Serializable);
@@ -41,16 +42,19 @@ namespace AIS_Polyclinic
                 dt.Load(fbDataReader);
                 //fbt.Commit();
                 fbCommand.Dispose();
+                fbConnection.Close();
                 return dt;
             }
             catch (Exception ex)
             {
                 fbCommand.Dispose();
+                fbConnection.Close();
                 return null;
             }
         }
         public void iExeecuteNonQuery(string sSql)
         {
+            fbConnection.Open();
             FbCommand fbCommand = new FbCommand(sSql, fbConnection);
             //FbTransaction fbt = fbConnection.BeginTransaction(IsolationLevel.Serializable);
             //fbCommand.Transaction = fbt;
@@ -59,15 +63,19 @@ namespace AIS_Polyclinic
                 fbCommand.ExecuteNonQuery();
                 //fbt.Commit();
                 fbCommand.Dispose();
-                
+                fbConnection.Close();
+
             }
             catch(Exception ex)
             {
+
                 fbCommand.Dispose();
+                fbConnection.Close();
             }
         }
         public int iExecuteScalar(string sSql)
         {
+            fbConnection.Open();
             FbCommand fbCommand = new FbCommand(sSql, fbConnection);
             //FbTransaction fbt = fbConnection.BeginTransaction(IsolationLevel.Serializable);
             //fbCommand.Transaction = fbt;
@@ -78,11 +86,13 @@ namespace AIS_Polyclinic
                 int i = Convert.ToInt32(fbCommand.ExecuteScalar());
                 //fbt.Commit();
                 fbCommand.Dispose();
+                fbConnection.Close();
                 return i;
             }
             catch (Exception ex)
             {
                 fbCommand.Dispose();
+                fbConnection.Close();
                 return -1;
             }
         }
@@ -93,7 +103,7 @@ namespace AIS_Polyclinic
         //}
         public void Close()
         {
-            fbConnection.Close();
+            //fbConnection.Close();
         }
     }
 }

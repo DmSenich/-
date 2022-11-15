@@ -57,6 +57,7 @@
             this.dataDoctor.RowTemplate.Height = 24;
             this.dataDoctor.Size = new System.Drawing.Size(380, 186);
             this.dataDoctor.TabIndex = 1;
+            this.dataDoctor.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataDoctor_CellClick);
             // 
             // dataPatient
             // 

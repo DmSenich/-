@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -90,6 +92,8 @@ namespace AIS_Polyclinic
                     dr[1] = dtDoc.Rows[0][4];
                     dr[2] = StringSpecBuild();
                     dt.Rows.Add(dr);
+
+                    
                     break;
                 case 1:
                     break;
@@ -98,7 +102,39 @@ namespace AIS_Polyclinic
             dataInfo.DataSource = dt;
 
         }
-
+        static public Image ToImage(byte[] data)
+        {
+            if (data == null)
+            {
+                return null;
+            }
+            Image img;
+            using (MemoryStream memory = new MemoryStream(data))
+            {
+                using (Image temp = Image.FromStream(memory))
+                {
+                    img = new Bitmap(temp);
+                }
+            }
+            return img;
+        }
+        static public byte[] ToByte(Image img)
+        {
+            Byte[] blob;
+            try
+            {
+                MemoryStream memory = new MemoryStream();
+                img.Save(memory, ImageFormat.Jpeg);
+                blob = new byte[memory.Length];
+                memory.Position = 0;
+                memory.Read(blob, 0, Convert.ToInt32(memory.Length));
+                return blob;
+            }
+            catch
+            {
+                return null;
+            }
+        }
         private void bUpdate_Click(object sender, EventArgs e)
         {
             switch(numTable)

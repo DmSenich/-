@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace AIS_Polyclinic
 {
@@ -191,6 +192,36 @@ namespace AIS_Polyclinic
                     break;
                 case 2:
                     break;
+            }
+        }
+
+        private void tFind_TextChanged(object sender, EventArgs e)
+        {
+            for (int k = 0; k < dataPerson.Rows.Count; k++)
+            {
+                dataPerson.Rows[k].Visible = true;
+            }
+            string find = tFind.Text.ToLower();
+            if(find == "")
+            {
+                for (int k = 0; k < dataPerson.Rows.Count; k++)
+                {
+                    dataPerson.Rows[k].Visible = true;
+                }
+                return;
+            }
+
+            for(int k = 0; k < dt.Rows.Count; k++)
+            {
+                Regex regex = new Regex(find);
+                bool f = false, i = false, o = false;
+                f = regex.IsMatch(dt.Rows[k][1].ToString().ToLower());
+                i = regex.IsMatch(dt.Rows[k][2].ToString().ToLower());
+                o = regex.IsMatch(dt.Rows[k][3].ToString().ToLower());
+                if(!(f || i || o))
+                {
+                    dataPerson.Rows[k].Visible = false;
+                }
             }
         }
     }

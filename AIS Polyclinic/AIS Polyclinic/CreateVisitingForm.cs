@@ -12,24 +12,29 @@ namespace AIS_Polyclinic
 {
     public partial class CreateVisitingForm : Form
     {
-        //SqlManager myDB;
+        SqlManager myDB;
         DataTable dtDocs, dtPatients;
         string messegeL = "На данный день у этого врача назначено визитов: ";
         private CreateVisitingForm()     //сделать приватным
         {
             InitializeComponent();
         }
-        //public CreateVisitingForm(SqlManager myDB) : this()
-        //{
-        //    this.myDB = myDB;
-        //    FillData();
-        //}
-        public CreateVisitingForm(DataTable dtDocs, DataTable dtPatients):this()
+        public CreateVisitingForm(SqlManager myDB) : this()
         {
-            this.dtDocs = dtDocs;
-            this.dtPatients = dtPatients;
+            this.myDB = myDB;
+            string sSql = $"select * from doctor_table";
+            dtDocs = myDB.iExecuteReader(sSql);
+            sSql = $"select * from patient_table";
+            dtPatients = myDB.iExecuteReader(sSql);
+
             FillData();
         }
+        //public CreateVisitingForm(DataTable dtDocs, DataTable dtPatients):this()
+        //{
+        //    this.dtDocs = dtDocs;
+        //    this.dtPatients = dtPatients;
+        //    FillData();
+        //}
         private void FillData()
         {
             DataTable dtDocView = new DataTable();
@@ -59,6 +64,9 @@ namespace AIS_Polyclinic
             dataPatient.DataSource = dtPatView;
             dataDoctor.Columns[0].Visible = false;
             dataPatient.Columns[0].Visible = false;
+
+            dataDoctor.ReadOnly = true;
+            dataPatient.ReadOnly = true;
         }
 
         private void bOK_Click(object sender, EventArgs e)
@@ -75,6 +83,13 @@ namespace AIS_Polyclinic
         private void CreateVisitingForm_Activated(object sender, EventArgs e)
         {
 
+        }
+
+        private void dataDoctor_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataRow dr = dtDocs.Rows[dataDoctor.CurrentRow.Index];
+            int id = Convert.ToInt32(dr[0]);
+            string sSql = $"select count * from visiting_table where id_doctor = {id}";
         }
 
         private void CreateVisitingForm_Shown(object sender, EventArgs e)

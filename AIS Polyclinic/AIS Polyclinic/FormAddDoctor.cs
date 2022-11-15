@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,8 @@ namespace AIS_Polyclinic
     public partial class FormAddDoctor : Form
     {
         SqlManager myDB;
-        DoctorData doctorData;
+        //DoctorData doctorData;
+        Image photo;
         DataTable dtSpecs;
         DataTable dtSpecsForView;
         DataTable newSpec;
@@ -96,6 +98,17 @@ namespace AIS_Polyclinic
             if (oldDoc)
             {
                 idSpec = DoctorSpecIds();
+                byte[] data;
+                try
+                {
+                    data = (byte[])dtDoc.Rows[0][5];
+                }
+                catch
+                {
+                    data = null;
+                }
+                if(data != null)
+                    pPhoto.Image = InfoForm.ToImage(data);
             }
             
 
@@ -168,7 +181,7 @@ namespace AIS_Polyclinic
             fio[0] = tLastName.Text;
             fio[1] = tFirstName.Text;
             fio[2] = tPatronymic.Text;
-
+            photo = pPhoto.Image;
             workExp = Convert.ToInt32(nWorkExperience.Value);
             newSpec = CreateNewDTSpec();
             DialogResult = DialogResult.OK;
@@ -176,11 +189,29 @@ namespace AIS_Polyclinic
 
         private void bAddPhoto_Click(object sender, EventArgs e)
         {
-
+            Bitmap img;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files(*.BMP;*.JPG;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG|All files (*.*)|*.*";
+            if(openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    img = new Bitmap(openFileDialog.FileName);
+                    pPhoto.Image = img;
+                    pPhoto.Invalidate();
+                }
+                catch
+                {
+                    DialogResult rezult = MessageBox.Show("Невозможно открыть выбранный файл",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
+        
         public string[] FIO { get { return fio; } }
         public int WorkExp { get { return workExp; } }
         public DataTable DTSpec { get { return newSpec; } }
+        public Image GetPHOTO { get { return photo; } }
         //private int[] IdSpec { get { return idSpec; } }
         //public void GetInfo()
         //{
