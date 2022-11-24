@@ -14,11 +14,13 @@ namespace AIS_Polyclinic
 {
     public partial class InfoForm : Form
     {
+        static private Image defaultPhoto = Image.FromFile("materials\\defaultPhoto.jpeg");
         SqlManager myDB;
         DataTable dtSpecDoc;
         DataTable dtSpec;
         DataTable dtSpecs;
-        DataTable dtDoc;
+        DataTable dtPerson;
+        Image photo;
         string sSql = "";
         int numTable;
         int id;
@@ -39,19 +41,22 @@ namespace AIS_Polyclinic
             string specs = "";
             sSql = $"select * from \"DOCTOR-SPECIALTY_TABLE\" where id_doctor = {id}";
             dtSpecDoc = myDB.iExecuteReader(sSql);
-            sSql = $"select * from \"SPECIALTY_TABLE\"";
-            dtSpec = myDB.iExecuteReader(sSql);
-            dtSpec.Rows.Clear();
-            for (int i = 0; i < dtSpecDoc.Rows.Count; i++)
-            {
-                sSql = $"select * from \"SPECIALTY_TABLE\" where ID_SPECIALTY = {dtSpecDoc.Rows[i][1]}";
-                DataTable sp = myDB.iExecuteReader(sSql);
-                DataRow dr = dtSpec.NewRow();
-                dr[0] = sp.Rows[0][0];
-                dr[1] = sp.Rows[0][1];
-                dtSpec.Rows.Add(dr);
-                specs += $"{sp.Rows[0][1]}\n";
-            }
+            //sSql = $"select * from \"SPECIALTY_TABLE\"";
+            //dtSpec = myDB.iExecuteReader(sSql);
+            //dtSpec.Rows.Clear();
+            //for (int i = 0; i < dtSpecDoc.Rows.Count; i++)
+            //{
+            //    sSql = $"select * from \"SPECIALTY_TABLE\" where ID_SPECIALTY = {dtSpecDoc.Rows[i][1]}";
+            //    DataTable sp = myDB.iExecuteReader(sSql);
+            //    DataRow dr = dtSpec.NewRow();
+            //    dr[0] = sp.Rows[0][0];
+            //    dr[1] = sp.Rows[0][1];
+            //    dtSpec.Rows.Add(dr);
+            //    specs += $"{sp.Rows[0][1]}\n";
+            //}
+
+            sSql = $"select list (name_specialty , ', ') from \"SPECIALTY_TABLE\" where id_specialty in (select id_specialty from \"DOCTOR-SPECIALTY_TABLE\" where id_doctor = {id})";
+            specs = myDB.iExecuteReader(sSql).Rows[0][0].ToString();
 
             return specs;
             //string sql = "select * from SPECIALTY_TABLE";
@@ -88,19 +93,37 @@ namespace AIS_Polyclinic
                     dt.Columns.Add("Spec");
 
                     DataRow dr = dt.NewRow();
-                    dr[0] = dtDoc.Rows[0][1] + " " + dtDoc.Rows[0][2] + " " + dtDoc.Rows[0][3];
-                    dr[1] = dtDoc.Rows[0][4];
+                    dr[0] = dtPerson.Rows[0][1] + " " + dtPerson.Rows[0][2] + " " + dtPerson.Rows[0][3];
+                    dr[1] = dtPerson.Rows[0][4];
                     dr[2] = StringSpecBuild();
                     dt.Rows.Add(dr);
-
+                    try
+                    {
+                        photo = ToImage((byte[])dtPerson.Rows[0][5]);
+                    }
+                    catch
+                    {
+                        photo = defaultPhoto;
+                    }
                     
                     break;
                 case 1:
+                    dt.Columns.Add("FIO");
+                    dt.Columns.Add("DateBirth");
+                    dt.Columns.Add("Adress");
+
+                    DataRow xdr = dt.NewRow();
+                    xdr[0] = dtPerson.Rows[0][1] + " " + dtPerson.Rows[0][2] + " " + dtPerson.Rows[0][3];
+                    xdr[1] = Convert.ToDateTime(dtPerson.Rows[0][8].ToString()).ToString("dd.MM.yyyy");
+
+                    xdr[2] = String.Join(", ", dtPerson.Rows[0][4], dtPerson.Rows[0][5], dtPerson.Rows[0][6], dtPerson.Rows[0][7]);
+                    dt.Rows.Add(xdr);
+
                     break;
             }
             
             dataInfo.DataSource = dt;
-
+            pPhoto.Image = photo;
         }
         static public Image ToImage(byte[] data)
         {
@@ -142,7 +165,17 @@ namespace AIS_Polyclinic
                 case 0:
                     sSql = "select * from \"SPECIALTY_TABLE\"";
                     dtSpecs = myDB.iExecuteReader(sSql);
-                    FormAddDoctor upDoctor = new FormAddDoctor(dtDoc, dtSpec, dtSpecs);
+                    sSql = $"execute procedure LISTING_SPEC_ID_OF_DOC({id})";
+                    
+                    DataTable listSp = myDB.iExecuteReader(sSql);
+                    string[] sp = listSp.Rows[0][0].ToString().Split(',');
+                    int[] idSpecOld = new int[sp.Length];
+                    for(int i = 0; i < sp.Length; i++)
+                    {
+                        idSpecOld[i] = Convert.ToInt32(sp[i]);
+                    }
+                    //FormAddDoctor upDoctor = new FormAddDoctor(dtPerson, dtSpec, dtSpecs);
+                    FormAddDoctor upDoctor = new FormAddDoctor(dtPerson, idSpecOld, dtSpecs);
                     Hide();
                     if(upDoctor.ShowDialog() == DialogResult.OK)
                     {
@@ -156,7 +189,7 @@ namespace AIS_Polyclinic
                         {
                             DataRow xdr = newSpecDoc.NewRow();
                             xdr[1] = dr[0];
-                            xdr[0] = dtDoc.Rows[0][0];
+                            xdr[0] = dtPerson.Rows[0][0];
                             newSpecDoc.Rows.Add(xdr);
                         }
 
@@ -183,7 +216,7 @@ namespace AIS_Polyclinic
                         {
                             if (!idSpec.Contains(id))
                             {
-                                sSql = $"insert into \"DOCTOR-SPECIALTY_TABLE\" (id_doctor, id_specialty) values({dtDoc.Rows[0][0]}, {id}) ";
+                                sSql = $"execute procedure add_doc_spec({dtPerson.Rows[0][0]}, {id}) ";
                                 myDB.iExeecuteNonQuery(sSql);
                             }
                         }
@@ -201,7 +234,7 @@ namespace AIS_Polyclinic
                         //{
                         //    if (!dtSpecDoc.Rows.Contains(row))
                         //    {
-                        //        sSql = $"insert into \"DOCTOR-SPECIALTY_TABLE\" (id_doctor, id_specialty) values({dtDoc.Rows[0][0]}, {row[0]}) ";
+                        //        sSql = $"insert into \"DOCTOR-SPECIALTY_TABLE\" (id_doctor, id_specialty) values({dtPerson.Rows[0][0]}, {row[0]}) ";
                         //        myDB.iExeecuteNonQuery(sSql);
                         //    }
                         //}
@@ -220,18 +253,30 @@ namespace AIS_Polyclinic
                         //{
                         //    if (!dtSpecDoc.Columns[0].ExtendedProperties.Contains(newSpec.Rows[i][0].ToString()))
                         //    {
-                        //        sSql = $"insert into \"DOCTOR-SPECIALTY_TABLE\" (id_doctor, id_specialty) values({dtDoc.Rows[0][0]}, {newSpec.Rows[i][0]}) ";
+                        //        sSql = $"insert into \"DOCTOR-SPECIALTY_TABLE\" (id_doctor, id_specialty) values({dtPerson.Rows[0][0]}, {newSpec.Rows[i][0]}) ";
                         //        myDB.iExeecuteNonQuery(sSql);
                         //    }
                         //}
                         
-                        sSql = $"update \"DOCTOR_TABLE\" set last_name = {fio[0]}, first_name = {fio[1]}, PATRONYMIC = {fio[2]}, WORK_EXPERIENCE = {workExp} where id_doctor = {dtDoc.Rows[0][0]}) ";
+                        sSql = $"update \"DOCTOR_TABLE\" set last_name = '{fio[0]}', first_name = '{fio[1]}', PATRONYMIC = '{fio[2]}', WORK_EXPERIENCE = {workExp} where id_doctor = {dtPerson.Rows[0][0]} ";
                         myDB.iExeecuteNonQuery(sSql);
                     }
                     break;
                 case 1:
+                    FormAddPatient upPatient = new FormAddPatient(dtPerson);
+                    Hide();
+                    if(upPatient.ShowDialog() == DialogResult.OK)
+                    {
+                        string[] fio = upPatient.FIO;
+                        string[] adress = upPatient.Adress;
+                        DateTime birth = upPatient.DateBirth;
+
+                        sSql = $"update patient_table set last_name = '{fio[0]}', first_name = '{fio[1]}', PATRONYMIC = '{fio[2]}', area = '{adress[0]}', city = '{adress[1]}', house = '{adress[2]}', apartment = {adress[3]} where id_patient = {dtPerson.Rows[0][0]}";
+                        myDB.iExeecuteNonQuery(sSql);
+                    }
                     break;
             }
+            updateDataView();
             Show();
         }
 
@@ -249,17 +294,33 @@ namespace AIS_Polyclinic
         private void InfoForm_Shown(object sender, EventArgs e)
         {
             
+            updateDataView();
+        }
+
+        private void updateDataView()
+        {
             switch (numTable)
             {
                 case 0:
                     sSql = $"select * from doctor_table where id_doctor = {id}";
                     break;
                 case 1:
+                    sSql = $"select * from patient_table where id_patient = {id}";
                     break;
             }
 
-            dtDoc = myDB.iExecuteReader(sSql);
+            dtPerson = myDB.iExecuteReader(sSql);
             CreateTable();
+        }
+        public void ToBlockUpdate()
+        {
+            bUpdate.Enabled = false;
+            //bUpdate.Visible = false;
+        }
+
+        private void dataInfo_DoubleClick(object sender, EventArgs e)
+        {
+
         }
     }
 }

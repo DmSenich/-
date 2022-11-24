@@ -13,6 +13,7 @@ namespace AIS_Polyclinic
 {
     public partial class FormAddDoctor : Form
     {
+        static private Image defaultPhoto = Image.FromFile("materials\\defaultPhoto.jpeg");
         SqlManager myDB;
         //DoctorData doctorData;
         Image photo;
@@ -72,22 +73,73 @@ namespace AIS_Polyclinic
             tPatronymic.Text = dtDoc.Rows[0][3].ToString();
             nWorkExperience.Value = Convert.ToInt32(dtDoc.Rows[0][4].ToString());
 
+            byte[] data;
+            try
+            {
+                data = (byte[])dtDoc.Rows[0][5];
+            }
+            catch
+            {
+                data = null;
+            }
+            if (data != null)
+                pPhoto.Image = InfoForm.ToImage(data);
+            else
+                pPhoto.Image = defaultPhoto;
+
+            TableSpecBuild2();
+        }
+        public FormAddDoctor(DataTable dtDoc, int[] idSpec, DataTable dtSpecs) : this()
+        {
+            oldDoc = true;
+            //this.dtSpec = dtSpec;
+            this.idSpec = idSpec;
+            this.dtDoc = dtDoc;
+            this.dtSpecs = dtSpecs;
+
+            tLastName.Text = dtDoc.Rows[0][1].ToString();
+            tFirstName.Text = dtDoc.Rows[0][2].ToString();
+            tPatronymic.Text = dtDoc.Rows[0][3].ToString();
+            nWorkExperience.Value = Convert.ToInt32(dtDoc.Rows[0][4].ToString());
+
+            byte[] data;
+            try
+            {
+                data = (byte[])dtDoc.Rows[0][5];
+            }
+            catch
+            {
+                data = null;
+            }
+            if (data != null)
+                pPhoto.Image = InfoForm.ToImage(data);
+            else
+                pPhoto.Image = defaultPhoto;
+
             TableSpecBuild2();
         }
         public FormAddDoctor(DataTable dtSpecs) : this()
         {
             this.dtSpecs = dtSpecs;
+            pPhoto.Image = defaultPhoto;
             TableSpecBuild2();
         }
         private int[] DoctorSpecIds()
         {
-            int[] idSpec = new int[dtSpec.Rows.Count];
-
-            for (int i = 0; i < dtSpec.Rows.Count; i++)
+            try
             {
-                idSpec[i] = Convert.ToInt32(dtSpec.Rows[i][0]);
+                int[] idSpec = new int[dtSpec.Rows.Count];
+
+                for (int i = 0; i < dtSpec.Rows.Count; i++)
+                {
+                    idSpec[i] = Convert.ToInt32(dtSpec.Rows[i][0]);
+                }
+                if (idSpec is null)
+                {
+                    idSpec = new int[] { 0 };
+                }
             }
-            if(idSpec is null)
+            catch
             {
                 idSpec = new int[] { 0 };
             }
@@ -95,23 +147,12 @@ namespace AIS_Polyclinic
         }
         private void TableSpecBuild2()
         {
-            if (oldDoc)
+            if (oldDoc && idSpec == null)
             {
                 idSpec = DoctorSpecIds();
-                byte[] data;
-                try
-                {
-                    data = (byte[])dtDoc.Rows[0][5];
-                }
-                catch
-                {
-                    data = null;
-                }
-                if(data != null)
-                    pPhoto.Image = InfoForm.ToImage(data);
+                
             }
-            
-
+           
             for (int i = 0; i < dtSpecs.Rows.Count; i++)
             {
                 DataRow dr = dtSpecsForView.NewRow();
@@ -184,14 +225,21 @@ namespace AIS_Polyclinic
             photo = pPhoto.Image;
             workExp = Convert.ToInt32(nWorkExperience.Value);
             newSpec = CreateNewDTSpec();
-            DialogResult = DialogResult.OK;
+            if (newSpec == null || newSpec.Rows.Count == 0)
+            {
+                MessageBox.Show("Нет специальностей!");
+            }
+            else
+            {
+                DialogResult = DialogResult.OK;
+            }
         }
 
         private void bAddPhoto_Click(object sender, EventArgs e)
         {
             Bitmap img;
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image Files(*.BMP;*.JPG;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG|All files (*.*)|*.*";
+            openFileDialog.Filter = "Image Files(*.BMP;*.JPG;*.GIF;*.PNG;*.JPEG)|*.BMP;*.JPG;*.GIF;*.PNG;*.JPEG|All files (*.*)|*.*";
             if(openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 try

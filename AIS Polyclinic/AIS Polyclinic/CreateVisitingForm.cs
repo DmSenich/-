@@ -14,6 +14,8 @@ namespace AIS_Polyclinic
     {
         SqlManager myDB;
         DataTable dtDocs, dtPatients;
+        int idDoc, idPat;
+        DateTime date;
         string messegeL = "На данный день у этого врача назначено визитов: ";
         private CreateVisitingForm()     //сделать приватным
         {
@@ -26,7 +28,6 @@ namespace AIS_Polyclinic
             dtDocs = myDB.iExecuteReader(sSql);
             sSql = $"select * from patient_table";
             dtPatients = myDB.iExecuteReader(sSql);
-
             FillData();
         }
         //public CreateVisitingForm(DataTable dtDocs, DataTable dtPatients):this()
@@ -72,7 +73,11 @@ namespace AIS_Polyclinic
         private void bOK_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
-
+            date = dateTimeVisit.Value;
+            DataRow drDoc = dtDocs.Rows[dataDoctor.CurrentRow.Index];
+            DataRow drPat = dtPatients.Rows[dataPatient.CurrentRow.Index];
+            idDoc = Convert.ToInt32(drDoc[0]);
+            idPat = Convert.ToInt32(drPat[0]);
         }
 
         private void bCancel_Click(object sender, EventArgs e)
@@ -87,14 +92,52 @@ namespace AIS_Polyclinic
 
         private void dataDoctor_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataRow dr = dtDocs.Rows[dataDoctor.CurrentRow.Index];
-            int id = Convert.ToInt32(dr[0]);
-            string sSql = $"select count * from visiting_table where id_doctor = {id}";
+            LabelMesUpdate();
         }
 
         private void CreateVisitingForm_Shown(object sender, EventArgs e)
         {
 
         }
+        private void LabelMesUpdate()
+        {
+            DataRow dr = dtDocs.Rows[dataDoctor.CurrentRow.Index];
+            int id = Convert.ToInt32(dr[0]);
+            DateTime dateTime = dateTimeVisit.Value;
+            string sSql = $"select count(id_doctor) from visiting_table where id_doctor = {id} and date_visiting = '{dateTime.ToShortDateString()}'";
+            int count = myDB.iExecuteScalar(sSql);
+            label1.Text = messegeL + count.ToString();
+        }
+        public int IdDoc { get { return idDoc; } }
+
+        private void dateTimeVisit_ValueChanged(object sender, EventArgs e)
+        {
+            LabelMesUpdate();
+        }
+
+        private void dataDoctor_DoubleClick(object sender, EventArgs e)
+        {
+            DataRow dr = dtDocs.Rows[dataDoctor.CurrentRow.Index];
+
+
+            InfoForm infoDoctor = new InfoForm(Convert.ToInt32(dr[0]), 0, myDB);
+            infoDoctor.ToBlockUpdate();
+            infoDoctor.Show();
+            
+        }
+
+        private void dataPatient_DoubleClick(object sender, EventArgs e)
+        {
+            DataRow dr = dtPatients.Rows[dataPatient.CurrentRow.Index];
+
+
+            InfoForm infoPatient = new InfoForm(Convert.ToInt32(dr[0]), 1, myDB);
+            infoPatient.ToBlockUpdate();
+            infoPatient.Show();
+
+        }
+
+        public int IdPat { get { return idPat; } }
+        public DateTime Date { get { return date; } }
     }
 }

@@ -44,12 +44,14 @@
             this.dataInfo.RowTemplate.Height = 24;
             this.dataInfo.Size = new System.Drawing.Size(873, 96);
             this.dataInfo.TabIndex = 0;
+            this.dataInfo.DoubleClick += new System.EventHandler(this.dataInfo_DoubleClick);
             // 
             // pPhoto
             // 
             this.pPhoto.Location = new System.Drawing.Point(12, 114);
             this.pPhoto.Name = "pPhoto";
             this.pPhoto.Size = new System.Drawing.Size(300, 300);
+            this.pPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pPhoto.TabIndex = 1;
             this.pPhoto.TabStop = false;
             // 

@@ -61,6 +61,7 @@
             this.tFind.Size = new System.Drawing.Size(100, 22);
             this.tFind.TabIndex = 2;
             this.tFind.TextChanged += new System.EventHandler(this.tFind_TextChanged);
+            this.tFind.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tFind_KeyPress);
             // 
             // FormListPerson
             // 

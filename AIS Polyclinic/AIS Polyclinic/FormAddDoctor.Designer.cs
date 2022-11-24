@@ -122,6 +122,7 @@
             this.pPhoto.Location = new System.Drawing.Point(468, 53);
             this.pPhoto.Name = "pPhoto";
             this.pPhoto.Size = new System.Drawing.Size(300, 300);
+            this.pPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pPhoto.TabIndex = 9;
             this.pPhoto.TabStop = false;
             // 

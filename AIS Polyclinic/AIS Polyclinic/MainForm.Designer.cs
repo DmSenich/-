@@ -37,6 +37,7 @@
             this.bListPatient = new System.Windows.Forms.Button();
             this.bDisease = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.bSwitchVisitings = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // bAddDoctor
@@ -61,7 +62,7 @@
             // 
             // bCreateDoc
             // 
-            this.bCreateDoc.Location = new System.Drawing.Point(174, 94);
+            this.bCreateDoc.Location = new System.Drawing.Point(174, 57);
             this.bCreateDoc.Name = "bCreateDoc";
             this.bCreateDoc.Size = new System.Drawing.Size(130, 57);
             this.bCreateDoc.TabIndex = 2;
@@ -129,11 +130,22 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // bSwitchVisitings
+            // 
+            this.bSwitchVisitings.Location = new System.Drawing.Point(174, 135);
+            this.bSwitchVisitings.Name = "bSwitchVisitings";
+            this.bSwitchVisitings.Size = new System.Drawing.Size(130, 55);
+            this.bSwitchVisitings.TabIndex = 9;
+            this.bSwitchVisitings.Text = "Визиты и диагнозы";
+            this.bSwitchVisitings.UseVisualStyleBackColor = true;
+            this.bSwitchVisitings.Click += new System.EventHandler(this.bSwitchVisitings_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(678, 262);
+            this.Controls.Add(this.bSwitchVisitings);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.bDisease);
             this.Controls.Add(this.bListPatient);
@@ -164,6 +176,7 @@
         private System.Windows.Forms.Button bListPatient;
         private System.Windows.Forms.Button bDisease;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button bSwitchVisitings;
     }
 }
 

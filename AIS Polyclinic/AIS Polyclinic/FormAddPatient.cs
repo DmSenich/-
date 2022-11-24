@@ -44,7 +44,15 @@ namespace AIS_Polyclinic
             adress[1] = dtPatient.Rows[0][5].ToString();
             adress[2] = dtPatient.Rows[0][6].ToString();
             adress[3] = dtPatient.Rows[0][7].ToString();
-            dateOfBirth = Convert.ToDateTime(dtPatient.Rows[0][7]);
+            dateOfBirth = Convert.ToDateTime(dtPatient.Rows[0][8]);
+
+            tLastName.Text = fio[0];
+            tFirstName.Text = fio[1];
+            tPatronymic.Text = fio[2];
+            tArea.Text = adress[0];
+            tCity.Text = adress[1];
+            tHouse.Text = adress[2];
+            tApartment.Text = adress[3];
         }
 
         private void bCancel_Click(object sender, EventArgs e)

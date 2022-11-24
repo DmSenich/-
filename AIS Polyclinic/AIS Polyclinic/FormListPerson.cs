@@ -42,23 +42,7 @@ namespace AIS_Polyclinic
 
         private void FormListPerson_Activated(object sender, EventArgs e)
         {
-            //switch (numTable)
-            //{
-            //    case 0:
-            //        this.Text = "List of doctors";
-            //        sSql = "Select * from doctor_table";
-            //        break;
-            //    case 1:
-            //        this.Text = "List of patients";
-            //        sSql = "Select * from patient_table";
-            //        break;
-            //    case 2:
-            //        this.Text = "List of visiting";
-            //        sSql = "Select * from visiting_table";
-            //        break;
-            //}
-            //DataTable dt = myDB.iExecuteReader(sSql);
-            //dataPerson.DataSource = dt;
+            updateDataView();
         }
         private void CreateUserTable()
         {
@@ -92,26 +76,26 @@ namespace AIS_Polyclinic
                     }
                     break;
                 case 2:
-                    table.Columns.Add("Date");
-                    table.Columns.Add("FIO Doctor");
-                    table.Columns.Add("FIO Patient");
+                    //table.Columns.Add("Date");
+                    //table.Columns.Add("FIO Doctor");
+                    //table.Columns.Add("FIO Patient");
 
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-                        int idD = Convert.ToInt32(dt.Rows[i][2]),
-                            idP = Convert.ToInt32(dt.Rows[i][3]);
+                    //for (int i = 0; i < dt.Rows.Count; i++)
+                    //{
+                    //    int idD = Convert.ToInt32(dt.Rows[i][2]),
+                    //        idP = Convert.ToInt32(dt.Rows[i][3]);
                         
-                        DataRow dr = table.NewRow();
-                        dr[0] = dt.Rows[i][0];
-                        dr[1] = Convert.ToDateTime(dt.Rows[i][1]).ToString("dd.MM.yyyy");
-                        string sql = $"select * from doctor_table where id_doctor = {idD}";
-                        DataTable data = myDB.iExecuteReader(sql);
-                        dr[2] = String.Join(" ", data.Rows[0][1].ToString(), data.Rows[0][2].ToString(), data.Rows[0][3].ToString());
-                        sql = $"select * from patient_table where id_patient = {idP}";
-                        data = myDB.iExecuteReader(sql);
-                        dr[3] = String.Join(" ", data.Rows[0][1].ToString(), data.Rows[0][2].ToString(), data.Rows[0][3].ToString());
-                        table.Rows.Add(dr);
-                    }
+                    //    DataRow dr = table.NewRow();
+                    //    dr[0] = dt.Rows[i][0];
+                    //    dr[1] = Convert.ToDateTime(dt.Rows[i][1]).ToString("dd.MM.yyyy");
+                    //    string sql = $"select * from doctor_table where id_doctor = {idD}";
+                    //    DataTable data = myDB.iExecuteReader(sql);
+                    //    dr[2] = String.Join(" ", data.Rows[0][1].ToString(), data.Rows[0][2].ToString(), data.Rows[0][3].ToString());
+                    //    sql = $"select * from patient_table where id_patient = {idP}";
+                    //    data = myDB.iExecuteReader(sql);
+                    //    dr[3] = String.Join(" ", data.Rows[0][1].ToString(), data.Rows[0][2].ToString(), data.Rows[0][3].ToString());
+                    //    table.Rows.Add(dr);
+                    //}
                     //dataPerson.Columns.Add("dateCol", "Date");
                     //dataPerson.Columns.Add("fioDocCol", "FIO Doctor");
                     //dataPerson.Columns.Add("fioPatCol", "FIO Patient");
@@ -128,6 +112,11 @@ namespace AIS_Polyclinic
 
         private void FormListPerson_Shown(object sender, EventArgs e)
         {
+            updateDataView();
+        }
+
+        private void updateDataView()
+        {
             switch (numTable)
             {
                 case 0:
@@ -139,8 +128,8 @@ namespace AIS_Polyclinic
                     sSql = "Select * from patient_table";
                     break;
                 case 2:
-                    this.Text = "List of visiting";
-                    sSql = "Select * from visiting_table";
+                    //this.Text = "List of visiting";
+                    //sSql = "Select * from visiting_table";
                     break;
             }
             dt = myDB.iExecuteReader(sSql);
@@ -189,10 +178,13 @@ namespace AIS_Polyclinic
                     infoDoctor.Show();
                     break;
                 case 1:
+                    InfoForm infoPatient = new InfoForm(Convert.ToInt32(dr[0]), 1, myDB);
+                    infoPatient.Show();
                     break;
                 case 2:
                     break;
             }
+
         }
 
         private void tFind_TextChanged(object sender, EventArgs e)
@@ -223,6 +215,20 @@ namespace AIS_Polyclinic
                     dataPerson.Rows[k].Visible = false;
                 }
             }
+        }
+
+        private void tFind_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string c = e.KeyChar.ToString();
+            if(!Regex.Match(c, @"[а-яА-Я\s\b]").Success)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void dataPerson_Enter(object sender, EventArgs e)
+        {
+            updateDataView();
         }
     }
 }

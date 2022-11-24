@@ -20,3 +20,4 @@ D:\Учеба\Базы данных\Курсовая\Приложение\AIS Po
 D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Debug\AIS_Polyclinic.FormAddDoctor.resources
 D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Debug\AIS_Polyclinic.FormListPerson.resources
 D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Debug\AIS_Polyclinic.FormAddPatient.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Debug\AIS_Polyclinic.SwitchVisualVisitings.resources
