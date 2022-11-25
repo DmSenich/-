@@ -80,6 +80,12 @@
     <Compile Include="FormAddPatient.Designer.cs">
       <DependentUpon>FormAddPatient.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormDiseaseView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDiseaseView.Designer.cs">
+      <DependentUpon>FormDiseaseView.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormListPerson.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,11 +118,17 @@
     <EmbeddedResource Include="CreateVisitingForm.resx">
       <DependentUpon>CreateVisitingForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormAddDisease.resx">
+      <DependentUpon>FormAddDisease.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormAddDoctor.resx">
       <DependentUpon>FormAddDoctor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAddPatient.resx">
       <DependentUpon>FormAddPatient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDiseaseView.resx">
+      <DependentUpon>FormDiseaseView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormListPerson.resx">
       <DependentUpon>FormListPerson.cs</DependentUpon>

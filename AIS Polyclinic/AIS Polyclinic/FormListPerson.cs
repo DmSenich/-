@@ -144,6 +144,8 @@ namespace AIS_Polyclinic
             //    dataPerson.Rows[i].ReadOnly = true;
             //}
             dataPerson.ReadOnly = true;
+            //dataPerson.Rows[1].Visible = false;
+
         }
         private void CreateObj(int id)
         {
@@ -188,32 +190,39 @@ namespace AIS_Polyclinic
         }
 
         private void tFind_TextChanged(object sender, EventArgs e)
-        {
-            for (int k = 0; k < dataPerson.Rows.Count; k++)
-            {
-                dataPerson.Rows[k].Visible = true;
-            }
-            string find = tFind.Text.ToLower();
-            if(find == "")
-            {
+        {     
+            try
+            {       
                 for (int k = 0; k < dataPerson.Rows.Count; k++)
                 {
                     dataPerson.Rows[k].Visible = true;
                 }
-                return;
-            }
-
-            for(int k = 0; k < dt.Rows.Count; k++)
-            {
-                Regex regex = new Regex(find);
-                bool f = false, i = false, o = false;
-                f = regex.IsMatch(dt.Rows[k][1].ToString().ToLower());
-                i = regex.IsMatch(dt.Rows[k][2].ToString().ToLower());
-                o = regex.IsMatch(dt.Rows[k][3].ToString().ToLower());
-                if(!(f || i || o))
+                string find = tFind.Text.ToLower();
+                if (find == "")
                 {
-                    dataPerson.Rows[k].Visible = false;
+                    for (int k = 0; k < dataPerson.Rows.Count; k++)
+                    {
+                        dataPerson.Rows[k].Visible = true;
+                    }
+                    return;
                 }
+                dataPerson.CurrentCell = null;
+                for (int k = 0; k < dt.Rows.Count; k++)
+                {
+                    Regex regex = new Regex(find);
+                    bool f = false, i = false, o = false;
+                    f = regex.IsMatch(dt.Rows[k][1].ToString().ToLower());
+                    i = regex.IsMatch(dt.Rows[k][2].ToString().ToLower());
+                    o = regex.IsMatch(dt.Rows[k][3].ToString().ToLower());
+                    if (!(f || i || o))
+                    {
+                        dataPerson.Rows[k].Visible = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

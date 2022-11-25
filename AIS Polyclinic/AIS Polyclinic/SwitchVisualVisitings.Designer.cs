@@ -65,12 +65,13 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(721, 261);
+            this.button3.Location = new System.Drawing.Point(636, 272);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(88, 55);
+            this.button3.Size = new System.Drawing.Size(107, 69);
             this.button3.TabIndex = 2;
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // label1
             // 

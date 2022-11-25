@@ -119,14 +119,35 @@ namespace AIS_Polyclinic
 
         private void bAddDisease_Click(object sender, EventArgs e)
         {
+            //dtPatients.Rows[dataPatient.CurrentRow.Index];
+
             try
             {
+                int idVis = Convert.ToInt32(dtVisiting.Rows[dataVisiting.CurrentRow.Index][0]);
+                FormAddDisease formAddDisease = new FormAddDisease(myDB);
+                if(formAddDisease.ShowDialog() == DialogResult.OK)
+                {
+                    string description = formAddDisease.Description;
+                    string name = formAddDisease.NameDis;
+                    int idCat = formAddDisease.IdCategory;
 
+                    string sSql = $"execute procedure add_disease({idVis}, '{name}', '{description}', {idCat})";
+
+                    myDB.iExeecuteNonQuery(sSql);
+
+                    
+                }
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            FormDiseaseView diseaseView = new FormDiseaseView(myDB, 1);
+            diseaseView.Show();
         }
 
         private void bAddVisiting_Click(object sender, EventArgs e)
@@ -150,6 +171,10 @@ namespace AIS_Polyclinic
                     DateTime date = createVisitingForm.Date;
                     sSql = $"execute procedure add_visiting('{date.ToShortDateString()}', {idDoc}, {idPat})";
                     myDB.iExeecuteNonQuery(sSql);
+
+                    sSql = "select * from visiting_table";
+                    dtVisiting = myDB.iExecuteReader(sSql);
+                    CreateTable();
                 }
             }
             catch (Exception ex)
