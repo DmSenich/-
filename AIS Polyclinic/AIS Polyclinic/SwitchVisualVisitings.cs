@@ -5,7 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -73,195 +72,49 @@ namespace AIS_Polyclinic
             }
         }
 
-        private void TextForSearch()
-        {
-            string tDoc = tFindDoc.Text.ToLower();
-            string tPat = tFindPat.Text.ToLower();
-            Search(tDoc, tPat);
-        }
-        private void TimeForSearch()
-        {
-            string tDoc = tFindDoc.Text.ToLower();
-            string tPat = tFindPat.Text.ToLower();
-            //Search(tDoc, tPat, dateTimePicker1.Value);
-        }
-
-        private void Search(string tDoc, string tPat, DateTime date)
-        {
-            bool doc = true, pat = true;
-            bool da = false, db = false, dc = false, pa = false, pb = false , pc = false, dfio = false, pfio = false;
-
-            if (tDoc == "")
-            {
-                doc = false;
-                dfio = true;
-                da = true;
-                db = true;
-                dc = true;
-            }
-            if(tPat == "")
-            {
-                pat = false;
-                pfio = true;
-                pa = true;
-                pb = true;
-                pc = true;
-            }
-            if(!pat && !doc)
-            {
-                for (int k = 0; k < dataVisiting.Rows.Count; k++)
-                {
-                    if (date.ToShortDateString().Equals(dataVisiting.Rows[k].Cells[1].Value.ToString()))
-                    {
-                        dataVisiting.Rows[k].Visible = true;
-                    }
-                }
-                return;
-            }
-            dataVisiting.CurrentCell = null;
-
-            for (int k = 0; k < dataVisiting.Rows.Count; k++)
-            {
-                bool dateBool = date.ToShortDateString().Equals(dataVisiting.Rows[k].Cells[1].Value.ToString());
-                if (doc)
-                {
-                    Regex regexD = new Regex(tDoc);
-                    dfio = regexD.IsMatch(dataVisiting.Rows[k].Cells[2].Value.ToString().ToLower());
-                    //da = regexD.IsMatch(dtVisiting.Rows[k][1].ToString().ToLower());
-                    //db = regexD.IsMatch(dtVisiting.Rows[k][2].ToString().ToLower());
-                    //dc = regexD.IsMatch(dtVisiting.Rows[k][3].ToString().ToLower());
-                }
-
-                if (pat)
-                {
-                    Regex regexP = new Regex(tPat);
-                    pfio = regexP.IsMatch(dataVisiting.Rows[k].Cells[3].Value.ToString().ToLower());
-                    //pa = regexP.IsMatch(dataVisiting.Rows[k][1].ToString().ToLower());
-                    //pb = regexP.IsMatch(dataVisiting.Rows[k][2].ToString().ToLower());
-                    //pc = regexP.IsMatch(dataVisiting.Rows[k][3].ToString().ToLower());
-                }
-
-                //if (!(da || db || dc || pa || pb || pc))
-                //{
-                //    dataVisiting.Rows[k].Visible = false;
-                //}
-                if (!(dfio && pfio && dateBool))
-                {
-                    dataVisiting.Rows[k].Visible = false;
-                }
-            }
-        }
-        private void Search(string tDoc, string tPat)
-        {
-            bool doc = true, pat = true;
-            bool da = false, db = false, dc = false, pa = false, pb = false, pc = false, dfio = false, pfio = false;
-            if (tDoc == "")
-            {
-                doc = false;
-                dfio = true;
-                da = true;
-                db = true;
-                dc = true;
-            }
-            if (tPat == "")
-            {
-                pat = false;
-                pfio = true;
-                pa = true;
-                pb = true;
-                pc = true;
-            }
-            if (!pat && !doc)
-            {
-                for (int k = 0; k < dataVisiting.Rows.Count; k++)
-                {
-                    dataVisiting.Rows[k].Visible = true;
-                }
-                return;
-            }
-            dataVisiting.CurrentCell = null;
-
-            for (int k = 0; k < dataVisiting.Rows.Count; k++)
-            {
-                if (doc)
-                {
-                    Regex regexD = new Regex(tDoc);
-                    dfio = regexD.IsMatch(dataVisiting.Rows[k].Cells[2].Value.ToString().ToLower());
-                    //da = regexD.IsMatch(dtVisiting.Rows[k][1].ToString().ToLower());
-                    //db = regexD.IsMatch(dtVisiting.Rows[k][2].ToString().ToLower());
-                    //dc = regexD.IsMatch(dtVisiting.Rows[k][3].ToString().ToLower());
-                }
-
-                if (pat)
-                {
-                    Regex regexP = new Regex(tPat);
-                    pfio = regexP.IsMatch(dataVisiting.Rows[k].Cells[3].Value.ToString().ToLower());
-                    //pa = regexP.IsMatch(dataVisiting.Rows[k][1].ToString().ToLower());
-                    //pb = regexP.IsMatch(dataVisiting.Rows[k][2].ToString().ToLower());
-                    //pc = regexP.IsMatch(dataVisiting.Rows[k][3].ToString().ToLower());
-                }
-
-                //if (!(da || db || dc || pa || pb || pc))
-                //{
-                //    dataVisiting.Rows[k].Visible = false;
-                //}
-                if (!(dfio && pfio))
-                {
-                    dataVisiting.Rows[k].Visible = false;
-                }
-            }
-        }
-
         private void tFindDoc_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                for (int k = 0; k < dataVisiting.Rows.Count; k++)
-                {
-                    dataVisiting.Rows[k].Visible = true;
-                }
-                TextForSearch();
-                
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            //for (int k = 0; k < dataPerson.Rows.Count; k++)
+            //{
+            //    dataPerson.Rows[k].Visible = true;
+            //}
+            //string find = tFind.Text.ToLower();
+            //if (find == "")
+            //{
+            //    for (int k = 0; k < dataPerson.Rows.Count; k++)
+            //    {
+            //        dataPerson.Rows[k].Visible = true;
+            //    }
+            //    return;
+            //}
+
+            //for (int k = 0; k < dt.Rows.Count; k++)
+            //{
+            //    Regex regex = new Regex(find);
+            //    bool f = false, i = false, o = false;
+            //    f = regex.IsMatch(dt.Rows[k][1].ToString().ToLower());
+            //    i = regex.IsMatch(dt.Rows[k][2].ToString().ToLower());
+            //    o = regex.IsMatch(dt.Rows[k][3].ToString().ToLower());
+            //    if (!(f || i || o))
+            //    {
+            //        dataPerson.Rows[k].Visible = false;
+            //    }
+            //}
         }
 
         private void tFindPat_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                for (int k = 0; k < dataVisiting.Rows.Count; k++)
-                {
-                    dataVisiting.Rows[k].Visible = true;
-                }
-                TextForSearch();
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
 
         private void tFindDoc_KeyPress(object sender, KeyPressEventArgs e)
         {
-            string c = e.KeyChar.ToString();
-            if (!Regex.Match(c, @"[а-яА-Я\s\b]").Success)
-            {
-                e.Handled = true;
-            }
+
         }
 
         private void tFindPat_KeyPress(object sender, KeyPressEventArgs e)
         {
-            string c = e.KeyChar.ToString();
-            if (!Regex.Match(c, @"[а-яА-Я\s\b]").Success)
-            {
-                e.Handled = true;
-            }
+
         }
 
         private void bAddDisease_Click(object sender, EventArgs e)
@@ -295,40 +148,6 @@ namespace AIS_Polyclinic
         {
             FormDiseaseView diseaseView = new FormDiseaseView(myDB, 1);
             diseaseView.Show();
-        }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                for (int k = 0; k < dataVisiting.Rows.Count; k++)
-                {
-                    dataVisiting.Rows[k].Visible = true;
-                }
-                //TimeForSearch();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void bDateNull_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                for (int k = 0; k < dataVisiting.Rows.Count; k++)
-                {
-                    dataVisiting.Rows[k].Visible = true;
-                }
-                TextForSearch();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
 
         private void bAddVisiting_Click(object sender, EventArgs e)
