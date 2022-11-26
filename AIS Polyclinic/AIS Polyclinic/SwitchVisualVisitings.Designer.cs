@@ -40,6 +40,7 @@
             this.cSpecs = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dataVisiting = new System.Windows.Forms.DataGridView();
+            this.bDateNull = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataVisiting)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,6 +89,7 @@
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(167, 22);
             this.dateTimePicker1.TabIndex = 4;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // label2
             // 
@@ -144,19 +146,33 @@
             // 
             // dataVisiting
             // 
+            this.dataVisiting.AllowUserToAddRows = false;
+            this.dataVisiting.AllowUserToDeleteRows = false;
             this.dataVisiting.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataVisiting.Location = new System.Drawing.Point(343, 12);
             this.dataVisiting.Name = "dataVisiting";
+            this.dataVisiting.ReadOnly = true;
             this.dataVisiting.RowHeadersWidth = 51;
             this.dataVisiting.RowTemplate.Height = 24;
             this.dataVisiting.Size = new System.Drawing.Size(519, 243);
             this.dataVisiting.TabIndex = 14;
+            // 
+            // bDateNull
+            // 
+            this.bDateNull.Location = new System.Drawing.Point(15, 272);
+            this.bDateNull.Name = "bDateNull";
+            this.bDateNull.Size = new System.Drawing.Size(106, 51);
+            this.bDateNull.TabIndex = 15;
+            this.bDateNull.Text = "Сбросить дату";
+            this.bDateNull.UseVisualStyleBackColor = true;
+            this.bDateNull.Click += new System.EventHandler(this.bDateNull_Click);
             // 
             // SwitchVisualVisitings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(897, 362);
+            this.Controls.Add(this.bDateNull);
             this.Controls.Add(this.dataVisiting);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cSpecs);
@@ -191,5 +207,6 @@
         private System.Windows.Forms.ComboBox cSpecs;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridView dataVisiting;
+        private System.Windows.Forms.Button bDateNull;
     }
 }
