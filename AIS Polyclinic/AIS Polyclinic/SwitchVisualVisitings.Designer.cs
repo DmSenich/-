@@ -144,9 +144,12 @@
             // 
             // dataVisiting
             // 
+            this.dataVisiting.AllowUserToAddRows = false;
+            this.dataVisiting.AllowUserToDeleteRows = false;
             this.dataVisiting.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataVisiting.Location = new System.Drawing.Point(343, 12);
             this.dataVisiting.Name = "dataVisiting";
+            this.dataVisiting.ReadOnly = true;
             this.dataVisiting.RowHeadersWidth = 51;
             this.dataVisiting.RowTemplate.Height = 24;
             this.dataVisiting.Size = new System.Drawing.Size(519, 243);
