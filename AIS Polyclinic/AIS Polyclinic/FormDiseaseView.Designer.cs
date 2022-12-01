@@ -43,6 +43,7 @@
             this.cNames.Name = "cNames";
             this.cNames.Size = new System.Drawing.Size(182, 24);
             this.cNames.TabIndex = 0;
+            this.cNames.SelectionChangeCommitted += new System.EventHandler(this.cNames_SelectionChangeCommitted);
             // 
             // label1
             // 

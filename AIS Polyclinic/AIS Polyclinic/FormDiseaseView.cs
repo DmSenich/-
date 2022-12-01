@@ -41,8 +41,31 @@ namespace AIS_Polyclinic
             cNames.DataSource = dtDisease;
             cNames.DisplayMember = "name_disease";
             cNames.ValueMember = "id_disease";
+
+            FullData(Convert.ToInt32(cNames.SelectedValue));
+        }
+        private void FullData(int idDis)
+        {
+            try 
+            {
+                string sSql = $"select * from disease_table where id_disease = {idDis}";
+                DataTable dis = myDB.iExecuteReader(sSql);
+                richDescription.Text = dis.Rows[0][2].ToString();
+                int idCat = Convert.ToInt32(dis.Rows[0][3]);
+                sSql = $"select * from category_table where id_category = {idCat}";
+                DataTable cat = myDB.iExecuteReader(sSql);
+                tCategory.Text = cat.Rows[0][1].ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
-
+        private void cNames_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            int idDis = Convert.ToInt32(cNames.SelectedValue);
+            FullData(idDis);
+        }
     }
 }

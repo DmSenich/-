@@ -30,9 +30,8 @@
         {
             this.bAddVisiting = new System.Windows.Forms.Button();
             this.bAddDisease = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.bListDisease = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tFindDoc = new System.Windows.Forms.TextBox();
@@ -40,6 +39,9 @@
             this.cSpecs = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dataVisiting = new System.Windows.Forms.DataGridView();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.checkSpecs = new System.Windows.Forms.CheckBox();
+            this.checkDate = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataVisiting)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,15 +65,15 @@
             this.bAddDisease.UseVisualStyleBackColor = true;
             this.bAddDisease.Click += new System.EventHandler(this.bAddDisease_Click);
             // 
-            // button3
+            // bListDisease
             // 
-            this.button3.Location = new System.Drawing.Point(636, 272);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(107, 69);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.bListDisease.Location = new System.Drawing.Point(636, 272);
+            this.bListDisease.Name = "bListDisease";
+            this.bListDisease.Size = new System.Drawing.Size(107, 69);
+            this.bListDisease.TabIndex = 2;
+            this.bListDisease.Text = "Посмотреть диагнозы";
+            this.bListDisease.UseVisualStyleBackColor = true;
+            this.bListDisease.Click += new System.EventHandler(this.bListDisease_Click);
             // 
             // label1
             // 
@@ -81,13 +83,6 @@
             this.label1.Size = new System.Drawing.Size(104, 16);
             this.label1.TabIndex = 3;
             this.label1.Text = "Найти по дате:";
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(15, 233);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(167, 22);
-            this.dateTimePicker1.TabIndex = 4;
             // 
             // label2
             // 
@@ -132,6 +127,8 @@
             this.cSpecs.Name = "cSpecs";
             this.cSpecs.Size = new System.Drawing.Size(197, 24);
             this.cSpecs.TabIndex = 12;
+            this.cSpecs.SelectedIndexChanged += new System.EventHandler(this.cSpecs_SelectedIndexChanged);
+            this.cSpecs.SelectionChangeCommitted += new System.EventHandler(this.cSpecs_SelectionChangeCommitted);
             // 
             // label4
             // 
@@ -155,11 +152,41 @@
             this.dataVisiting.Size = new System.Drawing.Size(519, 243);
             this.dataVisiting.TabIndex = 14;
             // 
+            // monthCalendar1
+            // 
+            this.monthCalendar1.Location = new System.Drawing.Point(15, 227);
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.TabIndex = 15;
+            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
+            // 
+            // checkSpecs
+            // 
+            this.checkSpecs.AutoSize = true;
+            this.checkSpecs.Location = new System.Drawing.Point(293, 136);
+            this.checkSpecs.Name = "checkSpecs";
+            this.checkSpecs.Size = new System.Drawing.Size(18, 17);
+            this.checkSpecs.TabIndex = 17;
+            this.checkSpecs.UseVisualStyleBackColor = true;
+            this.checkSpecs.CheckedChanged += new System.EventHandler(this.checkSpecs_CheckedChanged);
+            // 
+            // checkDate
+            // 
+            this.checkDate.AutoSize = true;
+            this.checkDate.Location = new System.Drawing.Point(122, 202);
+            this.checkDate.Name = "checkDate";
+            this.checkDate.Size = new System.Drawing.Size(18, 17);
+            this.checkDate.TabIndex = 18;
+            this.checkDate.UseVisualStyleBackColor = true;
+            this.checkDate.CheckedChanged += new System.EventHandler(this.checkDate_CheckedChanged);
+            // 
             // SwitchVisualVisitings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(897, 362);
+            this.ClientSize = new System.Drawing.Size(905, 466);
+            this.Controls.Add(this.checkDate);
+            this.Controls.Add(this.checkSpecs);
+            this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.dataVisiting);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cSpecs);
@@ -167,9 +194,8 @@
             this.Controls.Add(this.tFindDoc);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.bListDisease);
             this.Controls.Add(this.bAddDisease);
             this.Controls.Add(this.bAddVisiting);
             this.Name = "SwitchVisualVisitings";
@@ -184,9 +210,8 @@
 
         private System.Windows.Forms.Button bAddVisiting;
         private System.Windows.Forms.Button bAddDisease;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button bListDisease;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tFindDoc;
@@ -194,5 +219,8 @@
         private System.Windows.Forms.ComboBox cSpecs;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridView dataVisiting;
+        private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.CheckBox checkSpecs;
+        private System.Windows.Forms.CheckBox checkDate;
     }
 }

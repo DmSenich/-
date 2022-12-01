@@ -27,10 +27,14 @@ namespace AIS_Polyclinic
             dtVisiting = myDB.iExecuteReader(sSql);
             sSql = "select * from specialty_table";
             dtSpecs = myDB.iExecuteReader(sSql);
-            foreach(DataRow dr in dtSpecs.Rows)
-            {
-                cSpecs.Items.Add(dr[1].ToString());
-            }
+            //foreach(DataRow dr in dtSpecs.Rows)
+            //{
+            //    cSpecs.Items.Add(dr[1].ToString());
+            //}
+            cSpecs.DataSource = dtSpecs;
+            cSpecs.DisplayMember = "name_specialty";
+            cSpecs.ValueMember = "id_specialty";
+
             CreateTable();
             //string sSql = "select * from doctor_table";
             //dtDocs = myDB.iExecuteReader(sSql);
@@ -72,16 +76,80 @@ namespace AIS_Polyclinic
                 dataVisiting.Columns[i].AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             }
         }
-        private void TextForSearch()
+        private void ForSearch()
         {
             string tDoc = tFindDoc.Text.ToLower();
             string tPat = tFindPat.Text.ToLower();
-            Search(tDoc, tPat);
+            Search(tDoc, tPat, checkSpecs.Checked, checkDate.Checked);
+        }
+
+        private void Search(string tDoc, string tPat, bool bSpec, bool bDate)
+        {
+            bool doc = true, pat = true;
+            bool dfio = false, pfio = false;
+            int[] idVisitFromSpec = null;
+            DateTime dateTime = DateTime.Now;
+            if (tDoc == "")
+            {
+                doc = false;
+                dfio = true;
+            }
+            if (tPat == "")
+            {
+                pat = false;
+                pfio = true;
+            }
+            if (bSpec)
+            {
+                idVisitFromSpec = VisitFromSpec();
+            }
+            if (bDate)
+            {
+                dateTime = monthCalendar1.SelectionStart;
+            }
+            
+
+            //for (int k = 0; k < dataVisiting.Rows.Count; k++)
+            //{
+            //    dataVisiting.Rows[k].Visible = true;
+            //}
+
+            dataVisiting.CurrentCell = null;
+
+            for (int k = 0; k < dataVisiting.Rows.Count; k++)
+            {
+                if (doc)
+                {
+                    Regex regexD = new Regex(tDoc);
+                    dfio = regexD.IsMatch(dataVisiting.Rows[k].Cells[2].Value.ToString().ToLower());
+                }
+
+                if (pat)
+                {
+                    Regex regexP = new Regex(tPat);
+                    pfio = regexP.IsMatch(dataVisiting.Rows[k].Cells[3].Value.ToString().ToLower());
+                }
+                int idV = Convert.ToInt32(dataVisiting.Rows[k].Cells[0].Value);
+
+                if (!(dfio && pfio))
+                {
+                    dataVisiting.Rows[k].Visible = false;
+                }
+                if(bSpec && !idVisitFromSpec.Contains(idV))
+                {
+                    dataVisiting.Rows[k].Visible = false;
+                }
+                if(bDate && !dataVisiting.Rows[k].Cells[1].Value.Equals(dateTime.ToShortDateString()))
+                {
+                    dataVisiting.Rows[k].Visible = false;
+                }
+            }
         }
         private void Search(string tDoc, string tPat)
         {
-            bool doc = true, pat = true;
-            bool da = false, db = false, dc = false, pa = false, pb = false, pc = false, dfio = false, pfio = false;
+            bool doc = true, pat = true, spec = true;
+            bool da = false, db = false, dc = false, pa = false, pb = false, pc = false, dfio = false, pfio = false, specB = false;
+            int[] idFromSpec;
             if (tDoc == "")
             {
                 doc = false;
@@ -98,15 +166,51 @@ namespace AIS_Polyclinic
                 pb = true;
                 pc = true;
             }
-            if (!pat && !doc)
+            if (!checkSpecs.Checked)
             {
-                for (int k = 0; k < dataVisiting.Rows.Count; k++)
+                spec = false;
+                specB = true;
+                idFromSpec = null;
+            }
+            else
+            {
+                idFromSpec = VisitFromSpec();
+            }
+
+            dataVisiting.CurrentCell = null;
+
+            for (int k = 0; k < dataVisiting.Rows.Count; k++)
+            {
+                if (!pat && !doc)
                 {
                     dataVisiting.Rows[k].Visible = true;
                 }
+                if (checkSpecs.Checked)
+                {
+                    if(idFromSpec == null)
+                    {
+                        dataVisiting.Rows[k].Visible = false;
+                    }
+                    else if (!idFromSpec.Contains(Convert.ToInt32(dataVisiting.Rows[k].Cells[0].Value)))
+                    {
+                        dataVisiting.Rows[k].Visible = false;
+                    }                 
+                }
+            }
+            if (!pat && !doc)
+            {
                 return;
             }
-            dataVisiting.CurrentCell = null;
+
+            //if (!pat && !doc)
+            //{
+            //    for (int k = 0; k < dataVisiting.Rows.Count; k++)
+            //    {
+            //        dataVisiting.Rows[k].Visible = true;
+            //    }
+            //    return;
+            //}
+            
 
             for (int k = 0; k < dataVisiting.Rows.Count; k++)
             {
@@ -138,16 +242,90 @@ namespace AIS_Polyclinic
                 }
             }
         }
+
+        //private void TimeForSearch()
+        //{
+        //    string tDoc = tFindDoc.Text.ToLower();
+        //    string tPat = tFindPat.Text.ToLower();
+        //    Search(tDoc, tPat, checkSpecs.Checked, checkDate.Checked);
+        //}
+        private void Search(string tDoc, string tPat, DateTime date)
+        {
+            bool doc = true, pat = true;
+            bool da = false, db = false, dc = false, pa = false, pb = false, pc = false, dfio = false, pfio = false;
+
+            dataVisiting.CurrentCell = null;
+
+            if (tDoc == "")
+            {
+                doc = false;
+                dfio = true;
+                da = true;
+                db = true;
+                dc = true;
+            }
+            if (tPat == "")
+            {
+                pat = false;
+                pfio = true;
+                pa = true;
+                pb = true;
+                pc = true;
+            }
+            if (!pat && !doc)
+            {
+                for (int k = 0; k < dataVisiting.Rows.Count; k++)
+                {
+                    if (date.ToShortDateString().Equals(dataVisiting.Rows[k].Cells[1].Value.ToString()))
+                    {
+                        continue;
+                    }
+                    dataVisiting.Rows[k].Visible = false;
+                }
+                return;
+            }
+
+
+            for (int k = 0; k < dataVisiting.Rows.Count; k++)
+            {
+                bool dateBool = date.ToShortDateString().Equals(dataVisiting.Rows[k].Cells[1].Value.ToString());
+                if (doc)
+                {
+                    Regex regexD = new Regex(tDoc);
+                    dfio = regexD.IsMatch(dataVisiting.Rows[k].Cells[2].Value.ToString().ToLower());
+                    //da = regexD.IsMatch(dtVisiting.Rows[k][1].ToString().ToLower());
+                    //db = regexD.IsMatch(dtVisiting.Rows[k][2].ToString().ToLower());
+                    //dc = regexD.IsMatch(dtVisiting.Rows[k][3].ToString().ToLower());
+                }
+
+                if (pat)
+                {
+                    Regex regexP = new Regex(tPat);
+                    pfio = regexP.IsMatch(dataVisiting.Rows[k].Cells[3].Value.ToString().ToLower());
+                    //pa = regexP.IsMatch(dataVisiting.Rows[k][1].ToString().ToLower());
+                    //pb = regexP.IsMatch(dataVisiting.Rows[k][2].ToString().ToLower());
+                    //pc = regexP.IsMatch(dataVisiting.Rows[k][3].ToString().ToLower());
+                }
+
+                //if (!(da || db || dc || pa || pb || pc))
+                //{
+                //    dataVisiting.Rows[k].Visible = false;
+                //}
+                if (!(dfio && pfio && dateBool))
+                {
+                    dataVisiting.Rows[k].Visible = false;
+                }
+            }
+        }
         private void tFindDoc_TextChanged(object sender, EventArgs e)
         {
-
             try
             {
                 for (int k = 0; k < dataVisiting.Rows.Count; k++)
                 {
                     dataVisiting.Rows[k].Visible = true;
                 }
-                TextForSearch();
+                ForSearch();
 
             }
             catch (Exception ex)
@@ -190,7 +368,7 @@ namespace AIS_Polyclinic
                 {
                     dataVisiting.Rows[k].Visible = true;
                 }
-                TextForSearch();
+                ForSearch();
 
             }
             catch (Exception ex)
@@ -216,6 +394,12 @@ namespace AIS_Polyclinic
                 e.Handled = true;
             }
         }
+        
+
+        //private void Search(string tDoc, string tPat, DateTime date, ) ----- с учетом специальности 
+        //{
+
+        //}
 
         private void bAddDisease_Click(object sender, EventArgs e)
         {
@@ -248,6 +432,140 @@ namespace AIS_Polyclinic
         {
             FormDiseaseView diseaseView = new FormDiseaseView(myDB, 1);
             diseaseView.Show();
+        }
+
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            try
+            {
+                for (int k = 0; k < dataVisiting.Rows.Count; k++)
+                {
+                    dataVisiting.Rows[k].Visible = true;
+                }
+                ForSearch();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        //private void bDateToNull_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        for (int k = 0; k < dataVisiting.Rows.Count; k++)
+        //        {
+        //            dataVisiting.Rows[k].Visible = true;
+        //        }
+        //        ForSearch();
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //    }
+        //}
+
+        private void cSpecs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkSpecs_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                for (int k = 0; k < dataVisiting.Rows.Count; k++)
+                {
+                    dataVisiting.Rows[k].Visible = true;
+                }
+                ForSearch();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private int[] VisitFromSpec()
+        {
+            int idS = Convert.ToInt32(cSpecs.SelectedValue);
+            string sSql = $"select id_visiting from visiting_table where id_doctor in (select id_doctor from \"DOCTOR-SPECIALTY_TABLE\" where id_specialty = {idS})";
+            DataTable dtV = myDB.iExecuteReader(sSql);
+            if(dtV.Rows.Count == 0)
+            {
+                int[] nres = new int[] { -1 };
+                return nres;
+            }
+            int[] idV = new int[dtV.Rows.Count];
+            for (int i = 0; i < dtV.Rows.Count; i++)
+            {
+                idV[i] = Convert.ToInt32(dtV.Rows[i][0]);
+            }
+            return idV;
+        }
+
+        private void cSpecs_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            try
+            {
+                if (checkSpecs.Checked)
+                {
+                    for (int k = 0; k < dataVisiting.Rows.Count; k++)
+                    {
+                        dataVisiting.Rows[k].Visible = true;
+                    }
+                    ForSearch();
+                    
+                    //dataVisiting.CurrentCell = null;
+                    //for(int i = 0; i < dataVisiting.RowCount; i++)
+                    //{
+                    //    if (!idV.Contains(Convert.ToInt32(dataVisiting.Rows[i].Cells[0].Value)))
+                    //    {
+                    //        dataVisiting.Rows[i].Visible = false;
+                    //    }
+                    //    else
+                    //    {
+                    //        dataVisiting.Rows[i].Visible = true;
+                    //    }
+                    //}
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void checkDate_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                for (int k = 0; k < dataVisiting.Rows.Count; k++)
+                {
+                    dataVisiting.Rows[k].Visible = true;
+                }
+                ForSearch();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void bListDisease_Click(object sender, EventArgs e)
+        {
+            try 
+            {
+                int idV = Convert.ToInt32(dataVisiting.CurrentRow.Cells[0].Value);
+                FormDiseaseView diseaseView = new FormDiseaseView(myDB, idV);
+                diseaseView.Show();
+            }
+            catch(Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void bAddVisiting_Click(object sender, EventArgs e)

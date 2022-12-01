@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,7 +14,7 @@ namespace AIS_Polyclinic
     public partial class CreateVisitingForm : Form
     {
         SqlManager myDB;
-        DataTable dtDocs, dtPatients;
+        DataTable dtDocs, dtPatients, dtSpecs;
         int idDoc, idPat;
         DateTime date;
         string messegeL = "На данный день у этого врача назначено визитов: ";
@@ -28,6 +29,11 @@ namespace AIS_Polyclinic
             dtDocs = myDB.iExecuteReader(sSql);
             sSql = $"select * from patient_table";
             dtPatients = myDB.iExecuteReader(sSql);
+            sSql = $"select * from specialty_table";
+            dtSpecs = myDB.iExecuteReader(sSql);
+            cSpecs.DataSource = dtSpecs;
+            cSpecs.DisplayMember = "name_specialty";
+            cSpecs.ValueMember = "id_specialty";
             FillData();
         }
         //public CreateVisitingForm(DataTable dtDocs, DataTable dtPatients):this()
@@ -108,7 +114,97 @@ namespace AIS_Polyclinic
             int count = myDB.iExecuteScalar(sSql);
             label1.Text = messegeL + count.ToString();
         }
-        public int IdDoc { get { return idDoc; } }
+
+        
+        private void ForSearch(int numT)
+        {
+            string tDoc = tFindDoc.Text.ToLower();
+            string tPat = tFindPat.Text.ToLower();
+            switch (numT)
+            {
+                case 0:
+                    SearchDoc(tDoc, checkSpecs.Checked);
+                    break;
+                case 1:
+                    SearchPat(tPat);
+                    break;
+            }
+
+            
+            
+        }
+        private void SearchPat(string tPat)
+        {
+            bool doc = true, pat = true;
+            bool dfio = false, pfio = false;
+            int idS = 0;
+
+            if (tPat == "")
+            {
+                pat = false;
+                pfio = true;
+            }
+
+            dataPatient.CurrentCell = null;
+
+            for (int k = 0; k < dataPatient.Rows.Count; k++)
+            {
+                if (pat)
+                {
+                    Regex regexP = new Regex(tPat);
+                    pfio = regexP.IsMatch(dataPatient.Rows[k].Cells[1].Value.ToString().ToLower());
+                }
+
+                if (!pfio)
+                {
+                    dataPatient.Rows[k].Visible = false;
+                }
+            }
+        }
+        private void SearchDoc(string tDoc, bool bSpec)
+        {
+            bool doc = true, pat = true;
+            bool dfio = false, pfio = false;
+            int idS = 0;
+            if (tDoc == "")
+            {
+                doc = false;
+                dfio = true;
+            }
+            if (bSpec)
+            {
+                idS = Convert.ToInt32(cSpecs.SelectedValue);
+            }
+
+            dataDoctor.CurrentCell = null;
+
+            for (int k = 0; k < dataDoctor.Rows.Count; k++)
+            {
+                if (doc)
+                {
+                    Regex regexD = new Regex(tDoc);
+                    dfio = regexD.IsMatch(dataDoctor.Rows[k].Cells[1].Value.ToString().ToLower());
+                }
+
+                int idD = Convert.ToInt32(dataDoctor.Rows[k].Cells[0].Value);        
+
+                if (!dfio)
+                {
+                    dataDoctor.Rows[k].Visible = false;
+                }
+
+                if (bSpec)
+                {
+                    string sSql = $"select count(id_doctor) from \"DOCTOR-SPECIALTY_TABLE\" where id_doctor = {idD} and id_specialty = {idS}";
+                    int count = myDB.iExecuteScalar(sSql);
+                    if (count == 0)
+                    {
+                        dataDoctor.Rows[k].Visible = false;
+                    }
+                    
+                }
+            }
+        }
 
         private void dateTimeVisit_ValueChanged(object sender, EventArgs e)
         {
@@ -117,27 +213,117 @@ namespace AIS_Polyclinic
 
         private void dataDoctor_DoubleClick(object sender, EventArgs e)
         {
-            DataRow dr = dtDocs.Rows[dataDoctor.CurrentRow.Index];
+
+            int id = Convert.ToInt32(dataDoctor.Rows[dataDoctor.CurrentRow.Index].Cells[0].Value);
 
 
-            InfoForm infoDoctor = new InfoForm(Convert.ToInt32(dr[0]), 0, myDB);
+            InfoForm infoDoctor = new InfoForm(id, 0, myDB);
             infoDoctor.ToBlockUpdate();
             infoDoctor.Show();
             
         }
 
+        private void checkSpecs_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                for (int k = 0; k < dataDoctor.Rows.Count; k++)
+                {
+                    dataDoctor.Rows[k].Visible = true;
+                }
+                ForSearch(0);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void dataPatient_DoubleClick(object sender, EventArgs e)
         {
-            DataRow dr = dtPatients.Rows[dataPatient.CurrentRow.Index];
+            int id = Convert.ToInt32(dataPatient.Rows[dataPatient.CurrentRow.Index].Cells[0].Value);
 
 
-            InfoForm infoPatient = new InfoForm(Convert.ToInt32(dr[0]), 1, myDB);
+            InfoForm infoPatient = new InfoForm(id, 1, myDB);
             infoPatient.ToBlockUpdate();
             infoPatient.Show();
 
         }
 
+        private void cSpecs_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            try
+            {
+                if (checkSpecs.Checked)
+                {
+                    for (int k = 0; k <dataDoctor.Rows.Count; k++)
+                    {
+                        dataDoctor.Rows[k].Visible = true;
+                    }
+                    ForSearch(0);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void tFindDoc_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                for (int k = 0; k < dataDoctor.Rows.Count; k++)
+                {
+                    dataDoctor.Rows[k].Visible = true;
+                }
+                ForSearch(0);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void tFindDoc_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string c = e.KeyChar.ToString();
+            if (!Regex.Match(c, @"[а-яА-Я\s\b]").Success)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void tFindPat_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                for (int k = 0; k < dataPatient.Rows.Count; k++)
+                {
+                    dataPatient.Rows[k].Visible = true;
+                }
+                ForSearch(1);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void tFindPat_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string c = e.KeyChar.ToString();
+            if (!Regex.Match(c, @"[а-яА-Я\s\b]").Success)
+            {
+                e.Handled = true;
+            }
+        }
+
         public int IdPat { get { return idPat; } }
         public DateTime Date { get { return date; } }
+        public int IdDoc { get { return idDoc; } }
     }
 }

@@ -162,7 +162,9 @@ namespace AIS_Polyclinic
         }
         private void dataPerson_DoubleClick(object sender, EventArgs e)
         {
-            DataRow dr = dt.Rows[dataPerson.CurrentRow.Index];
+
+            int id = Convert.ToInt32(dataPerson.Rows[dataPerson.CurrentRow.Index].Cells[0].Value);
+
             switch (numTable)
             {
                 case 0:
@@ -176,11 +178,11 @@ namespace AIS_Polyclinic
                     //{
 
                     //}
-                    InfoForm infoDoctor = new InfoForm(Convert.ToInt32(dr[0]), 0, myDB);
+                    InfoForm infoDoctor = new InfoForm(id, 0, myDB);
                     infoDoctor.Show();
                     break;
                 case 1:
-                    InfoForm infoPatient = new InfoForm(Convert.ToInt32(dr[0]), 1, myDB);
+                    InfoForm infoPatient = new InfoForm(id, 1, myDB);
                     infoPatient.Show();
                     break;
                 case 2:
@@ -207,14 +209,15 @@ namespace AIS_Polyclinic
                     return;
                 }
                 dataPerson.CurrentCell = null;
-                for (int k = 0; k < dt.Rows.Count; k++)
+                for (int k = 0; k < dataPerson.RowCount; k++)
                 {
                     Regex regex = new Regex(find);
-                    bool f = false, i = false, o = false;
-                    f = regex.IsMatch(dt.Rows[k][1].ToString().ToLower());
-                    i = regex.IsMatch(dt.Rows[k][2].ToString().ToLower());
-                    o = regex.IsMatch(dt.Rows[k][3].ToString().ToLower());
-                    if (!(f || i || o))
+                    bool f = false, i = false, o = false, fio = false;
+                    //f = regex.IsMatch(dataPerson.Rows[k].Cells[1].ToString().ToLower());
+                    //i = regex.IsMatch(dataPerson.Rows[k].Cells[2].ToString().ToLower());
+                    //o = regex.IsMatch(dataPerson.Rows[k].Cells[3].ToString().ToLower());
+                    fio = regex.IsMatch(dataPerson.Rows[k].Cells[1].Value.ToString().ToLower());
+                    if (!fio)
                     {
                         dataPerson.Rows[k].Visible = false;
                     }

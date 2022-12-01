@@ -39,6 +39,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.cSpecs = new System.Windows.Forms.ComboBox();
+            this.checkSpecs = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataDoctor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataPatient)).BeginInit();
             this.SuspendLayout();
@@ -55,9 +57,12 @@
             // 
             // dataDoctor
             // 
+            this.dataDoctor.AllowUserToAddRows = false;
+            this.dataDoctor.AllowUserToDeleteRows = false;
             this.dataDoctor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataDoctor.Location = new System.Drawing.Point(196, 70);
             this.dataDoctor.Name = "dataDoctor";
+            this.dataDoctor.ReadOnly = true;
             this.dataDoctor.RowHeadersWidth = 51;
             this.dataDoctor.RowTemplate.Height = 24;
             this.dataDoctor.Size = new System.Drawing.Size(490, 95);
@@ -67,9 +72,12 @@
             // 
             // dataPatient
             // 
+            this.dataPatient.AllowUserToAddRows = false;
+            this.dataPatient.AllowUserToDeleteRows = false;
             this.dataPatient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataPatient.Location = new System.Drawing.Point(196, 185);
             this.dataPatient.Name = "dataPatient";
+            this.dataPatient.ReadOnly = true;
             this.dataPatient.RowHeadersWidth = 51;
             this.dataPatient.RowTemplate.Height = 24;
             this.dataPatient.Size = new System.Drawing.Size(490, 98);
@@ -109,6 +117,8 @@
             this.tFindPat.Name = "tFindPat";
             this.tFindPat.Size = new System.Drawing.Size(164, 22);
             this.tFindPat.TabIndex = 14;
+            this.tFindPat.TextChanged += new System.EventHandler(this.tFindPat_TextChanged);
+            this.tFindPat.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tFindPat_KeyPress);
             // 
             // tFindDoc
             // 
@@ -116,6 +126,8 @@
             this.tFindDoc.Name = "tFindDoc";
             this.tFindDoc.Size = new System.Drawing.Size(164, 22);
             this.tFindDoc.TabIndex = 13;
+            this.tFindDoc.TextChanged += new System.EventHandler(this.tFindDoc_TextChanged);
+            this.tFindDoc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tFindDoc_KeyPress);
             // 
             // label3
             // 
@@ -144,11 +156,32 @@
             this.label4.TabIndex = 15;
             this.label4.Text = "Найти по дате:";
             // 
+            // cSpecs
+            // 
+            this.cSpecs.FormattingEnabled = true;
+            this.cSpecs.Location = new System.Drawing.Point(474, 18);
+            this.cSpecs.Name = "cSpecs";
+            this.cSpecs.Size = new System.Drawing.Size(201, 24);
+            this.cSpecs.TabIndex = 16;
+            this.cSpecs.SelectionChangeCommitted += new System.EventHandler(this.cSpecs_SelectionChangeCommitted);
+            // 
+            // checkSpecs
+            // 
+            this.checkSpecs.AutoSize = true;
+            this.checkSpecs.Location = new System.Drawing.Point(681, 22);
+            this.checkSpecs.Name = "checkSpecs";
+            this.checkSpecs.Size = new System.Drawing.Size(18, 17);
+            this.checkSpecs.TabIndex = 17;
+            this.checkSpecs.UseVisualStyleBackColor = true;
+            this.checkSpecs.CheckedChanged += new System.EventHandler(this.checkSpecs_CheckedChanged);
+            // 
             // CreateVisitingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(806, 358);
+            this.Controls.Add(this.checkSpecs);
+            this.Controls.Add(this.cSpecs);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.tFindPat);
             this.Controls.Add(this.tFindDoc);
@@ -184,5 +217,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cSpecs;
+        private System.Windows.Forms.CheckBox checkSpecs;
     }
 }
