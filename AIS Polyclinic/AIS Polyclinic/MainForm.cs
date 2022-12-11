@@ -89,7 +89,8 @@ namespace AIS_Polyclinic
 
         private void bCreateDoc_Click(object sender, EventArgs e)
         {
-
+            FormGenerateDoc generateDoc = new FormGenerateDoc(myDB);
+            generateDoc.Show();
         }
 
         private void bAddPatient_Click(object sender, EventArgs e)
@@ -161,32 +162,26 @@ namespace AIS_Polyclinic
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //int id = 4;
-            //string str = "", sSql;
-            ////sSql = $"execute procedure listing_spec_of_doc({id})";
-            //sSql = $"select list (name_specialty , ', ') from \"SPECIALTY_TABLE\" where id_specialty in (select id_specialty from \"DOCTOR-SPECIALTY_TABLE\" where id_doctor = {id})";
-            //DataTable dt = myDB.iExecuteReader(sSql);
-            ////sSql = $"execute procedure listing_spec_id_of_doc({id})";
-            //sSql = $"select list (id_specialty , ', ') from \"SPECIALTY_TABLE\" where id_specialty in (select id_specialty from \"DOCTOR-SPECIALTY_TABLE\" where id_doctor = {id})";
-            //dt = myDB.iExecuteReader(sSql);
-            //string[] stint = dt.Rows[0][0].ToString().Split(',');
-            //int[] ir = new int[stint.Length];
-            //for(int i = 0; i < stint.Length; i++)
-            //{
-            //    ir[i] = int.Parse(stint[i]);
-            //}
-            //FormListPersonAlter formListPersonAlter = new FormListPersonAlter(0, myDB);
-            //formListPersonAlter.Show();
-
-            string sql = "select description from disease_table where id_disease = 2";
-            DataTable d = myDB.iExecuteReader(sql);
-            MessageBox.Show(d.Rows[0][0].ToString());
+            
         }
 
         private void bSwitchVisitings_Click(object sender, EventArgs e)
         {
             SwitchVisualVisitings visitingsForm = new SwitchVisualVisitings(myDB);
             visitingsForm.Show();
+        }
+
+        private void bAdminUp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FormForAdm adm = new FormForAdm(myDB);
+                adm.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /*Все английские слова перевести

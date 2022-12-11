@@ -80,11 +80,41 @@
     <Compile Include="FormAddPatient.Designer.cs">
       <DependentUpon>FormAddPatient.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormCountDiseases.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCountDiseases.Designer.cs">
+      <DependentUpon>FormCountDiseases.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormCountVisiting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCountVisiting.Designer.cs">
+      <DependentUpon>FormCountVisiting.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormDiseaseView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormDiseaseView.Designer.cs">
       <DependentUpon>FormDiseaseView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormForAdm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormForAdm.Designer.cs">
+      <DependentUpon>FormForAdm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormGenerateDoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGenerateDoc.Designer.cs">
+      <DependentUpon>FormGenerateDoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormListingDocOnSpec.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormListingDocOnSpec.Designer.cs">
+      <DependentUpon>FormListingDocOnSpec.cs</DependentUpon>
     </Compile>
     <Compile Include="FormListPerson.cs">
       <SubType>Form</SubType>
@@ -127,8 +157,23 @@
     <EmbeddedResource Include="FormAddPatient.resx">
       <DependentUpon>FormAddPatient.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormCountDiseases.resx">
+      <DependentUpon>FormCountDiseases.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCountVisiting.resx">
+      <DependentUpon>FormCountVisiting.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormDiseaseView.resx">
       <DependentUpon>FormDiseaseView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormForAdm.resx">
+      <DependentUpon>FormForAdm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGenerateDoc.resx">
+      <DependentUpon>FormGenerateDoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormListingDocOnSpec.resx">
+      <DependentUpon>FormListingDocOnSpec.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormListPerson.resx">
       <DependentUpon>FormListPerson.cs</DependentUpon>

@@ -34,6 +34,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tCategory = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.bDeleteDisease = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cNames
@@ -89,11 +90,22 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "Категория:";
             // 
+            // bDeleteDisease
+            // 
+            this.bDeleteDisease.Location = new System.Drawing.Point(26, 376);
+            this.bDeleteDisease.Name = "bDeleteDisease";
+            this.bDeleteDisease.Size = new System.Drawing.Size(110, 49);
+            this.bDeleteDisease.TabIndex = 6;
+            this.bDeleteDisease.Text = "Удалить диагноз";
+            this.bDeleteDisease.UseVisualStyleBackColor = true;
+            this.bDeleteDisease.Click += new System.EventHandler(this.bDeleteDisease_Click);
+            // 
             // FormDiseaseView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(799, 455);
+            this.Controls.Add(this.bDeleteDisease);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tCategory);
             this.Controls.Add(this.label2);
@@ -115,5 +127,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tCategory;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button bDeleteDisease;
     }
 }

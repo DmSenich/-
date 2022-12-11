@@ -38,6 +38,7 @@
             this.bDisease = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.bSwitchVisitings = new System.Windows.Forms.Button();
+            this.bAdminUp = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // bAddDoctor
@@ -140,11 +141,22 @@
             this.bSwitchVisitings.UseVisualStyleBackColor = true;
             this.bSwitchVisitings.Click += new System.EventHandler(this.bSwitchVisitings_Click);
             // 
+            // bAdminUp
+            // 
+            this.bAdminUp.Location = new System.Drawing.Point(458, 210);
+            this.bAdminUp.Name = "bAdminUp";
+            this.bAdminUp.Size = new System.Drawing.Size(192, 40);
+            this.bAdminUp.TabIndex = 10;
+            this.bAdminUp.Text = "Администрирование";
+            this.bAdminUp.UseVisualStyleBackColor = true;
+            this.bAdminUp.Click += new System.EventHandler(this.bAdminUp_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(678, 262);
+            this.Controls.Add(this.bAdminUp);
             this.Controls.Add(this.bSwitchVisitings);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.bDisease);
@@ -177,6 +189,7 @@
         private System.Windows.Forms.Button bDisease;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button bSwitchVisitings;
+        private System.Windows.Forms.Button bAdminUp;
     }
 }
 

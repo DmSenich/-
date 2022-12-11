@@ -67,5 +67,18 @@ namespace AIS_Polyclinic
             int idDis = Convert.ToInt32(cNames.SelectedValue);
             FullData(idDis);
         }
+
+        private void bDeleteDisease_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int id = Convert.ToInt32(cNames.SelectedValue);
+                string sSql = $"execute procedure delete_disease({id})";
+                myDB.iExeecuteNonQuery(sSql);
+                dtDisease.Rows.RemoveAt(cNames.SelectedIndex);
+               
+            }
+            catch(Exception ex) { MessageBox.Show(ex.Message); }
+        }
     }
 }

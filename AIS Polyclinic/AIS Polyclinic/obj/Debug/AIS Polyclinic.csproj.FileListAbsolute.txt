@@ -23,3 +23,8 @@ D:\Учеба\Базы данных\Курсовая\Приложение\AIS Po
 D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Debug\AIS_Polyclinic.SwitchVisualVisitings.resources
 D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Debug\AIS_Polyclinic.FormAddDisease.resources
 D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Debug\AIS_Polyclinic.FormDiseaseView.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Debug\AIS_Polyclinic.FormForAdm.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Debug\AIS_Polyclinic.FormGenerateDoc.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Debug\AIS_Polyclinic.FormListingDocOnSpec.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Debug\AIS_Polyclinic.FormCountVisiting.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Debug\AIS_Polyclinic.FormCountDiseases.resources
