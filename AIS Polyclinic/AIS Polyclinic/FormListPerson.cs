@@ -291,8 +291,8 @@ namespace AIS_Polyclinic
                     }
                     break;
                 case 1:
-                    InfoForm infoPatient = new InfoForm(id, 1, myDB);
-                    infoPatient.Show();
+                    //InfoForm infoPatient = new InfoForm(id, 1, myDB);
+                    //infoPatient.Show();
                     break;
                 case 2:
                     break;
