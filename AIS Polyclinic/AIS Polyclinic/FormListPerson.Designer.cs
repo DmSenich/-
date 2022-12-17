@@ -31,6 +31,7 @@
             this.dataPerson = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.tFind = new System.Windows.Forms.TextBox();
+            this.bAdd = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataPerson)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,7 +45,7 @@
             this.dataPerson.ReadOnly = true;
             this.dataPerson.RowHeadersWidth = 51;
             this.dataPerson.RowTemplate.Height = 24;
-            this.dataPerson.Size = new System.Drawing.Size(776, 357);
+            this.dataPerson.Size = new System.Drawing.Size(290, 357);
             this.dataPerson.TabIndex = 0;
             this.dataPerson.DoubleClick += new System.EventHandler(this.dataPerson_DoubleClick);
             // 
@@ -66,11 +67,22 @@
             this.tFind.TextChanged += new System.EventHandler(this.tFind_TextChanged);
             this.tFind.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tFind_KeyPress);
             // 
+            // bAdd
+            // 
+            this.bAdd.Location = new System.Drawing.Point(113, 429);
+            this.bAdd.Name = "bAdd";
+            this.bAdd.Size = new System.Drawing.Size(88, 33);
+            this.bAdd.TabIndex = 3;
+            this.bAdd.Text = "Добавить";
+            this.bAdd.UseVisualStyleBackColor = true;
+            this.bAdd.Click += new System.EventHandler(this.bAdd_Click);
+            // 
             // FormListPerson
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(320, 487);
+            this.Controls.Add(this.bAdd);
             this.Controls.Add(this.tFind);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataPerson);
@@ -89,5 +101,6 @@
         private System.Windows.Forms.DataGridView dataPerson;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tFind;
+        private System.Windows.Forms.Button bAdd;
     }
 }
