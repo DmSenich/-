@@ -268,9 +268,8 @@ namespace AIS_Polyclinic
                             Image photo = formAddDoctor.GetPHOTO;
                             byte[] blob = InfoForm.ToByte(photo);
                             //sSql = $"insert into doctor_table (last_name, first_name, patronymic, work_experience) values('{fio[0]}', '{fio[1]}', '{fio[2]}', {workExp})"; // ДОБАВИТЬ ФОТО
-                            sSql = $"EXECUTE PROCEDURE add_doctor('{fio[0]}', '{fio[1]}', '{fio[2]}', {workExp}, {blob})";
 
-                            myDB.iExeecuteNonQuery(sSql);
+                            myDB.iExeecuteAddDoctor(fio[0], fio[1], fio[2], workExp, blob);
                             //sSql = $"select * from doctor_table where last_name = '{fio[0]}' and first_name = '{fio[1]}' and patronymic = '{fio[2]}' and work_experience = {workExp}";                  
                             //DataTable newDoc = myDB.iExecuteReader(sSql);
                             //int id = Convert.ToInt32(newDoc.Rows[0][0]);
@@ -291,8 +290,24 @@ namespace AIS_Polyclinic
                     }
                     break;
                 case 1:
-                    InfoForm infoPatient = new InfoForm(id, 1, myDB);
-                    infoPatient.Show();
+                    FormAddPatient formAddPatient = new FormAddPatient();
+                    try
+                    {
+                        if (formAddPatient.ShowDialog() == DialogResult.OK)
+                        {
+                            string[] fio = formAddPatient.FIO;
+                            string[] adress = formAddPatient.Adress;
+                            DateTime dateBirth = formAddPatient.DateBirth;
+
+                            //string sSql = $"insert into patient_table (last_name, first_name, patronymic, area, city, house, apartment, date_birth) values('{fio[0]}', '{fio[1]}', '{fio[2]}', '{adress[0]}', '{adress[1]}', '{adress[2]}', '{adress[3]}', '{dateBirth.ToShortDateString()}')";
+                            sSql = $"execute procedure add_patient('{fio[0]}', '{fio[1]}', '{fio[2]}', '{adress[0]}', '{adress[1]}', '{adress[2]}', '{adress[3]}', '{dateBirth.ToShortDateString()}')";
+                            myDB.iExeecuteNonQuery(sSql);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                     break;
                 case 2:
                     break;

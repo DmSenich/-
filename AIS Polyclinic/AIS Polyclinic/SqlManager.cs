@@ -52,6 +52,69 @@ namespace AIS_Polyclinic
                 return null;
             }
         }
+        public void iExeecuteAddDoctor(string ln, string fn, string patr, int workEx, byte[] blob)
+        {
+            fbConnection.Open();
+            string sSql = $"EXECUTE PROCEDURE add_doctor(@ln, @fn, @p, @WorkEx, @blob)";
+
+            FbCommand fbCommand = new FbCommand(sSql, fbConnection);
+
+            fbCommand.Parameters.AddWithValue("ln", ln);
+            fbCommand.Parameters.AddWithValue("fn", fn);
+            fbCommand.Parameters.AddWithValue("p", patr);
+            fbCommand.Parameters.AddWithValue("workEx", workEx);
+
+            FbParameter pBlob = new FbParameter("blob", FbDbType.Binary, blob.Length, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, blob);
+            fbCommand.Parameters.Add(pBlob);
+            //FbTransaction fbt = fbConnection.BeginTransaction(IsolationLevel.Serializable);
+            //fbCommand.Transaction = fbt;
+            try
+            {
+                fbCommand.ExecuteNonQuery();
+                //fbt.Commit();
+                fbCommand.Dispose();
+                fbConnection.Close();
+
+            }
+            catch (Exception ex)
+            {
+
+                fbCommand.Dispose();
+                fbConnection.Close();
+            }
+        }
+        public void iExeecuteUpDoctor(int id,string ln, string fn, string patr, int workEx, byte[] blob)
+        {
+            fbConnection.Open();
+            string sSql = $"update \"DOCTOR_TABLE\" set last_name = @ln, first_name = @fn, PATRONYMIC = @p, WORK_EXPERIENCE = @workEx, photo = @blob where id_doctor = @id";
+
+            FbCommand fbCommand = new FbCommand(sSql, fbConnection);
+
+            fbCommand.Parameters.AddWithValue("ln", ln);
+            fbCommand.Parameters.AddWithValue("fn", fn);
+            fbCommand.Parameters.AddWithValue("p", patr);
+            fbCommand.Parameters.AddWithValue("workEx", workEx);
+            fbCommand.Parameters.AddWithValue("id", id);
+
+            FbParameter pBlob = new FbParameter("blob", FbDbType.Binary, blob.Length, ParameterDirection.Input, false, 0, 0, null, DataRowVersion.Current, blob);
+            fbCommand.Parameters.Add(pBlob);
+            //FbTransaction fbt = fbConnection.BeginTransaction(IsolationLevel.Serializable);
+            //fbCommand.Transaction = fbt;
+            try
+            {
+                fbCommand.ExecuteNonQuery();
+                //fbt.Commit();
+                fbCommand.Dispose();
+                fbConnection.Close();
+
+            }
+            catch (Exception ex)
+            {
+
+                fbCommand.Dispose();
+                fbConnection.Close();
+            }
+        }
         public void iExeecuteNonQuery(string sSql)
         {
             fbConnection.Open();

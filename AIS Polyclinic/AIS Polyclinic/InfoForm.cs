@@ -183,6 +183,10 @@ namespace AIS_Polyclinic
                         string[] fio = upDoctor.FIO;
                         int workExp = upDoctor.WorkExp;
 
+                        Image image = upDoctor.GetPHOTO;
+
+                        byte[] blob = ToByte(image);
+
                         DataTable newSpecDoc = dtSpecDoc.Clone();
                         newSpecDoc.Rows.Clear();
                         foreach(DataRow dr in newSpec.Rows)
@@ -258,8 +262,7 @@ namespace AIS_Polyclinic
                         //    }
                         //}
                         
-                        sSql = $"update \"DOCTOR_TABLE\" set last_name = '{fio[0]}', first_name = '{fio[1]}', PATRONYMIC = '{fio[2]}', WORK_EXPERIENCE = {workExp} where id_doctor = {dtPerson.Rows[0][0]} ";
-                        myDB.iExeecuteNonQuery(sSql);
+                        myDB.iExeecuteUpDoctor(Convert.ToInt32(dtPerson.Rows[0][0]), fio[0],fio[1], fio[2], workExp, blob);
                     }
                     break;
                 case 1:

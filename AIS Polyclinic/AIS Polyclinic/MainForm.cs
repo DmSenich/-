@@ -45,46 +45,46 @@ namespace AIS_Polyclinic
 
         private void bAddDoctor_Click(object sender, EventArgs e)
         {
-            string sSql = "select * from \"SPECIALTY_TABLE\"";
-            DataTable dtSpecs = myDB.iExecuteReader(sSql);
-            FormAddDoctor formAddDoctor = new FormAddDoctor(dtSpecs);
-            try
-            {
-                if (formAddDoctor.ShowDialog() == DialogResult.OK)
-                {
-                    string[] fio = formAddDoctor.FIO;
-                    int workExp = formAddDoctor.WorkExp;
-                    DataTable dtSpec = formAddDoctor.DTSpec;
-                    //if(dtSpec == null || dtSpec.Rows.Count == 0)
-                    //{
-                    //    throw new Exception("Нет специальностей (2)!");
-                    //}
+            //string sSql = "select * from \"SPECIALTY_TABLE\"";
+            //DataTable dtSpecs = myDB.iExecuteReader(sSql);
+            //FormAddDoctor formAddDoctor = new FormAddDoctor(dtSpecs);
+            //try
+            //{
+            //    if (formAddDoctor.ShowDialog() == DialogResult.OK)
+            //    {
+            //        string[] fio = formAddDoctor.FIO;
+            //        int workExp = formAddDoctor.WorkExp;
+            //        DataTable dtSpec = formAddDoctor.DTSpec;
+            //        //if(dtSpec == null || dtSpec.Rows.Count == 0)
+            //        //{
+            //        //    throw new Exception("Нет специальностей (2)!");
+            //        //}
 
 
-                    Image photo = formAddDoctor.GetPHOTO;
-                    byte[] blob = InfoForm.ToByte(photo);
-                    //sSql = $"insert into doctor_table (last_name, first_name, patronymic, work_experience) values('{fio[0]}', '{fio[1]}', '{fio[2]}', {workExp})"; // ДОБАВИТЬ ФОТО
-                    sSql = $"EXECUTE PROCEDURE add_doctor('{fio[0]}', '{fio[1]}', '{fio[2]}', {workExp}, {blob})";
+            //        Image photo = formAddDoctor.GetPHOTO;
+            //        byte[] blob = InfoForm.ToByte(photo);
+            //        //sSql = $"insert into doctor_table (last_name, first_name, patronymic, work_experience) values('{fio[0]}', '{fio[1]}', '{fio[2]}', {workExp})"; // ДОБАВИТЬ ФОТО
+            //        sSql = $"EXECUTE PROCEDURE add_doctor('{fio[0]}', '{fio[1]}', '{fio[2]}', {workExp}, {blob})";
 
-                    myDB.iExeecuteNonQuery(sSql);
-                    //sSql = $"select * from doctor_table where last_name = '{fio[0]}' and first_name = '{fio[1]}' and patronymic = '{fio[2]}' and work_experience = {workExp}";                  
-                    //DataTable newDoc = myDB.iExecuteReader(sSql);
-                    //int id = Convert.ToInt32(newDoc.Rows[0][0]);
-                    sSql = $"select max(id_doctor) from doctor_table";
+            //        myDB.iExeecuteNonQuery(sSql);
+            //        //sSql = $"select * from doctor_table where last_name = '{fio[0]}' and first_name = '{fio[1]}' and patronymic = '{fio[2]}' and work_experience = {workExp}";                  
+            //        //DataTable newDoc = myDB.iExecuteReader(sSql);
+            //        //int id = Convert.ToInt32(newDoc.Rows[0][0]);
+            //        sSql = $"select max(id_doctor) from doctor_table";
 
-                    int id = myDB.iExecuteScalar(sSql);
-                    foreach(DataRow row in dtSpec.Rows)
-                    {
-                        //sSql = $"insert into \"DOCTOR-SPECIALTY_TABLE\" (id_doctor, id_specialty) values({id}, {row[0]}) ";
-                        sSql = $"execute procedure add_doc_spec({id}, {row[0]})";
-                        myDB.iExeecuteNonQuery(sSql);
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            //        int id = myDB.iExecuteScalar(sSql);
+            //        foreach(DataRow row in dtSpec.Rows)
+            //        {
+            //            //sSql = $"insert into \"DOCTOR-SPECIALTY_TABLE\" (id_doctor, id_specialty) values({id}, {row[0]}) ";
+            //            sSql = $"execute procedure add_doc_spec({id}, {row[0]})";
+            //            myDB.iExeecuteNonQuery(sSql);
+            //        }
+            //    }
+            //}
+            //catch(Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
         }
 
         private void bCreateDoc_Click(object sender, EventArgs e)
@@ -95,24 +95,24 @@ namespace AIS_Polyclinic
 
         private void bAddPatient_Click(object sender, EventArgs e)
         {
-            FormAddPatient formAddPatient = new FormAddPatient();
-            try
-            {
-                if (formAddPatient.ShowDialog() == DialogResult.OK)
-                {
-                    string[] fio = formAddPatient.FIO;
-                    string[] adress = formAddPatient.Adress;
-                    DateTime dateBirth = formAddPatient.DateBirth;
+            //FormAddPatient formAddPatient = new FormAddPatient();
+            //try
+            //{
+            //    if (formAddPatient.ShowDialog() == DialogResult.OK)
+            //    {
+            //        string[] fio = formAddPatient.FIO;
+            //        string[] adress = formAddPatient.Adress;
+            //        DateTime dateBirth = formAddPatient.DateBirth;
 
-                    //string sSql = $"insert into patient_table (last_name, first_name, patronymic, area, city, house, apartment, date_birth) values('{fio[0]}', '{fio[1]}', '{fio[2]}', '{adress[0]}', '{adress[1]}', '{adress[2]}', '{adress[3]}', '{dateBirth.ToShortDateString()}')";
-                    string sSql = $"execute procedure add_patient('{fio[0]}', '{fio[1]}', '{fio[2]}', '{adress[0]}', '{adress[1]}', '{adress[2]}', '{adress[3]}', '{dateBirth.ToShortDateString()}')";
-                    myDB.iExeecuteNonQuery(sSql);
-                }
-            }
-            catch( Exception ex)
-            {
-                MessageBox.Show(ex.Message );
-            }
+            //        //string sSql = $"insert into patient_table (last_name, first_name, patronymic, area, city, house, apartment, date_birth) values('{fio[0]}', '{fio[1]}', '{fio[2]}', '{adress[0]}', '{adress[1]}', '{adress[2]}', '{adress[3]}', '{dateBirth.ToShortDateString()}')";
+            //        string sSql = $"execute procedure add_patient('{fio[0]}', '{fio[1]}', '{fio[2]}', '{adress[0]}', '{adress[1]}', '{adress[2]}', '{adress[3]}', '{dateBirth.ToShortDateString()}')";
+            //        myDB.iExeecuteNonQuery(sSql);
+            //    }
+            //}
+            //catch( Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message );
+            //}
         }
 
         private void bListVisiting_Click(object sender, EventArgs e)
