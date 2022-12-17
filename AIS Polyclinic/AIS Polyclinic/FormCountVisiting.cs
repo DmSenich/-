@@ -94,6 +94,8 @@ namespace AIS_Polyclinic
                 FileInfo info = new FileInfo(path);
                 using (TextWriter writer = new StreamWriter(path, false, Encoding.Default))
                 {
+                    writer.WriteLine("Информация о количестрве посещиний");
+                    writer.WriteLine();
                     writer.WriteLine("Врач " + fio);
 
                     if (!existVisitings)

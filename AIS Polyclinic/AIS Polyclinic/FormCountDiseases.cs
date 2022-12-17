@@ -49,6 +49,9 @@ namespace AIS_Polyclinic
                 FileInfo info = new FileInfo(path);
                 using (TextWriter writer = new StreamWriter(path, false, Encoding.Default))
                 {
+                    writer.WriteLine("Информация о количестве заболеваний");
+                    writer.WriteLine();
+
                     writer.WriteLine("Категория заболевания " + cCategories.Text);
 
                     if (!existDisease)

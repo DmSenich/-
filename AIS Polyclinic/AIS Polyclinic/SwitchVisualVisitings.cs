@@ -71,10 +71,9 @@ namespace AIS_Polyclinic
             }
             dataVisiting.DataSource = table;
             dataVisiting.Columns[0].Visible = false;
-            for (int i = 0; i < table.Columns.Count; i++)
-            {
-                dataVisiting.Columns[i].AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            }
+            dataVisiting.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataVisiting.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
         }
         private void ForSearch()
         {
