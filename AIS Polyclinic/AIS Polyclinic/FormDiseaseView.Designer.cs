@@ -113,7 +113,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cNames);
             this.Name = "FormDiseaseView";
-            this.Text = "FormDiseaseView";
+            this.Text = "Диагноз";
             this.ResumeLayout(false);
             this.PerformLayout();
 

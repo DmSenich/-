@@ -84,19 +84,23 @@ namespace AIS_Polyclinic
         }
         private void CreateTable()
         {
-            DataTable dt = new DataTable();
+            //DataTable dt = new DataTable();
             switch (numTable) 
             {
                 case 0:
-                    dt.Columns.Add("FIO");
-                    dt.Columns.Add("WorkExp");
-                    dt.Columns.Add("Spec");
+                    //dt.Columns.Add("FIO");
+                    //dt.Columns.Add("WorkExp");
+                    //dt.Columns.Add("Spec");
 
-                    DataRow dr = dt.NewRow();
-                    dr[0] = dtPerson.Rows[0][1] + " " + dtPerson.Rows[0][2] + " " + dtPerson.Rows[0][3];
-                    dr[1] = dtPerson.Rows[0][4];
-                    dr[2] = StringSpecBuild();
-                    dt.Rows.Add(dr);
+                    //DataRow dr = dt.NewRow();
+                    //dr[0] = dtPerson.Rows[0][1] + " " + dtPerson.Rows[0][2] + " " + dtPerson.Rows[0][3];
+                    //dr[1] = dtPerson.Rows[0][4];
+                    //dr[2] = StringSpecBuild();
+                    //dt.Rows.Add(dr);
+                    string fio = String.Join(" ", dtPerson.Rows[0][1], dtPerson.Rows[0][2], dtPerson.Rows[0][3]);
+                    richTextBoxInfo.Text = $"ФИО: {fio}\n";
+                    richTextBoxInfo.Text += $"Опыт работы (в годах): {dtPerson.Rows[0][4]}\n";
+                    richTextBoxInfo.Text += $"Перечень специальностей: {StringSpecBuild()}";
                     try
                     {
                         photo = ToImage((byte[])dtPerson.Rows[0][5]);
@@ -108,21 +112,27 @@ namespace AIS_Polyclinic
                     
                     break;
                 case 1:
-                    dt.Columns.Add("FIO");
-                    dt.Columns.Add("DateBirth");
-                    dt.Columns.Add("Adress");
+                    //dt.Columns.Add("FIO");
+                    //dt.Columns.Add("DateBirth");
+                    //dt.Columns.Add("Adress");
 
-                    DataRow xdr = dt.NewRow();
-                    xdr[0] = dtPerson.Rows[0][1] + " " + dtPerson.Rows[0][2] + " " + dtPerson.Rows[0][3];
-                    xdr[1] = Convert.ToDateTime(dtPerson.Rows[0][8].ToString()).ToString("dd.MM.yyyy");
+                    //DataRow xdr = dt.NewRow();
+                    //xdr[0] = dtPerson.Rows[0][1] + " " + dtPerson.Rows[0][2] + " " + dtPerson.Rows[0][3];
+                    //xdr[1] = Convert.ToDateTime(dtPerson.Rows[0][8].ToString()).ToString("dd.MM.yyyy");
 
-                    xdr[2] = String.Join(", ", dtPerson.Rows[0][4], dtPerson.Rows[0][5], dtPerson.Rows[0][6], dtPerson.Rows[0][7]);
-                    dt.Rows.Add(xdr);
+                    //xdr[2] = String.Join(", ", dtPerson.Rows[0][4], dtPerson.Rows[0][5], dtPerson.Rows[0][6], dtPerson.Rows[0][7]);
+                    //dt.Rows.Add(xdr);
+
+                    fio = String.Join(" ", dtPerson.Rows[0][1], dtPerson.Rows[0][2], dtPerson.Rows[0][3]);
+                    richTextBoxInfo.Text = $"ФИО: {fio}\n";
+                    richTextBoxInfo.Text += $"Дата рождения: {Convert.ToDateTime(dtPerson.Rows[0][8].ToString()).ToString("dd.MM.yyyy")}\n";
+                    richTextBoxInfo.Text += $"Адрес: {String.Join(", ", dtPerson.Rows[0][4], dtPerson.Rows[0][5], dtPerson.Rows[0][6], dtPerson.Rows[0][7])}";
+                    photo = defaultPhoto;
 
                     break;
             }
             
-            dataInfo.DataSource = dt;
+            //dataInfo.DataSource = dt;
             pPhoto.Image = photo;
         }
         static public Image ToImage(byte[] data)

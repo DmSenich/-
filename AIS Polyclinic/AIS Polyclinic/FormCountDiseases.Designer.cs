@@ -69,7 +69,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cCategories);
             this.Name = "FormCountDiseases";
-            this.Text = "FormCountDiseases";
+            this.Text = "Отчет о заболевании";
             this.ResumeLayout(false);
             this.PerformLayout();
 

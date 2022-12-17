@@ -72,7 +72,7 @@
             this.Controls.Add(this.bCountVisiting);
             this.Controls.Add(this.bListingDoctors);
             this.Name = "FormGenerateDoc";
-            this.Text = "FormGenerateDoc";
+            this.Text = "Выбор документа";
             this.ResumeLayout(false);
 
         }

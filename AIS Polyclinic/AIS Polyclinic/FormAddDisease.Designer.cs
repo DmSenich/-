@@ -123,7 +123,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cCategories);
             this.Name = "FormAddDisease";
-            this.Text = "FormAddDisease";
+            this.Text = "Поставить диагноз";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -63,7 +63,7 @@
             this.dataDoctor.ReadOnly = true;
             this.dataDoctor.RowHeadersWidth = 51;
             this.dataDoctor.RowTemplate.Height = 24;
-            this.dataDoctor.Size = new System.Drawing.Size(490, 387);
+            this.dataDoctor.Size = new System.Drawing.Size(292, 387);
             this.dataDoctor.TabIndex = 14;
             // 
             // bCreateDocument
@@ -80,13 +80,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(723, 450);
+            this.ClientSize = new System.Drawing.Size(509, 450);
             this.Controls.Add(this.bCreateDocument);
             this.Controls.Add(this.tFindDoc);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dataDoctor);
             this.Name = "FormCountVisiting";
-            this.Text = "FormCountVisiting";
+            this.Text = "Отчет о визитах";
             this.Load += new System.EventHandler(this.FormCountVisiting_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataDoctor)).EndInit();
             this.ResumeLayout(false);

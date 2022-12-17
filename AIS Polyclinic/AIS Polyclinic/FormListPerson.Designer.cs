@@ -45,7 +45,7 @@
             this.dataPerson.ReadOnly = true;
             this.dataPerson.RowHeadersWidth = 51;
             this.dataPerson.RowTemplate.Height = 24;
-            this.dataPerson.Size = new System.Drawing.Size(290, 357);
+            this.dataPerson.Size = new System.Drawing.Size(342, 357);
             this.dataPerson.TabIndex = 0;
             this.dataPerson.DoubleClick += new System.EventHandler(this.dataPerson_DoubleClick);
             // 
@@ -69,7 +69,7 @@
             // 
             // bAdd
             // 
-            this.bAdd.Location = new System.Drawing.Point(113, 429);
+            this.bAdd.Location = new System.Drawing.Point(140, 430);
             this.bAdd.Name = "bAdd";
             this.bAdd.Size = new System.Drawing.Size(88, 33);
             this.bAdd.TabIndex = 3;
@@ -81,7 +81,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(320, 487);
+            this.ClientSize = new System.Drawing.Size(366, 487);
             this.Controls.Add(this.bAdd);
             this.Controls.Add(this.tFind);
             this.Controls.Add(this.label1);

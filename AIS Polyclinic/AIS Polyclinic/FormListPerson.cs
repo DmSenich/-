@@ -120,11 +120,11 @@ namespace AIS_Polyclinic
             switch (numTable)
             {
                 case 0:
-                    this.Text = "List of doctors";
+                    this.Text = "Список докторов";
                     sSql = "Select * from doctor_table";
                     break;
                 case 1:
-                    this.Text = "List of patients";
+                    this.Text = "Список пациентов";
                     sSql = "Select * from patient_table";
                     break;
                 case 2:

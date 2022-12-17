@@ -74,6 +74,8 @@ namespace AIS_Polyclinic
 
             dataDoctor.ReadOnly = true;
             dataPatient.ReadOnly = true;
+            dataDoctor.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataPatient.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void bOK_Click(object sender, EventArgs e)

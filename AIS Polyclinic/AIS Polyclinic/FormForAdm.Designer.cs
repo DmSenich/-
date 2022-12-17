@@ -160,7 +160,7 @@
             this.Controls.Add(this.cCategory);
             this.Controls.Add(this.bAddCategory);
             this.Name = "FormForAdm";
-            this.Text = "FormForAdm";
+            this.Text = "Изменение структуры";
             ((System.ComponentModel.ISupportInitialize)(this.dataPerson)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -195,7 +195,7 @@
             this.Controls.Add(this.lFirstName);
             this.Controls.Add(this.lLastName);
             this.Name = "FormAddDoctor";
-            this.Text = "FormAddDoctor";
+            this.Text = "Добавить доктора";
             ((System.ComponentModel.ISupportInitialize)(this.nWorkExperience)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pPhoto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSpecialty)).EndInit();

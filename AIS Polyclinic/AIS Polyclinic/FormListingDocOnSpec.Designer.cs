@@ -35,7 +35,7 @@
             // cSpecialty
             // 
             this.cSpecialty.FormattingEnabled = true;
-            this.cSpecialty.Location = new System.Drawing.Point(57, 21);
+            this.cSpecialty.Location = new System.Drawing.Point(108, 21);
             this.cSpecialty.Name = "cSpecialty";
             this.cSpecialty.Size = new System.Drawing.Size(199, 24);
             this.cSpecialty.TabIndex = 1;
@@ -43,7 +43,7 @@
             // 
             // bCreate
             // 
-            this.bCreate.Location = new System.Drawing.Point(88, 120);
+            this.bCreate.Location = new System.Drawing.Point(152, 68);
             this.bCreate.Name = "bCreate";
             this.bCreate.Size = new System.Drawing.Size(110, 73);
             this.bCreate.TabIndex = 2;
@@ -55,11 +55,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(310, 227);
+            this.ClientSize = new System.Drawing.Size(398, 165);
             this.Controls.Add(this.bCreate);
             this.Controls.Add(this.cSpecialty);
             this.Name = "FormListingDocOnSpec";
-            this.Text = "FormListingDocOnSpec";
+            this.Text = "Отчет о специалистах";
             this.ResumeLayout(false);
 
         }

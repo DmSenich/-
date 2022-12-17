@@ -231,7 +231,7 @@
             this.Controls.Add(this.lFirstName);
             this.Controls.Add(this.lLastName);
             this.Name = "FormAddPatient";
-            this.Text = "FormAddPatient";
+            this.Text = "Добавить пациента";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -47,7 +47,7 @@
             // 
             // bAddVisiting
             // 
-            this.bAddVisiting.Location = new System.Drawing.Point(343, 272);
+            this.bAddVisiting.Location = new System.Drawing.Point(446, 314);
             this.bAddVisiting.Name = "bAddVisiting";
             this.bAddVisiting.Size = new System.Drawing.Size(121, 69);
             this.bAddVisiting.TabIndex = 0;
@@ -57,7 +57,7 @@
             // 
             // bAddDisease
             // 
-            this.bAddDisease.Location = new System.Drawing.Point(492, 272);
+            this.bAddDisease.Location = new System.Drawing.Point(595, 314);
             this.bAddDisease.Name = "bAddDisease";
             this.bAddDisease.Size = new System.Drawing.Size(109, 69);
             this.bAddDisease.TabIndex = 1;
@@ -67,7 +67,7 @@
             // 
             // bListDisease
             // 
-            this.bListDisease.Location = new System.Drawing.Point(636, 272);
+            this.bListDisease.Location = new System.Drawing.Point(739, 314);
             this.bListDisease.Name = "bListDisease";
             this.bListDisease.Size = new System.Drawing.Size(107, 69);
             this.bListDisease.TabIndex = 2;
@@ -149,7 +149,7 @@
             this.dataVisiting.ReadOnly = true;
             this.dataVisiting.RowHeadersWidth = 51;
             this.dataVisiting.RowTemplate.Height = 24;
-            this.dataVisiting.Size = new System.Drawing.Size(519, 243);
+            this.dataVisiting.Size = new System.Drawing.Size(612, 243);
             this.dataVisiting.TabIndex = 14;
             // 
             // monthCalendar1
@@ -183,7 +183,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(905, 466);
+            this.ClientSize = new System.Drawing.Size(967, 466);
             this.Controls.Add(this.checkDate);
             this.Controls.Add(this.checkSpecs);
             this.Controls.Add(this.monthCalendar1);
@@ -199,7 +199,7 @@
             this.Controls.Add(this.bAddDisease);
             this.Controls.Add(this.bAddVisiting);
             this.Name = "SwitchVisualVisitings";
-            this.Text = "SwitchVisualVisitings";
+            this.Text = "Визиты и диагнозы";
             ((System.ComponentModel.ISupportInitialize)(this.dataVisiting)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

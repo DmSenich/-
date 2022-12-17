@@ -46,6 +46,7 @@ namespace AIS_Polyclinic
             dataDoctor.Columns[0].Visible = false;
 
             dataDoctor.ReadOnly = true;
+            dataDoctor.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
         private void SearchDoc(string tDoc)
