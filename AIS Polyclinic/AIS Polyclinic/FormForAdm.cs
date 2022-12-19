@@ -78,7 +78,7 @@ namespace AIS_Polyclinic
             DataTable table = new DataTable();
             table.Columns.Add("id");
 
-            table.Columns.Add("FIO");
+            table.Columns.Add("ФИО");
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {

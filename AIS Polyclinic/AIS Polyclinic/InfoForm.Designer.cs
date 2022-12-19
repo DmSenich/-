@@ -72,6 +72,7 @@
             this.Controls.Add(this.bUpdate);
             this.Controls.Add(this.pPhoto);
             this.Name = "InfoForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Информация о человеке";
             this.Activated += new System.EventHandler(this.InfoForm_Activated);
             this.Shown += new System.EventHandler(this.InfoForm_Shown);

@@ -132,6 +132,7 @@
             this.Controls.Add(this.groupAdmin);
             this.Controls.Add(this.groupPeople);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Начальное меню";
             this.Activated += new System.EventHandler(this.MainForm_Activated);
             this.Deactivate += new System.EventHandler(this.MainForm_Deactivate);

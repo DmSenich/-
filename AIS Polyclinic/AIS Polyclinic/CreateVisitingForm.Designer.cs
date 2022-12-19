@@ -194,6 +194,7 @@
             this.Controls.Add(this.dataDoctor);
             this.Controls.Add(this.bOK);
             this.Name = "CreateVisitingForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Назначение визита";
             this.Activated += new System.EventHandler(this.CreateVisitingForm_Activated);
             this.Shown += new System.EventHandler(this.CreateVisitingForm_Shown);

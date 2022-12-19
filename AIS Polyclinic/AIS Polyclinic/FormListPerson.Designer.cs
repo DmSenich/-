@@ -87,6 +87,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataPerson);
             this.Name = "FormListPerson";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormListPerson";
             this.Activated += new System.EventHandler(this.FormListPerson_Activated);
             this.Shown += new System.EventHandler(this.FormListPerson_Shown);

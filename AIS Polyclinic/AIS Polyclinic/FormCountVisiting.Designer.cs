@@ -86,6 +86,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dataDoctor);
             this.Name = "FormCountVisiting";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Отчет о визитах";
             this.Load += new System.EventHandler(this.FormCountVisiting_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataDoctor)).EndInit();

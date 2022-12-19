@@ -33,8 +33,8 @@ namespace AIS_Polyclinic
             InitializeComponent();
             dtSpecsForView = new DataTable();
             dtSpecsForView.Columns.Add("id");
-            dtSpecsForView.Columns.Add("Specialty");
-            dtSpecsForView.Columns.Add("Having");
+            dtSpecsForView.Columns.Add("Специальность");
+            dtSpecsForView.Columns.Add("Наличие");
             dtSpecsForView.Columns[2].DataType = typeof(bool);
             dtSpecsForView.Columns[2].DefaultValue = false;
         }

@@ -199,6 +199,7 @@
             this.Controls.Add(this.bAddDisease);
             this.Controls.Add(this.bAddVisiting);
             this.Name = "SwitchVisualVisitings";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Визиты и диагнозы";
             ((System.ComponentModel.ISupportInitialize)(this.dataVisiting)).EndInit();
             this.ResumeLayout(false);

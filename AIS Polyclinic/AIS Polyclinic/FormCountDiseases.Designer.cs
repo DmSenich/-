@@ -69,6 +69,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cCategories);
             this.Name = "FormCountDiseases";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Отчет о заболевании";
             this.ResumeLayout(false);
             this.PerformLayout();

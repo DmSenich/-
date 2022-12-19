@@ -195,6 +195,7 @@
             this.Controls.Add(this.lFirstName);
             this.Controls.Add(this.lLastName);
             this.Name = "FormAddDoctor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Добавить доктора";
             ((System.ComponentModel.ISupportInitialize)(this.nWorkExperience)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pPhoto)).EndInit();

@@ -46,10 +46,10 @@ namespace AIS_Polyclinic
         {
             DataTable dtDocView = new DataTable();
             dtDocView.Columns.Add("id");
-            dtDocView.Columns.Add("FIO Doctor");
+            dtDocView.Columns.Add("ФИО доктора");
             DataTable dtPatView = new DataTable();
             dtPatView.Columns.Add("id");
-            dtPatView.Columns.Add("FIO Patient");
+            dtPatView.Columns.Add("ФИО врача");
 
             for(int i = 0; i < dtDocs.Rows.Count; i++)
             {

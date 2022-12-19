@@ -49,9 +49,9 @@ namespace AIS_Polyclinic
         {
             DataTable table = new DataTable();
             table.Columns.Add("id");
-            table.Columns.Add("Date");
-            table.Columns.Add("FIO Doctor");
-            table.Columns.Add("FIO Patient");
+            table.Columns.Add("Дата");
+            table.Columns.Add("ФИО доктора");
+            table.Columns.Add("ФИО пациента");
 
             for (int i = 0; i < dtVisiting.Rows.Count; i++)
             {

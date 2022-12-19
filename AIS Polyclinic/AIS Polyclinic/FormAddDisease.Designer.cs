@@ -103,6 +103,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cCategories);
             this.Name = "FormAddDisease";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Поставить диагноз";
             this.ResumeLayout(false);
             this.PerformLayout();

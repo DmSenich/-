@@ -53,7 +53,7 @@ namespace AIS_Polyclinic
             switch (numTable)
             {
                 case 0:
-                    table.Columns.Add("FIO Doctor");
+                    table.Columns.Add("ФИО доктора");
                     
                     for(int i = 0; i < dt.Rows.Count; i++)
                     {
@@ -65,7 +65,7 @@ namespace AIS_Polyclinic
                     
                     break;
                 case 1:
-                    table.Columns.Add("FIO Patient");
+                    table.Columns.Add("ФИО пациента");
 
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {

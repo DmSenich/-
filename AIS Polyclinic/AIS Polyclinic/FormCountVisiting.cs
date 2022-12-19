@@ -32,7 +32,7 @@ namespace AIS_Polyclinic
         {
             DataTable dtDocView = new DataTable();
             dtDocView.Columns.Add("id");
-            dtDocView.Columns.Add("FIO Doctor");
+            dtDocView.Columns.Add("ФИО доктора");
 
             for (int i = 0; i < dtDoctors.Rows.Count; i++)
             {

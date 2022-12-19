@@ -59,6 +59,7 @@
             this.Controls.Add(this.bCreate);
             this.Controls.Add(this.cSpecialty);
             this.Name = "FormListingDocOnSpec";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Отчет о специалистах";
             this.ResumeLayout(false);
 

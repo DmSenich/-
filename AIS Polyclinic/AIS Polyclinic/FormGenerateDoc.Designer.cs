@@ -72,6 +72,7 @@
             this.Controls.Add(this.bCountVisiting);
             this.Controls.Add(this.bListingDoctors);
             this.Name = "FormGenerateDoc";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Выбор документа";
             this.ResumeLayout(false);
 
