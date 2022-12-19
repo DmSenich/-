@@ -157,7 +157,16 @@ namespace AIS_Polyclinic
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            myDB = new SqlManager();
+            try
+            {
+                myDB = new SqlManager();
+            }
+            catch
+            {
+                MessageBox.Show("Невозможно запустить приложение. Возможно отсутствует база данных");
+                Application.Exit();
+            }
+            
         }
 
         private void button1_Click(object sender, EventArgs e)

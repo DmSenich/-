@@ -229,10 +229,15 @@ namespace AIS_Polyclinic
             {
                 MessageBox.Show("Нет специальностей!");
             }
+            else if (fio[0] == "" || fio[1] == "")
+            {
+                MessageBox.Show("Должны присутствовать и имя, и фамилия.");
+            }
             else
             {
                 DialogResult = DialogResult.OK;
             }
+            
         }
 
         private void bAddPhoto_Click(object sender, EventArgs e)

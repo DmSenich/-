@@ -411,10 +411,9 @@ namespace AIS_Polyclinic
                 if(formAddDisease.ShowDialog() == DialogResult.OK)
                 {
                     string description = formAddDisease.Description;
-                    string name = formAddDisease.NameDis;
                     int idCat = formAddDisease.IdCategory;
 
-                    string sSql = $"execute procedure add_disease({idVis}, '{name}', '{description}', {idCat})";
+                    string sSql = $"execute procedure add_disease({idVis}, '{description}', {idCat})";
 
                     myDB.iExeecuteNonQuery(sSql);
 
@@ -564,7 +563,7 @@ namespace AIS_Polyclinic
                 FormDiseaseView diseaseView = new FormDiseaseView(myDB, idV);
                 diseaseView.Show();
             }
-            catch(Exception ex) { MessageBox.Show(ex.Message); }
+            catch { MessageBox.Show("Диагнозы отсутствуют."); }
         }
 
         private void bAddVisiting_Click(object sender, EventArgs e)

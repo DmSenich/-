@@ -37,9 +37,28 @@ namespace AIS_Polyclinic
 
             sSql = $"select * from disease_table where id_disease in (select id_disease from \"DISEASE-VISITING_TABLE\" where id_visiting = {idVis})";
             dtDisease = myDB.iExecuteReader(sSql);
+            sSql = $"select * from category_table where id_category in (select id_category from disease_table where id_disease in (select id_disease from disease_table where id_disease in (select id_disease from \"DISEASE-VISITING_TABLE\" where id_visiting = {idVis})))";
+            DataTable dtCat = myDB.iExecuteReader(sSql);
+            dtDisease.Columns.Add("name_category");
 
+            int[] idCat = new int[dtCat.Rows.Count];
+            for(int i = 0; i < dtCat.Rows.Count; i++)
+            {
+                idCat[i] = Convert.ToInt32(dtCat.Rows[i][0]);
+            }
+            for(int i = 0; i < dtDisease.Rows.Count; i++)
+            {
+                for(int j = 0; j < idCat.Length; j++)
+                {
+                    if (idCat[j] == Convert.ToInt32(dtDisease.Rows[i][2]))
+                    {
+                        dtDisease.Rows[i][3] = dtCat.Rows[j][1];
+                    }
+                }
+                
+            }
             cNames.DataSource = dtDisease;
-            cNames.DisplayMember = "name_disease";
+            cNames.DisplayMember = "name_category";
             cNames.ValueMember = "id_disease";
 
             FullData(Convert.ToInt32(cNames.SelectedValue));
@@ -50,15 +69,13 @@ namespace AIS_Polyclinic
             {
                 string sSql = $"select * from disease_table where id_disease = {idDis}";
                 DataTable dis = myDB.iExecuteReader(sSql);
-                richDescription.Text = dis.Rows[0][2].ToString();
-                int idCat = Convert.ToInt32(dis.Rows[0][3]);
-                sSql = $"select * from category_table where id_category = {idCat}";
-                DataTable cat = myDB.iExecuteReader(sSql);
-                tCategory.Text = cat.Rows[0][1].ToString();
+                richDescription.Text = dis.Rows[0][1].ToString();
+
             }
-            catch (Exception ex)
+            catch 
             {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show("Диагнозы отсутствуют.");
+                Close();
             }
         }
 

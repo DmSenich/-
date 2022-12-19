@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -71,10 +72,32 @@ namespace AIS_Polyclinic
             adress[3] = tApartment.Text;
             dateOfBirth = dateBirth.Value;
 
-            DialogResult = DialogResult.OK;
+            if(fio[0] == "" || fio[1] == "")
+            {
+                MessageBox.Show("Должны присутствовать и имя, и фамилия.");
+            }
+            else if(adress[0] == "" || adress[1] == "" || adress[2] == "")
+            {
+                MessageBox.Show("Должен иметься более подробный адрес.");
+            }
+            else
+            {
+                DialogResult = DialogResult.OK;
+            }
+
+            
         }
         public string[] FIO { get { return fio; } }
         public string[] Adress { get { return adress; } }
         public DateTime DateBirth { get { return dateOfBirth; } }
+
+        private void tApartment_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string c = e.KeyChar.ToString();
+            if(!Regex.Match(c, @"[0-9\b]").Success)
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

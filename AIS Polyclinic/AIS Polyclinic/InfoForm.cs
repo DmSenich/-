@@ -126,7 +126,11 @@ namespace AIS_Polyclinic
                     fio = String.Join(" ", dtPerson.Rows[0][1], dtPerson.Rows[0][2], dtPerson.Rows[0][3]);
                     richTextBoxInfo.Text = $"ФИО: {fio}\n";
                     richTextBoxInfo.Text += $"Дата рождения: {Convert.ToDateTime(dtPerson.Rows[0][8].ToString()).ToString("dd.MM.yyyy")}\n";
-                    richTextBoxInfo.Text += $"Адрес: {String.Join(", ", dtPerson.Rows[0][4], dtPerson.Rows[0][5], dtPerson.Rows[0][6], dtPerson.Rows[0][7])}";
+                    richTextBoxInfo.Text += $"Адрес: {String.Join(", ", dtPerson.Rows[0][4], dtPerson.Rows[0][5], dtPerson.Rows[0][6])}";
+                    if(dtPerson.Rows[0][7] != null)
+                    {
+                        richTextBoxInfo.Text += dtPerson.Rows[0][7];
+                    }
                     photo = defaultPhoto;
 
                     break;

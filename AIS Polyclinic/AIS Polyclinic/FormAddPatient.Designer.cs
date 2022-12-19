@@ -185,6 +185,7 @@
             this.tApartment.Name = "tApartment";
             this.tApartment.Size = new System.Drawing.Size(241, 22);
             this.tApartment.TabIndex = 25;
+            this.tApartment.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tApartment_KeyPress);
             // 
             // bOK
             // 

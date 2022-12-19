@@ -15,7 +15,7 @@ namespace AIS_Polyclinic
         SqlManager myDB;
         //int idVis;
         int idCat;
-        string description, name;
+        string description;
         DataTable dtCategories;
 
         private FormAddDisease()
@@ -48,10 +48,16 @@ namespace AIS_Polyclinic
             try
             {
                 description = richDescription.Text;
-                name = tName.Text;
                 idCat = Convert.ToInt32(cCategories.SelectedValue);
-
-                DialogResult = DialogResult.OK;
+                if(description == "")
+                {
+                    MessageBox.Show("Введите все данные.");
+                }
+                else
+                {
+                    DialogResult = DialogResult.OK;
+                }
+                
             }
             catch (Exception ex)
             {
@@ -63,7 +69,6 @@ namespace AIS_Polyclinic
 
         public int IdCategory { get { return idCat; } }
         public string Description { get { return description; } }
-        public string NameDis { get { return name; } }
 
         private void cCategories_SelectedIndexChanged(object sender, EventArgs e)
         {

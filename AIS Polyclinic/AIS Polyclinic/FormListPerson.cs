@@ -269,6 +269,11 @@ namespace AIS_Polyclinic
                             byte[] blob = InfoForm.ToByte(photo);
                             //sSql = $"insert into doctor_table (last_name, first_name, patronymic, work_experience) values('{fio[0]}', '{fio[1]}', '{fio[2]}', {workExp})"; // ДОБАВИТЬ ФОТО
 
+                            if(fio[0] == "" || fio[1] == "")
+                            {
+                                throw new Exception("Должны присутствовать и имя, и фамилия.");
+                            }
+
                             myDB.iExeecuteAddDoctor(fio[0], fio[1], fio[2], workExp, blob);
                             //sSql = $"select * from doctor_table where last_name = '{fio[0]}' and first_name = '{fio[1]}' and patronymic = '{fio[2]}' and work_experience = {workExp}";                  
                             //DataTable newDoc = myDB.iExecuteReader(sSql);
@@ -282,6 +287,7 @@ namespace AIS_Polyclinic
                                 sSql = $"execute procedure add_doc_spec({id}, {row[0]})";
                                 myDB.iExeecuteNonQuery(sSql);
                             }
+                            updateDataView();
                         }
                     }
                     catch (Exception ex)
@@ -302,6 +308,7 @@ namespace AIS_Polyclinic
                             //string sSql = $"insert into patient_table (last_name, first_name, patronymic, area, city, house, apartment, date_birth) values('{fio[0]}', '{fio[1]}', '{fio[2]}', '{adress[0]}', '{adress[1]}', '{adress[2]}', '{adress[3]}', '{dateBirth.ToShortDateString()}')";
                             sSql = $"execute procedure add_patient('{fio[0]}', '{fio[1]}', '{fio[2]}', '{adress[0]}', '{adress[1]}', '{adress[2]}', '{adress[3]}', '{dateBirth.ToShortDateString()}')";
                             myDB.iExeecuteNonQuery(sSql);
+                            updateDataView();
                         }
                     }
                     catch (Exception ex)
@@ -312,6 +319,7 @@ namespace AIS_Polyclinic
                 case 2:
                     break;
             }
+            
         }
     }
 }

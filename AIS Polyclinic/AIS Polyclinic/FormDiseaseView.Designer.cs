@@ -32,15 +32,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.richDescription = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.tCategory = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.bDeleteDisease = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cNames
             // 
             this.cNames.FormattingEnabled = true;
-            this.cNames.Location = new System.Drawing.Point(123, 31);
+            this.cNames.Location = new System.Drawing.Point(127, 77);
             this.cNames.Name = "cNames";
             this.cNames.Size = new System.Drawing.Size(182, 24);
             this.cNames.TabIndex = 0;
@@ -49,7 +47,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 34);
+            this.label1.Location = new System.Drawing.Point(23, 77);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 16);
             this.label1.TabIndex = 1;
@@ -73,23 +71,6 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Описание:";
             // 
-            // tCategory
-            // 
-            this.tCategory.Location = new System.Drawing.Point(123, 77);
-            this.tCategory.Name = "tCategory";
-            this.tCategory.ReadOnly = true;
-            this.tCategory.Size = new System.Drawing.Size(182, 22);
-            this.tCategory.TabIndex = 4;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 80);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(78, 16);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Категория:";
-            // 
             // bDeleteDisease
             // 
             this.bDeleteDisease.Location = new System.Drawing.Point(26, 376);
@@ -106,8 +87,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(799, 455);
             this.Controls.Add(this.bDeleteDisease);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.tCategory);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.richDescription);
             this.Controls.Add(this.label1);
@@ -125,8 +104,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox richDescription;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox tCategory;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button bDeleteDisease;
     }
 }

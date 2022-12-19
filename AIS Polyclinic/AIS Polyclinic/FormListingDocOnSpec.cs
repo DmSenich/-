@@ -62,6 +62,10 @@ namespace AIS_Polyclinic
                         writer.Write("Опыт работы (в годах): ");
                         writer.WriteLine(drDoctor[4]);
                     }
+                    if(dtDoctors.Rows.Count  == 0)
+                    {
+                        writer.WriteLine("Врачей такой специальности нет в базе данных.");
+                    }
 
                     writer.Close();
                 }

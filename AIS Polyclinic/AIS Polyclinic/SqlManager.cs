@@ -16,15 +16,25 @@ namespace AIS_Polyclinic
 
         public SqlManager()
         {
-            FbConnectionStringBuilder cs = new FbConnectionStringBuilder();
-            
-            cs.DataSource = "localhost";
-            cs.UserID = "SYSDBA";
-            cs.Password = "masterkey";
-            cs.Database = Path.GetFullPath(pathDB);
-            cs.Charset = "win1251";
-            string ConnString = cs.ToString();
-            fbConnection.ConnectionString = ConnString;
+            try
+            {
+                FbConnectionStringBuilder cs = new FbConnectionStringBuilder();
+
+                cs.DataSource = "localhost";
+                cs.UserID = "SYSDBA";
+                cs.Password = "masterkey";
+                cs.Database = Path.GetFullPath(pathDB);
+                cs.Charset = "win1251";
+                string ConnString = cs.ToString();
+                fbConnection.ConnectionString = ConnString;
+
+                fbConnection.Open();
+                fbConnection.Close();
+            }
+            catch
+            {
+                throw new Exception("База данных отсутствует, или ложные настойкам подключения!");
+            }
             //fbConnection.Open();
         }
 
@@ -81,6 +91,7 @@ namespace AIS_Polyclinic
 
                 fbCommand.Dispose();
                 fbConnection.Close();
+                throw ex;
             }
         }
         public void iExeecuteUpDoctor(int id,string ln, string fn, string patr, int workEx, byte[] blob)
@@ -134,6 +145,7 @@ namespace AIS_Polyclinic
 
                 fbCommand.Dispose();
                 fbConnection.Close();
+                throw ex;
             }
         }
         public int iExecuteScalar(string sSql)
