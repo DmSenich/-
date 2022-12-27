@@ -58,6 +58,7 @@
             this.cCategory.Name = "cCategory";
             this.cCategory.Size = new System.Drawing.Size(163, 24);
             this.cCategory.TabIndex = 1;
+            this.cCategory.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cCategory_KeyPress);
             // 
             // bDeleteCategory
             // 
@@ -108,6 +109,7 @@
             // 
             // bDeletePerson
             // 
+            this.bDeletePerson.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.bDeletePerson.Location = new System.Drawing.Point(626, 380);
             this.bDeletePerson.Name = "bDeletePerson";
             this.bDeletePerson.Size = new System.Drawing.Size(162, 58);
@@ -133,6 +135,7 @@
             this.cSpecialty.Name = "cSpecialty";
             this.cSpecialty.Size = new System.Drawing.Size(163, 24);
             this.cSpecialty.TabIndex = 8;
+            this.cSpecialty.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cSpecialty_KeyPress);
             // 
             // bAddSpec
             // 
@@ -148,6 +151,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.bDeleteSpec);
             this.Controls.Add(this.cSpecialty);

@@ -90,6 +90,29 @@ namespace AIS_Polyclinic
         private void cSpecialty_SelectionChangeCommitted(object sender, EventArgs e)
         {
 
+                //SaveDocument();
+                //DialogResult = DialogResult.OK;
+
+        }
+
+        private void cSpecialty_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cSpecialty_SelectedValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cSpecialty_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                SaveDocument();
+                DialogResult = DialogResult.OK;
+            }
+            catch(Exception ex) { }
         }
     }
 }

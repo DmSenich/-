@@ -164,7 +164,7 @@ namespace AIS_Polyclinic
 
                 SaveDocumentOne(idDoctor, fio);
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch { MessageBox.Show("Невозможно создать документ."); }
         }
 
         private void tFindDoc_KeyPress(object sender, KeyPressEventArgs e)

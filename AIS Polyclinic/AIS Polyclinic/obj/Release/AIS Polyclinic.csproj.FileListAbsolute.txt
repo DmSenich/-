@@ -1,0 +1,30 @@
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\bin\Release\AIS Polyclinic.exe.config
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\bin\Release\AIS Polyclinic.exe
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\bin\Release\AIS Polyclinic.pdb
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\bin\Release\FirebirdSql.Data.FirebirdClient.dll
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\bin\Release\System.Threading.Tasks.Extensions.dll
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\bin\Release\System.Threading.Tasks.Extensions.xml
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Release\AIS Polyclinic.csproj.AssemblyReference.cache
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Release\AIS Polyclinic.csproj.SuggestedBindingRedirects.cache
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Release\AIS_Polyclinic.CreateVisitingForm.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Release\AIS_Polyclinic.FormAddDisease.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Release\AIS_Polyclinic.FormAddDoctor.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Release\AIS_Polyclinic.FormAddPatient.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Release\AIS_Polyclinic.FormCountDiseases.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Release\AIS_Polyclinic.FormCountVisiting.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Release\AIS_Polyclinic.FormDiseaseView.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Release\AIS_Polyclinic.FormForAdm.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Release\AIS_Polyclinic.FormGenerateDoc.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Release\AIS_Polyclinic.FormListingDocOnSpec.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Release\AIS_Polyclinic.FormListPerson.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Release\AIS_Polyclinic.InfoForm.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Release\AIS_Polyclinic.MainForm.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Release\AIS_Polyclinic.Properties.Resources.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Release\AIS_Polyclinic.SwitchVisualVisitings.resources
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Release\AIS Polyclinic.csproj.GenerateResource.cache
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Release\AIS Polyclinic.csproj.CoreCompileInputs.cache
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Release\AIS Polyclinic.csproj.CopyComplete
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Release\AIS Polyclinic.exe
+D:\Учеба\Базы данных\Курсовая\Приложение\AIS Polyclinic\AIS Polyclinic\obj\Release\AIS Polyclinic.pdb

@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -103,12 +104,13 @@ namespace AIS_Polyclinic
             try
             {
                 string newCat = cCategory.Text;
-                if(newCat == "")
+                if(newCat == "" || Regex.IsMatch(newCat, @"^\s"))
                 {
-                    return;
+                    throw new Exception("Введите название, без пробелоа в начале.");
                 }
                 string sSql = $"execute procedure add_category('{newCat}')";
                 myDB.iExeecuteNonQuery(sSql);
+                DataCategory();
             }
             catch (Exception ex)
             {
@@ -128,6 +130,7 @@ namespace AIS_Polyclinic
                 {
                     throw new Exception("Невозможно удалить, т. к. существуют связанные данные!");
                 }
+                DataCategory();
             }
             catch(Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -183,16 +186,35 @@ namespace AIS_Polyclinic
             try
             {
                 string newSpec = cSpecialty.Text;
-                if (newSpec == "")
+                if (newSpec == "" || Regex.IsMatch(newSpec, @"^\s"))
                 {
-                    return;
+                    throw new Exception("Введите название, без пробелоа в начале.");
                 }
                 string sSql = $"execute procedure ADD_SPECIALTY('{newSpec}')";
                 myDB.iExeecuteNonQuery(sSql);
+                DataSpecialty();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void cCategory_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string c = e.KeyChar.ToString();
+            if (!Regex.Match(c, @"[а-яА-Я\s\b]").Success)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void cSpecialty_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string c = e.KeyChar.ToString();
+            if (!Regex.Match(c, @"[а-яА-Я\s\b]").Success)
+            {
+                e.Handled = true;
             }
         }
 
@@ -208,6 +230,7 @@ namespace AIS_Polyclinic
                 {
                     throw new Exception("Невозможно удалить, т. к. существуют связанные данные!");
                 }
+                DataSpecialty();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }

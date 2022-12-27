@@ -55,6 +55,7 @@
             this.tPatronymic.Name = "tPatronymic";
             this.tPatronymic.Size = new System.Drawing.Size(241, 22);
             this.tPatronymic.TabIndex = 15;
+            this.tPatronymic.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tPatronymic_KeyPress);
             // 
             // tFirstName
             // 
@@ -62,6 +63,7 @@
             this.tFirstName.Name = "tFirstName";
             this.tFirstName.Size = new System.Drawing.Size(241, 22);
             this.tFirstName.TabIndex = 14;
+            this.tFirstName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tFirstName_KeyPress);
             // 
             // tLastName
             // 
@@ -69,6 +71,7 @@
             this.tLastName.Name = "tLastName";
             this.tLastName.Size = new System.Drawing.Size(241, 22);
             this.tLastName.TabIndex = 13;
+            this.tLastName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tLastName_KeyPress);
             // 
             // lDateBirth
             // 
@@ -164,6 +167,7 @@
             this.tArea.Name = "tArea";
             this.tArea.Size = new System.Drawing.Size(241, 22);
             this.tArea.TabIndex = 22;
+            this.tArea.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tArea_KeyPress);
             // 
             // tCity
             // 
@@ -171,6 +175,7 @@
             this.tCity.Name = "tCity";
             this.tCity.Size = new System.Drawing.Size(241, 22);
             this.tCity.TabIndex = 23;
+            this.tCity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tCity_KeyPress);
             // 
             // tHouse
             // 
@@ -203,7 +208,7 @@
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(75, 23);
             this.bCancel.TabIndex = 27;
-            this.bCancel.Text = "Cancel";
+            this.bCancel.Text = "Отмена";
             this.bCancel.UseVisualStyleBackColor = true;
             this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
             // 
@@ -211,6 +216,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(421, 450);
             this.Controls.Add(this.bCancel);
             this.Controls.Add(this.bOK);

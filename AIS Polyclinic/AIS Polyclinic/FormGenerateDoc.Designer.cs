@@ -55,6 +55,7 @@
             // 
             // bCountDisease
             // 
+            this.bCountDisease.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.bCountDisease.Location = new System.Drawing.Point(431, 56);
             this.bCountDisease.Name = "bCountDisease";
             this.bCountDisease.Size = new System.Drawing.Size(168, 54);
@@ -67,6 +68,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(672, 168);
             this.Controls.Add(this.bCountDisease);
             this.Controls.Add(this.bCountVisiting);

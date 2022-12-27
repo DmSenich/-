@@ -69,6 +69,7 @@
             // 
             // bAdd
             // 
+            this.bAdd.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.bAdd.Location = new System.Drawing.Point(140, 430);
             this.bAdd.Name = "bAdd";
             this.bAdd.Size = new System.Drawing.Size(88, 33);
@@ -81,6 +82,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(366, 487);
             this.Controls.Add(this.bAdd);
             this.Controls.Add(this.tFind);

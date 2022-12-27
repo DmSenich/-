@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,7 +14,8 @@ namespace AIS_Polyclinic
 {
     public partial class FormAddDoctor : Form
     {
-        static private Image defaultPhoto = Image.FromFile("materials\\defaultPhoto.jpeg");
+        static private string pathImPhoto = "materials\\defaultPhoto.jpeg";
+        static private Image defaultPhoto;
         SqlManager myDB;
         //DoctorData doctorData;
         Image photo;
@@ -31,6 +33,16 @@ namespace AIS_Polyclinic
         private FormAddDoctor()
         {
             InitializeComponent();
+            try
+            {
+                defaultPhoto = Image.FromFile(pathImPhoto);
+            }
+            catch
+            {
+                Close();
+                MessageBox.Show("Отсутствует файл defaultPhoto.jpeg в папке materials");
+
+            }
             dtSpecsForView = new DataTable();
             dtSpecsForView.Columns.Add("id");
             dtSpecsForView.Columns.Add("Специальность");
@@ -63,31 +75,31 @@ namespace AIS_Polyclinic
         //}
         public FormAddDoctor(DataTable dtDoc, DataTable dtSpec, DataTable dtSpecs) : this()
         {
-            oldDoc = true;
-            this.dtSpec = dtSpec;
-            this.dtDoc = dtDoc;
-            this.dtSpecs = dtSpecs;
+            //oldDoc = true;
+            //this.dtSpec = dtSpec;
+            //this.dtDoc = dtDoc;
+            //this.dtSpecs = dtSpecs;
 
-            tLastName.Text = dtDoc.Rows[0][1].ToString();
-            tFirstName.Text = dtDoc.Rows[0][2].ToString();
-            tPatronymic.Text = dtDoc.Rows[0][3].ToString();
-            nWorkExperience.Value = Convert.ToInt32(dtDoc.Rows[0][4].ToString());
+            //tLastName.Text = dtDoc.Rows[0][1].ToString();
+            //tFirstName.Text = dtDoc.Rows[0][2].ToString();
+            //tPatronymic.Text = dtDoc.Rows[0][3].ToString();
+            //nWorkExperience.Value = Convert.ToInt32(dtDoc.Rows[0][4].ToString());
 
-            byte[] data;
-            try
-            {
-                data = (byte[])dtDoc.Rows[0][5];
-            }
-            catch
-            {
-                data = null;
-            }
-            if (data != null)
-                pPhoto.Image = InfoForm.ToImage(data);
-            else
-                pPhoto.Image = defaultPhoto;
+            //byte[] data;
+            //try
+            //{
+            //    data = (byte[])dtDoc.Rows[0][5];
+            //}
+            //catch
+            //{
+            //    data = null;
+            //}
+            //if (data != null)
+            //    pPhoto.Image = InfoForm.ToImage(data);
+            //else
+            //    pPhoto.Image = defaultPhoto;
 
-            TableSpecBuild2();
+            //TableSpecBuild2();
         }
         public FormAddDoctor(DataTable dtDoc, int[] idSpec, DataTable dtSpecs) : this()
         {
@@ -166,6 +178,7 @@ namespace AIS_Polyclinic
             }
             dataSpecialty.DataSource = dtSpecsForView;
             dataSpecialty.Columns[0].Visible = false;
+            dataSpecialty.Columns[1].ReadOnly = true;
         }
         private DataTable CreateNewDTSpec()
         {
@@ -225,11 +238,15 @@ namespace AIS_Polyclinic
             photo = pPhoto.Image;
             workExp = Convert.ToInt32(nWorkExperience.Value);
             newSpec = CreateNewDTSpec();
-            if (newSpec == null || newSpec.Rows.Count == 0)
+            if(photo == null)
+            {
+                MessageBox.Show("Нет фото!");
+            }
+            else if (newSpec == null || newSpec.Rows.Count == 0)
             {
                 MessageBox.Show("Нет специальностей!");
             }
-            else if (fio[0] == "" || fio[1] == "")
+            else if (fio[0] == "" || fio[1] == "" || Regex.IsMatch(fio[0], @"^\s") || Regex.IsMatch(fio[2], @"^\s"))
             {
                 MessageBox.Show("Должны присутствовать и имя, и фамилия.");
             }
@@ -265,6 +282,33 @@ namespace AIS_Polyclinic
         public int WorkExp { get { return workExp; } }
         public DataTable DTSpec { get { return newSpec; } }
         public Image GetPHOTO { get { return photo; } }
+
+        private void tLastName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string c = e.KeyChar.ToString();
+            if (!Regex.Match(c, @"[а-яА-Я\s\b]").Success)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void tFirstName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string c = e.KeyChar.ToString();
+            if (!Regex.Match(c, @"[а-яА-Я\s\b]").Success)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void tPatronymic_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string c = e.KeyChar.ToString();
+            if (!Regex.Match(c, @"[а-яА-Я\s\b]").Success)
+            {
+                e.Handled = true;
+            }
+        }
         //private int[] IdSpec { get { return idSpec; } }
         //public void GetInfo()
         //{

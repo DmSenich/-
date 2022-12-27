@@ -61,6 +61,7 @@
             this.richDescription.Size = new System.Drawing.Size(426, 285);
             this.richDescription.TabIndex = 4;
             this.richDescription.Text = "";
+            this.richDescription.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.richDescription_KeyPress);
             // 
             // label3
             // 
@@ -95,6 +96,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.bCancel);
             this.Controls.Add(this.bOk);

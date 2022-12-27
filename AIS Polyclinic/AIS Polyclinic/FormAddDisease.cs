@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -49,9 +50,9 @@ namespace AIS_Polyclinic
             {
                 description = richDescription.Text;
                 idCat = Convert.ToInt32(cCategories.SelectedValue);
-                if(description == "")
+                if(description == "" || Regex.IsMatch(description, @"^\s"))
                 {
-                    MessageBox.Show("Введите все данные.");
+                    MessageBox.Show("Введите все данные и/или избавьтесь от пробелов в начале.");
                 }
                 else
                 {
@@ -73,6 +74,15 @@ namespace AIS_Polyclinic
         private void cCategories_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void richDescription_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //string c = e.KeyChar.ToString();
+            //if (!Regex.Match(c, @"[а-яА-Я\s\b,.-]").Success)
+            //{
+            //    e.Handled = true;
+            //}
         }
     }
 }

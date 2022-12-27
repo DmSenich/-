@@ -42,12 +42,13 @@
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.checkSpecs = new System.Windows.Forms.CheckBox();
             this.checkDate = new System.Windows.Forms.CheckBox();
+            this.bDeleteVisiting = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataVisiting)).BeginInit();
             this.SuspendLayout();
             // 
             // bAddVisiting
             // 
-            this.bAddVisiting.Location = new System.Drawing.Point(446, 314);
+            this.bAddVisiting.Location = new System.Drawing.Point(343, 276);
             this.bAddVisiting.Name = "bAddVisiting";
             this.bAddVisiting.Size = new System.Drawing.Size(121, 69);
             this.bAddVisiting.TabIndex = 0;
@@ -57,7 +58,7 @@
             // 
             // bAddDisease
             // 
-            this.bAddDisease.Location = new System.Drawing.Point(595, 314);
+            this.bAddDisease.Location = new System.Drawing.Point(484, 276);
             this.bAddDisease.Name = "bAddDisease";
             this.bAddDisease.Size = new System.Drawing.Size(109, 69);
             this.bAddDisease.TabIndex = 1;
@@ -67,7 +68,7 @@
             // 
             // bListDisease
             // 
-            this.bListDisease.Location = new System.Drawing.Point(739, 314);
+            this.bListDisease.Location = new System.Drawing.Point(484, 365);
             this.bListDisease.Name = "bListDisease";
             this.bListDisease.Size = new System.Drawing.Size(107, 69);
             this.bListDisease.TabIndex = 2;
@@ -179,11 +180,23 @@
             this.checkDate.UseVisualStyleBackColor = true;
             this.checkDate.CheckedChanged += new System.EventHandler(this.checkDate_CheckedChanged);
             // 
+            // bDeleteVisiting
+            // 
+            this.bDeleteVisiting.Location = new System.Drawing.Point(343, 365);
+            this.bDeleteVisiting.Name = "bDeleteVisiting";
+            this.bDeleteVisiting.Size = new System.Drawing.Size(121, 69);
+            this.bDeleteVisiting.TabIndex = 19;
+            this.bDeleteVisiting.Text = "Удалить встречу";
+            this.bDeleteVisiting.UseVisualStyleBackColor = true;
+            this.bDeleteVisiting.Click += new System.EventHandler(this.bDeleteVisiting_Click);
+            // 
             // SwitchVisualVisitings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(967, 466);
+            this.Controls.Add(this.bDeleteVisiting);
             this.Controls.Add(this.checkDate);
             this.Controls.Add(this.checkSpecs);
             this.Controls.Add(this.monthCalendar1);
@@ -223,5 +236,6 @@
         private System.Windows.Forms.MonthCalendar monthCalendar1;
         private System.Windows.Forms.CheckBox checkSpecs;
         private System.Windows.Forms.CheckBox checkDate;
+        private System.Windows.Forms.Button bDeleteVisiting;
     }
 }

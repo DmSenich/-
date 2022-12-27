@@ -14,7 +14,8 @@ namespace AIS_Polyclinic
 {
     public partial class InfoForm : Form
     {
-        static private Image defaultPhoto = Image.FromFile("materials\\defaultPhoto.jpeg");
+        static private string pathImPhoto = "materials\\defaultPhoto.jpeg";
+        static private Image defaultPhoto;
         SqlManager myDB;
         DataTable dtSpecDoc;
         DataTable dtSpec;
@@ -27,6 +28,16 @@ namespace AIS_Polyclinic
         private InfoForm()
         {
             InitializeComponent();
+            try
+            {
+                defaultPhoto = Image.FromFile(pathImPhoto);
+            }
+            catch
+            {
+                Close();
+                MessageBox.Show("Отсутствует файл defaultPhoto.jpeg в папке materials");
+
+            }
         }
         public InfoForm(int id, int num, SqlManager myDB) : this()       //добавить класс-sql
         {
@@ -41,46 +52,12 @@ namespace AIS_Polyclinic
             string specs = "";
             sSql = $"select * from \"DOCTOR-SPECIALTY_TABLE\" where id_doctor = {id}";
             dtSpecDoc = myDB.iExecuteReader(sSql);
-            //sSql = $"select * from \"SPECIALTY_TABLE\"";
-            //dtSpec = myDB.iExecuteReader(sSql);
-            //dtSpec.Rows.Clear();
-            //for (int i = 0; i < dtSpecDoc.Rows.Count; i++)
-            //{
-            //    sSql = $"select * from \"SPECIALTY_TABLE\" where ID_SPECIALTY = {dtSpecDoc.Rows[i][1]}";
-            //    DataTable sp = myDB.iExecuteReader(sSql);
-            //    DataRow dr = dtSpec.NewRow();
-            //    dr[0] = sp.Rows[0][0];
-            //    dr[1] = sp.Rows[0][1];
-            //    dtSpec.Rows.Add(dr);
-            //    specs += $"{sp.Rows[0][1]}\n";
-            //}
+
 
             sSql = $"select list (name_specialty , ', ') from \"SPECIALTY_TABLE\" where id_specialty in (select id_specialty from \"DOCTOR-SPECIALTY_TABLE\" where id_doctor = {id})";
             specs = myDB.iExecuteReader(sSql).Rows[0][0].ToString();
 
             return specs;
-            //string sql = "select * from SPECIALTY_TABLE";
-            //dtSpec = myDB.iExecuteReader(sql);
-            //DataTable table = new DataTable();
-            //table.Columns.Add("id");
-            //table.Columns.Add("Specialty");
-            //table.Columns.Add("Having");
-            //table.Columns[2].DataType = typeof(bool);
-            //table.Columns[2].DefaultValue = false;
-
-            //for (int i = 0; i < dtSpec.Rows.Count; i++)
-            //{
-            //    DataRow dr = table.NewRow();
-            //    dr[0] = dtSpec.Rows[i][0];
-            //    dr[1] = dtSpec.Rows[i][1];
-            //    if (oldDoc && idSpec.Contains(i + 1))
-            //    {
-            //        dr[2] = true;
-            //    }
-            //    table.Rows.Add(dr);
-            //}
-            //dataSpecialty.DataSource = table;
-            //dataSpecialty.Columns[0].Visible = false;
         }
         private void CreateTable()
         {
@@ -88,15 +65,6 @@ namespace AIS_Polyclinic
             switch (numTable) 
             {
                 case 0:
-                    //dt.Columns.Add("FIO");
-                    //dt.Columns.Add("WorkExp");
-                    //dt.Columns.Add("Spec");
-
-                    //DataRow dr = dt.NewRow();
-                    //dr[0] = dtPerson.Rows[0][1] + " " + dtPerson.Rows[0][2] + " " + dtPerson.Rows[0][3];
-                    //dr[1] = dtPerson.Rows[0][4];
-                    //dr[2] = StringSpecBuild();
-                    //dt.Rows.Add(dr);
                     string fio = String.Join(" ", dtPerson.Rows[0][1], dtPerson.Rows[0][2], dtPerson.Rows[0][3]);
                     richTextBoxInfo.Text = $"ФИО: {fio}\n";
                     richTextBoxInfo.Text += $"Опыт работы (в годах): {dtPerson.Rows[0][4]}\n";
@@ -129,7 +97,7 @@ namespace AIS_Polyclinic
                     richTextBoxInfo.Text += $"Адрес: {String.Join(", ", dtPerson.Rows[0][4], dtPerson.Rows[0][5], dtPerson.Rows[0][6])}";
                     if(dtPerson.Rows[0][7] != null)
                     {
-                        richTextBoxInfo.Text += dtPerson.Rows[0][7];
+                        richTextBoxInfo.Text += ", " + dtPerson.Rows[0][7];
                     }
                     photo = defaultPhoto;
 
@@ -174,127 +142,130 @@ namespace AIS_Polyclinic
         }
         private void bUpdate_Click(object sender, EventArgs e)
         {
-            switch(numTable)
+            try
             {
-                case 0:
-                    sSql = "select * from \"SPECIALTY_TABLE\"";
-                    dtSpecs = myDB.iExecuteReader(sSql);
-                    sSql = $"execute procedure LISTING_SPEC_ID_OF_DOC({id})";
-                    
-                    DataTable listSp = myDB.iExecuteReader(sSql);
-                    string[] sp = listSp.Rows[0][0].ToString().Split(',');
-                    int[] idSpecOld = new int[sp.Length];
-                    for(int i = 0; i < sp.Length; i++)
-                    {
-                        idSpecOld[i] = Convert.ToInt32(sp[i]);
-                    }
-                    //FormAddDoctor upDoctor = new FormAddDoctor(dtPerson, dtSpec, dtSpecs);
-                    FormAddDoctor upDoctor = new FormAddDoctor(dtPerson, idSpecOld, dtSpecs);
-                    Hide();
-                    if(upDoctor.ShowDialog() == DialogResult.OK)
-                    {
-                        DataTable newSpec = upDoctor.DTSpec; //id and name
-                        string[] fio = upDoctor.FIO;
-                        int workExp = upDoctor.WorkExp;
+                switch (numTable)
+                {
+                    case 0:
+                        sSql = "select * from \"SPECIALTY_TABLE\"";
+                        dtSpecs = myDB.iExecuteReader(sSql);
+                        sSql = $"execute procedure LISTING_SPEC_ID_OF_DOC({id})";
 
-                        Image image = upDoctor.GetPHOTO;
-
-                        byte[] blob = ToByte(image);
-
-                        DataTable newSpecDoc = dtSpecDoc.Clone();
-                        newSpecDoc.Rows.Clear();
-                        foreach(DataRow dr in newSpec.Rows)
+                        DataTable listSp = myDB.iExecuteReader(sSql);
+                        string[] sp = listSp.Rows[0][0].ToString().Split(',');
+                        int[] idSpecOld = new int[sp.Length];
+                        for (int i = 0; i < sp.Length; i++)
                         {
-                            DataRow xdr = newSpecDoc.NewRow();
-                            xdr[1] = dr[0];
-                            xdr[0] = dtPerson.Rows[0][0];
-                            newSpecDoc.Rows.Add(xdr);
+                            idSpecOld[i] = Convert.ToInt32(sp[i]);
                         }
+                        //FormAddDoctor upDoctor = new FormAddDoctor(dtPerson, dtSpec, dtSpecs);
+                        FormAddDoctor upDoctor = new FormAddDoctor(dtPerson, idSpecOld, dtSpecs);
+                        Hide();
+                        if (upDoctor.ShowDialog() == DialogResult.OK)
+                        {
+                            DataTable newSpec = upDoctor.DTSpec; //id and name
+                            string[] fio = upDoctor.FIO;
+                            int workExp = upDoctor.WorkExp;
 
-                        int[] idSpec = new int[dtSpecDoc.Rows.Count];
-                        for(int i = 0; i < idSpec.Length; i++)
-                        {
-                            idSpec[i] = Convert.ToInt32(dtSpecDoc.Rows[i][1]);
-                        }
-                        int[] idSpecNew = new int[newSpec.Rows.Count];
-                        for (int i = 0; i < idSpecNew.Length; i++)
-                        {
-                            idSpecNew[i] = Convert.ToInt32(newSpec.Rows[i][0]);
-                        }
+                            Image image = upDoctor.GetPHOTO;
 
-                        foreach(int id in idSpec)
-                        {
-                            if (!idSpecNew.Contains(id))
+                            byte[] blob = ToByte(image);
+
+                            DataTable newSpecDoc = dtSpecDoc.Clone();
+                            newSpecDoc.Rows.Clear();
+                            foreach (DataRow dr in newSpec.Rows)
                             {
-                                sSql = $"delete from \"DOCTOR-SPECIALTY_TABLE\" where id_specialty = {id}";
-                                myDB.iExeecuteNonQuery(sSql);
+                                DataRow xdr = newSpecDoc.NewRow();
+                                xdr[1] = dr[0];
+                                xdr[0] = dtPerson.Rows[0][0];
+                                newSpecDoc.Rows.Add(xdr);
                             }
-                        }
-                        foreach (int id in idSpecNew)
-                        {
-                            if (!idSpec.Contains(id))
+
+                            int[] idSpec = new int[dtSpecDoc.Rows.Count];
+                            for (int i = 0; i < idSpec.Length; i++)
                             {
-                                sSql = $"execute procedure add_doc_spec({dtPerson.Rows[0][0]}, {id}) ";
-                                myDB.iExeecuteNonQuery(sSql);
+                                idSpec[i] = Convert.ToInt32(dtSpecDoc.Rows[i][1]);
                             }
+                            int[] idSpecNew = new int[newSpec.Rows.Count];
+                            for (int i = 0; i < idSpecNew.Length; i++)
+                            {
+                                idSpecNew[i] = Convert.ToInt32(newSpec.Rows[i][0]);
+                            }
+
+                            foreach (int id in idSpec)
+                            {
+                                if (!idSpecNew.Contains(id))
+                                {
+                                    sSql = $"delete from \"DOCTOR-SPECIALTY_TABLE\" where id_specialty = {id}";
+                                    myDB.iExeecuteNonQuery(sSql);
+                                }
+                            }
+                            foreach (int id in idSpecNew)
+                            {
+                                if (!idSpec.Contains(id))
+                                {
+                                    sSql = $"execute procedure add_doc_spec({dtPerson.Rows[0][0]}, {id}) ";
+                                    myDB.iExeecuteNonQuery(sSql);
+                                }
+                            }
+
+
+                            //foreach (DataRow row in dtSpecDoc.Rows)
+                            //{
+                            //    if (!newSpecDoc.Rows.Contains(row))
+                            //    {
+                            //        sSql = $"delete from \"DOCTOR-SPECIALTY_TABLE\" where id_specialty = {row[0]}";
+                            //        myDB.iExeecuteNonQuery(sSql);
+                            //    }
+                            //}
+                            //foreach (DataRow row in newSpecDoc.Rows)
+                            //{
+                            //    if (!dtSpecDoc.Rows.Contains(row))
+                            //    {
+                            //        sSql = $"insert into \"DOCTOR-SPECIALTY_TABLE\" (id_doctor, id_specialty) values({dtPerson.Rows[0][0]}, {row[0]}) ";
+                            //        myDB.iExeecuteNonQuery(sSql);
+                            //    }
+                            //}
+
+                            //for (int i = 0; i < dtSpecDoc.Rows.Count; i++)
+                            //{
+                            //    //if(newSpec.Columns[0].ExtendedProperties.Contains(fio[i]))
+
+                            //    if (!newSpec.Columns[0].ExtendedProperties.Contains(dtSpecDoc.Rows[i][0].ToString()))
+                            //    {
+                            //        sSql = $"delete from \"DOCTOR-SPECIALTY_TABLE\" where id_specialty = {dtSpecDoc.Rows[i][0]}";
+                            //        myDB.iExeecuteNonQuery(sSql);
+                            //    }
+                            //}
+                            //for(int i = 0; i < newSpec.Rows.Count; i++)
+                            //{
+                            //    if (!dtSpecDoc.Columns[0].ExtendedProperties.Contains(newSpec.Rows[i][0].ToString()))
+                            //    {
+                            //        sSql = $"insert into \"DOCTOR-SPECIALTY_TABLE\" (id_doctor, id_specialty) values({dtPerson.Rows[0][0]}, {newSpec.Rows[i][0]}) ";
+                            //        myDB.iExeecuteNonQuery(sSql);
+                            //    }
+                            //}
+
+                            myDB.iExeecuteUpDoctor(Convert.ToInt32(dtPerson.Rows[0][0]), fio[0], fio[1], fio[2], workExp, blob);
                         }
+                        break;
+                    case 1:
+                        FormAddPatient upPatient = new FormAddPatient(dtPerson);
+                        Hide();
+                        if (upPatient.ShowDialog() == DialogResult.OK)
+                        {
+                            string[] fio = upPatient.FIO;
+                            string[] adress = upPatient.Adress;
+                            DateTime birth = upPatient.DateBirth;
 
-
-                        //foreach (DataRow row in dtSpecDoc.Rows)
-                        //{
-                        //    if (!newSpecDoc.Rows.Contains(row))
-                        //    {
-                        //        sSql = $"delete from \"DOCTOR-SPECIALTY_TABLE\" where id_specialty = {row[0]}";
-                        //        myDB.iExeecuteNonQuery(sSql);
-                        //    }
-                        //}
-                        //foreach (DataRow row in newSpecDoc.Rows)
-                        //{
-                        //    if (!dtSpecDoc.Rows.Contains(row))
-                        //    {
-                        //        sSql = $"insert into \"DOCTOR-SPECIALTY_TABLE\" (id_doctor, id_specialty) values({dtPerson.Rows[0][0]}, {row[0]}) ";
-                        //        myDB.iExeecuteNonQuery(sSql);
-                        //    }
-                        //}
-
-                        //for (int i = 0; i < dtSpecDoc.Rows.Count; i++)
-                        //{
-                        //    //if(newSpec.Columns[0].ExtendedProperties.Contains(fio[i]))
-
-                        //    if (!newSpec.Columns[0].ExtendedProperties.Contains(dtSpecDoc.Rows[i][0].ToString()))
-                        //    {
-                        //        sSql = $"delete from \"DOCTOR-SPECIALTY_TABLE\" where id_specialty = {dtSpecDoc.Rows[i][0]}";
-                        //        myDB.iExeecuteNonQuery(sSql);
-                        //    }
-                        //}
-                        //for(int i = 0; i < newSpec.Rows.Count; i++)
-                        //{
-                        //    if (!dtSpecDoc.Columns[0].ExtendedProperties.Contains(newSpec.Rows[i][0].ToString()))
-                        //    {
-                        //        sSql = $"insert into \"DOCTOR-SPECIALTY_TABLE\" (id_doctor, id_specialty) values({dtPerson.Rows[0][0]}, {newSpec.Rows[i][0]}) ";
-                        //        myDB.iExeecuteNonQuery(sSql);
-                        //    }
-                        //}
-                        
-                        myDB.iExeecuteUpDoctor(Convert.ToInt32(dtPerson.Rows[0][0]), fio[0],fio[1], fio[2], workExp, blob);
-                    }
-                    break;
-                case 1:
-                    FormAddPatient upPatient = new FormAddPatient(dtPerson);
-                    Hide();
-                    if(upPatient.ShowDialog() == DialogResult.OK)
-                    {
-                        string[] fio = upPatient.FIO;
-                        string[] adress = upPatient.Adress;
-                        DateTime birth = upPatient.DateBirth;
-
-                        sSql = $"update patient_table set last_name = '{fio[0]}', first_name = '{fio[1]}', PATRONYMIC = '{fio[2]}', area = '{adress[0]}', city = '{adress[1]}', house = '{adress[2]}', apartment = {adress[3]} where id_patient = {dtPerson.Rows[0][0]}";
-                        myDB.iExeecuteNonQuery(sSql);
-                    }
-                    break;
-            }
-            updateDataView();
-            Show();
+                            sSql = $"update patient_table set last_name = '{fio[0]}', first_name = '{fio[1]}', PATRONYMIC = '{fio[2]}', area = '{adress[0]}', city = '{adress[1]}', house = '{adress[2]}', apartment = {adress[3]} where id_patient = {dtPerson.Rows[0][0]}";
+                            myDB.iExeecuteNonQuery(sSql);
+                        }
+                        break;
+                }
+                updateDataView();
+                Show();
+            }catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void InfoForm_Activated(object sender, EventArgs e)
@@ -320,9 +291,11 @@ namespace AIS_Polyclinic
             {
                 case 0:
                     sSql = $"select * from doctor_table where id_doctor = {id}";
+                    Text = "Информация о докторе";
                     break;
                 case 1:
                     sSql = $"select * from patient_table where id_patient = {id}";
+                    Text = "Информация о пациенте";
                     break;
             }
 

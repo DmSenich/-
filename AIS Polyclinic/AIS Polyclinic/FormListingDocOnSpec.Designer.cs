@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.cSpecialty = new System.Windows.Forms.ComboBox();
-            this.bCreate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cSpecialty
@@ -39,24 +38,17 @@
             this.cSpecialty.Name = "cSpecialty";
             this.cSpecialty.Size = new System.Drawing.Size(199, 24);
             this.cSpecialty.TabIndex = 1;
+            this.cSpecialty.SelectedIndexChanged += new System.EventHandler(this.cSpecialty_SelectedIndexChanged);
             this.cSpecialty.SelectionChangeCommitted += new System.EventHandler(this.cSpecialty_SelectionChangeCommitted);
-            // 
-            // bCreate
-            // 
-            this.bCreate.Location = new System.Drawing.Point(152, 68);
-            this.bCreate.Name = "bCreate";
-            this.bCreate.Size = new System.Drawing.Size(110, 73);
-            this.bCreate.TabIndex = 2;
-            this.bCreate.Text = "Создать документ";
-            this.bCreate.UseVisualStyleBackColor = true;
-            this.bCreate.Click += new System.EventHandler(this.bCreate_Click);
+            this.cSpecialty.SelectedValueChanged += new System.EventHandler(this.cSpecialty_SelectedValueChanged);
+            this.cSpecialty.TextChanged += new System.EventHandler(this.cSpecialty_TextChanged);
             // 
             // FormListingDocOnSpec
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(398, 165);
-            this.Controls.Add(this.bCreate);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(398, 73);
             this.Controls.Add(this.cSpecialty);
             this.Name = "FormListingDocOnSpec";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -67,6 +59,5 @@
 
         #endregion
         private System.Windows.Forms.ComboBox cSpecialty;
-        private System.Windows.Forms.Button bCreate;
     }
 }

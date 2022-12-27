@@ -147,48 +147,38 @@ namespace AIS_Polyclinic
             //dataPerson.Rows[1].Visible = false;
 
         }
-        private void CreateObj(int id)
-        {
-            switch (numTable)
-            {
-                case 0:
-                    
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    break;
-            }
-        }
+
         private void dataPerson_DoubleClick(object sender, EventArgs e)
         {
+            try {
+                int id = Convert.ToInt32(dataPerson.Rows[dataPerson.CurrentRow.Index].Cells[0].Value);
 
-            int id = Convert.ToInt32(dataPerson.Rows[dataPerson.CurrentRow.Index].Cells[0].Value);
+                switch (numTable)
+                {
+                    case 0:
+                        //string[] fio = {dr[1].ToString(), dr[2].ToString(), dr[3].ToString()};
+                        //int workExp = Convert.ToInt32(dr[4]);
+                        //string sql = $"select * from DOCTOR-SPECIALTY_TABLE where id_doctor = {dr[0]}";
+                        //DataTable dtSpec = myDB.iExecuteReader(sql);
+                        //int[] idSpec = {5};
+                        //FormAddDoctor formAddDoctor = new FormAddDoctor(fio, workExp, idSpec, myDB);
+                        //if(formAddDoctor.ShowDialog() == DialogResult.OK)
+                        //{
 
-            switch (numTable)
-            {
-                case 0:
-                    //string[] fio = {dr[1].ToString(), dr[2].ToString(), dr[3].ToString()};
-                    //int workExp = Convert.ToInt32(dr[4]);
-                    //string sql = $"select * from DOCTOR-SPECIALTY_TABLE where id_doctor = {dr[0]}";
-                    //DataTable dtSpec = myDB.iExecuteReader(sql);
-                    //int[] idSpec = {5};
-                    //FormAddDoctor formAddDoctor = new FormAddDoctor(fio, workExp, idSpec, myDB);
-                    //if(formAddDoctor.ShowDialog() == DialogResult.OK)
-                    //{
+                        //}
+                        InfoForm infoDoctor = new InfoForm(id, 0, myDB);
+                        infoDoctor.Show();
+                        break;
+                    case 1:
+                        InfoForm infoPatient = new InfoForm(id, 1, myDB);
+                        infoPatient.Show();
+                        break;
+                    case 2:
+                        break;
+                }
 
-                    //}
-                    InfoForm infoDoctor = new InfoForm(id, 0, myDB);
-                    infoDoctor.Show();
-                    break;
-                case 1:
-                    InfoForm infoPatient = new InfoForm(id, 1, myDB);
-                    infoPatient.Show();
-                    break;
-                case 2:
-                    break;
             }
-
+            catch { MessageBox.Show("Невозможно вывести данные."); }
         }
 
         private void tFind_TextChanged(object sender, EventArgs e)

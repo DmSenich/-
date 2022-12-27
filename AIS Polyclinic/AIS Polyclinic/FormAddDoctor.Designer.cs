@@ -89,6 +89,7 @@
             this.tLastName.Name = "tLastName";
             this.tLastName.Size = new System.Drawing.Size(241, 22);
             this.tLastName.TabIndex = 5;
+            this.tLastName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tLastName_KeyPress);
             // 
             // tFirstName
             // 
@@ -96,6 +97,7 @@
             this.tFirstName.Name = "tFirstName";
             this.tFirstName.Size = new System.Drawing.Size(241, 22);
             this.tFirstName.TabIndex = 6;
+            this.tFirstName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tFirstName_KeyPress);
             // 
             // tPatronymic
             // 
@@ -103,6 +105,7 @@
             this.tPatronymic.Name = "tPatronymic";
             this.tPatronymic.Size = new System.Drawing.Size(241, 22);
             this.tPatronymic.TabIndex = 7;
+            this.tPatronymic.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tPatronymic_KeyPress);
             // 
             // nWorkExperience
             // 
@@ -152,12 +155,14 @@
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(125, 32);
             this.bCancel.TabIndex = 12;
-            this.bCancel.Text = "Cancel";
+            this.bCancel.Text = "Отмена";
             this.bCancel.UseVisualStyleBackColor = true;
             this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
             // 
             // dataSpecialty
             // 
+            this.dataSpecialty.AllowUserToAddRows = false;
+            this.dataSpecialty.AllowUserToDeleteRows = false;
             this.dataSpecialty.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataSpecialty.Location = new System.Drawing.Point(130, 214);
             this.dataSpecialty.Name = "dataSpecialty";
@@ -179,6 +184,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataSpecialty);

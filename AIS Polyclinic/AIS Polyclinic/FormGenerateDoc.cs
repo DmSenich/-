@@ -25,7 +25,11 @@ namespace AIS_Polyclinic
         private void bListingDoctors_Click(object sender, EventArgs e)
         {
             FormListingDocOnSpec docOnSpec = new FormListingDocOnSpec(myDB);
-            docOnSpec.Show();
+            if(docOnSpec.ShowDialog() == DialogResult.OK)
+            {
+                docOnSpec.Close();
+            }
+            //docOnSpec.Show();
         }
 
         private void bCountVisiting_Click(object sender, EventArgs e)
@@ -37,7 +41,10 @@ namespace AIS_Polyclinic
         private void bCountDisease_Click(object sender, EventArgs e)
         {
             FormCountDiseases countDiseases = new FormCountDiseases(myDB);
-            countDiseases.Show();
+            if(countDiseases.ShowDialog() == DialogResult.OK)
+            {
+                countDiseases.Close();
+            }
         }
     }
 }

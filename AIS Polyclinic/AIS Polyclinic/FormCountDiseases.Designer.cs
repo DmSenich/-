@@ -30,13 +30,12 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.cCategories = new System.Windows.Forms.ComboBox();
-            this.buCreateDocument = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(45, 47);
+            this.label1.Location = new System.Drawing.Point(63, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 16);
             this.label1.TabIndex = 3;
@@ -45,27 +44,21 @@
             // cCategories
             // 
             this.cCategories.FormattingEnabled = true;
-            this.cCategories.Location = new System.Drawing.Point(129, 44);
+            this.cCategories.Location = new System.Drawing.Point(147, 25);
             this.cCategories.Name = "cCategories";
             this.cCategories.Size = new System.Drawing.Size(199, 24);
             this.cCategories.TabIndex = 2;
-            // 
-            // buCreateDocument
-            // 
-            this.buCreateDocument.Location = new System.Drawing.Point(143, 149);
-            this.buCreateDocument.Name = "buCreateDocument";
-            this.buCreateDocument.Size = new System.Drawing.Size(123, 56);
-            this.buCreateDocument.TabIndex = 4;
-            this.buCreateDocument.Text = "Создать документ";
-            this.buCreateDocument.UseVisualStyleBackColor = true;
-            this.buCreateDocument.Click += new System.EventHandler(this.buCreateDocument_Click);
+            this.cCategories.SelectedIndexChanged += new System.EventHandler(this.cCategories_SelectedIndexChanged);
+            this.cCategories.SelectionChangeCommitted += new System.EventHandler(this.cCategories_SelectionChangeCommitted);
+            this.cCategories.SelectedValueChanged += new System.EventHandler(this.cCategories_SelectedValueChanged);
+            this.cCategories.TextChanged += new System.EventHandler(this.cCategories_TextChanged);
             // 
             // FormCountDiseases
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(432, 241);
-            this.Controls.Add(this.buCreateDocument);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(432, 75);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cCategories);
             this.Name = "FormCountDiseases";
@@ -80,6 +73,5 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cCategories;
-        private System.Windows.Forms.Button buCreateDocument;
     }
 }

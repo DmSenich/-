@@ -109,12 +109,17 @@ namespace AIS_Polyclinic
         }
         private void LabelMesUpdate()
         {
-            DataRow dr = dtDocs.Rows[dataDoctor.CurrentRow.Index];
-            int id = Convert.ToInt32(dr[0]);
-            DateTime dateTime = dateTimeVisit.Value;
-            string sSql = $"select count(id_doctor) from visiting_table where id_doctor = {id} and date_visiting = '{dateTime.ToShortDateString()}'";
-            int count = myDB.iExecuteScalar(sSql);
-            label1.Text = messegeL + count.ToString();
+            try
+            {
+                int index = dataDoctor.CurrentRow.Index;
+                DataRow dr = dtDocs.Rows[index];
+                int id = Convert.ToInt32(dr[0]);
+                DateTime dateTime = dateTimeVisit.Value;
+                string sSql = $"select count(id_doctor) from visiting_table where id_doctor = {id} and date_visiting = '{dateTime.ToShortDateString()}'";
+                int count = myDB.iExecuteScalar(sSql);
+                label1.Text = messegeL + count.ToString();
+            }
+            catch{ label1.Text = "Невозможно вывести сообщение о количестве."; }
         }
 
         
@@ -215,14 +220,16 @@ namespace AIS_Polyclinic
 
         private void dataDoctor_DoubleClick(object sender, EventArgs e)
         {
+            try
+            {
+                int id = Convert.ToInt32(dataDoctor.Rows[dataDoctor.CurrentRow.Index].Cells[0].Value);
 
-            int id = Convert.ToInt32(dataDoctor.Rows[dataDoctor.CurrentRow.Index].Cells[0].Value);
 
-
-            InfoForm infoDoctor = new InfoForm(id, 0, myDB);
-            infoDoctor.ToBlockUpdate();
-            infoDoctor.Show();
-            
+                InfoForm infoDoctor = new InfoForm(id, 0, myDB);
+                infoDoctor.ToBlockUpdate();
+                infoDoctor.Show();
+            }
+            catch (Exception ex) { MessageBox.Show("Невозможно выбрать данные."); }
         }
 
         private void checkSpecs_CheckedChanged(object sender, EventArgs e)
@@ -244,12 +251,15 @@ namespace AIS_Polyclinic
 
         private void dataPatient_DoubleClick(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(dataPatient.Rows[dataPatient.CurrentRow.Index].Cells[0].Value);
+            try
+            {
+                int id = Convert.ToInt32(dataPatient.Rows[dataPatient.CurrentRow.Index].Cells[0].Value);
 
 
-            InfoForm infoPatient = new InfoForm(id, 1, myDB);
-            infoPatient.ToBlockUpdate();
-            infoPatient.Show();
+                InfoForm infoPatient = new InfoForm(id, 1, myDB);
+                infoPatient.ToBlockUpdate();
+                infoPatient.Show();
+            }catch { MessageBox.Show("Невозможно выбрать данные."); }
 
         }
 
@@ -322,6 +332,11 @@ namespace AIS_Polyclinic
             {
                 e.Handled = true;
             }
+        }
+
+        private void dataPatient_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
 
         public int IdPat { get { return idPat; } }

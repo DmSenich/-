@@ -82,6 +82,7 @@
             this.dataPatient.RowTemplate.Height = 24;
             this.dataPatient.Size = new System.Drawing.Size(490, 98);
             this.dataPatient.TabIndex = 2;
+            this.dataPatient.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataPatient_CellContentClick);
             this.dataPatient.DoubleClick += new System.EventHandler(this.dataPatient_DoubleClick);
             // 
             // dateTimeVisit
@@ -98,7 +99,7 @@
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(95, 40);
             this.bCancel.TabIndex = 4;
-            this.bCancel.Text = "Cancel";
+            this.bCancel.Text = "Отмена";
             this.bCancel.UseVisualStyleBackColor = true;
             this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
             // 
@@ -179,6 +180,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(806, 358);
             this.Controls.Add(this.checkSpecs);
             this.Controls.Add(this.cSpecs);

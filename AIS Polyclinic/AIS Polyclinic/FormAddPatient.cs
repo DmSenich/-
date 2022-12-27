@@ -23,17 +23,17 @@ namespace AIS_Polyclinic
         }
         public FormAddPatient(string[] fio, string[] adress, DateTime date) : this()
         {
-            this.fio = fio;
-            this.adress = adress;
-            this.dateOfBirth = date;
-            tLastName.Text = fio[0];
-            tFirstName.Text = fio[1];
-            tPatronymic.Text = fio[2];
-            tArea.Text = adress[0];
-            tCity.Text = adress[1];
-            tHouse.Text = adress[2];
-            tApartment.Text = adress[3];
-            /*Дата дня рождения*/
+            //this.fio = fio;
+            //this.adress = adress;
+            //this.dateOfBirth = date;
+            //tLastName.Text = fio[0];
+            //tFirstName.Text = fio[1];
+            //tPatronymic.Text = fio[2];
+            //tArea.Text = adress[0];
+            //tCity.Text = adress[1];
+            //tHouse.Text = adress[2];
+            //tApartment.Text = adress[3];
+            ///*Дата дня рождения*/
         }
         public FormAddPatient(DataTable dtPAtient) : this()
         {
@@ -72,13 +72,13 @@ namespace AIS_Polyclinic
             adress[3] = tApartment.Text;
             dateOfBirth = dateBirth.Value;
 
-            if(fio[0] == "" || fio[1] == "")
+            if(fio[0] == "" || fio[1] == "" || Regex.IsMatch(fio[0], @"^\s") || Regex.IsMatch(fio[2], @"^\s"))
             {
-                MessageBox.Show("Должны присутствовать и имя, и фамилия.");
+                MessageBox.Show("Должны присутствовать и имя, и фамилия, без пробелов в начале.");
             }
-            else if(adress[0] == "" || adress[1] == "" || adress[2] == "")
+            else if(adress[0] == "" || adress[1] == "" || adress[2] == "" || Regex.IsMatch(adress[0], @"^\s") || Regex.IsMatch(adress[1], @"^\s") || Regex.IsMatch(adress[2], @"^\s"))
             {
-                MessageBox.Show("Должен иметься более подробный адрес.");
+                MessageBox.Show("Должен иметься более подробный адрес, без пробелов в начале.");
             }
             else
             {
@@ -95,6 +95,51 @@ namespace AIS_Polyclinic
         {
             string c = e.KeyChar.ToString();
             if(!Regex.Match(c, @"[0-9\b]").Success)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void tLastName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string c = e.KeyChar.ToString();
+            if (!Regex.Match(c, @"[а-яА-Я\s\b]").Success)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void tFirstName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string c = e.KeyChar.ToString();
+            if (!Regex.Match(c, @"[а-яА-Я\s\b]").Success)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void tPatronymic_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string c = e.KeyChar.ToString();
+            if (!Regex.Match(c, @"[а-яА-Я\s\b]").Success)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void tArea_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string c = e.KeyChar.ToString();
+            if (!Regex.Match(c, @"[а-яА-Я\s\b]").Success)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void tCity_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string c = e.KeyChar.ToString();
+            if (!Regex.Match(c, @"[а-яА-Я\s\b]").Success)
             {
                 e.Handled = true;
             }

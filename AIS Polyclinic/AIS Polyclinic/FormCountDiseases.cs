@@ -74,7 +74,35 @@ namespace AIS_Polyclinic
             {
                 SaveDocumentOne();
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch { MessageBox.Show("Невозможно создать документ."); }
+        }
+
+        private void cCategories_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+
+                //SaveDocumentOne();
+                //DialogResult = DialogResult.OK;
+
+        }
+
+        private void cCategories_SelectedValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cCategories_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cCategories_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                SaveDocumentOne();
+                DialogResult = DialogResult.OK;
+            }
+            catch { }
         }
     }
 }
